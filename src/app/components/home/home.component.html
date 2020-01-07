@@ -1,0 +1,77 @@
+<mat-toolbar color="primary" class="mat-elevation-z5">
+    <mat-toolbar-row>
+        <button type="button" mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <!-- <a mat-button routerLink="/home">Home</a>
+        <a mat-button routerLink="/home/dashboard">Dashboard</a>
+        <a mat-button routerLink="/home/assets">Assets</a> -->
+        <span class="toolbar-spacer">
+        </span>
+
+        <mat-menu #settingsMenu="matMenu" xPosition="before">
+
+            <div class="user-info">
+                <img src="../../../assets/img/avatar.png">
+                <h3>Maria Valerio</h3>
+                <h5>mariavaleriopsico@gmail.com</h5>
+            </div>
+
+            <mat-divider></mat-divider>
+            <button mat-menu-item>
+                <mat-icon>settings</mat-icon>
+                <span>Configuración</span>
+            </button>
+            <button mat-menu-item (click)="logOut()">
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Salir</span>
+            </button>
+        </mat-menu>
+
+        <img class="avatar-img" src="../../../assets/img/avatar.png" [matMenuTriggerFor]="settingsMenu">
+
+
+    </mat-toolbar-row>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+
+    
+    <mat-sidenav #snav 
+    [mode]="mobileQuery.matches ? 'over' : 'side'" 
+    [fixedInViewport]="mobileQuery.matches">
+
+        <mat-nav-list>
+            <div style="height: 60px"></div>
+            <a mat-list-item [routerLink]="'/home'" matTooltip="Home">
+                <mat-icon matBadge="8" matBadgePosition="below after" matBadgeColor="warn" matBadgeSize="small">home
+                </mat-icon>
+            </a>
+            <a mat-list-item [routerLink]="'/home/dashboard'" matTooltip="Dashboard">
+                <mat-icon>pie_chart</mat-icon>
+                <!-- <span>Dashboard</span> -->
+            </a>
+            <a mat-list-item [routerLink]="'/home/patient'" matTooltip="Usuarios">
+                <mat-icon>supervisor_account</mat-icon>
+                <!-- <span>Assets</span>  -->
+            </a>
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+        <h1>Texto con formato Roboto</h1>
+        <button mat-button (click)="nuevo()">new</button>
+
+        <!-- <div class="background-spinner" *ngIf="loading">
+        <mat-progress-spinner [diameter]="200" [strokeWidth]="5" color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+        </div> -->
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+
+</mat-sidenav-container>

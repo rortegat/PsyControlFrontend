@@ -1,0 +1,75 @@
+.mat-toolbar {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.toolbar-icon {
+  padding: 0 14px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-sidenav {
+  background-color: rgb(42, 45, 49);
+  position: fixed;
+}
+
+.mat-list-item {
+  color: white !important;
+  height: 55px !important;
+}
+
+.mat-list-item:hover {
+  background-color: rgba(52, 160, 233, 0.8);
+  color: white !important;
+  border-radius: 100%;
+  height: 55px;
+}
+
+a span {
+  font-size: 14px;
+  margin-left: 5px;
+  margin-top: 10px;
+}
+
+.avatar-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50em;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.user-info {
+  text-align: center;
+}
+
+.user-info img {
+  max-width: 100px;
+  border-radius: 50%;
+}
+
+::ng-deep .mat-menu-panel {
+  width: 300px !important;
+  padding: 0 10px !important;
+}
+
+mat-progress-spinner {
+  position: fixed !important;
+  top: 10%;
+  right: 40%;
+}
+
+.background-spinner {
+  background-color: rgba(255, 255, 255, 0.6);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}

@@ -1,0 +1,38 @@
+mat-card {
+    text-align: center;
+    position: fixed;
+    width: 450px;
+    padding: 0;
+    top: 10%;
+  }
+  
+  ::ng-deep .mat-card-image{
+    background-color:rgb(141, 117, 245); 
+    height: 200px;
+    width: 450px !important;
+    margin: 0 !important;
+  }
+  
+  mat-progress-bar{
+    width: 100% !important;
+  }
+
+  :host {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  ::ng-deep .mat-form-field-flex>.mat-form-field-infix {
+    padding: 0.4em 0px !important;
+    ;
+  }
+  
+  ::ng-deep .mat-form-field-label-wrapper {
+    top: -1.5em;
+  }
+  
+  ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+  }
