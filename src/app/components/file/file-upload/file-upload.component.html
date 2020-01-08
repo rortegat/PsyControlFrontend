@@ -1,0 +1,10 @@
+<form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline">
+            <mat-label>File</mat-label>
+            <input type="file" formControlName="file">
+        </mat-form-field>
+        
+            <button mat-raised-button color="primary" type="submit">Upload</button>
+        
+</form>

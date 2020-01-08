@@ -13,6 +13,9 @@ import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FileUploadComponent } from './components/file/file-upload/file-upload.component';
+import { AuthInterceptor } from './security/auth.interceptor';
+import { FileListComponent } from './components/file/file-list/file-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     LoginComponent,
     PatientListComponent,
-    PatientAddComponent
+    PatientAddComponent,
+    FileUploadComponent,
+    FileListComponent
   ],
   imports: [
     BrowserModule,
@@ -33,11 +38,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptor,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents:[
