@@ -52,7 +52,7 @@
                 <mat-icon>pie_chart</mat-icon>
                 <!-- <span>Dashboard</span> -->
             </a>
-            <a mat-list-item [routerLink]="'/home/patient'" matTooltip="Usuarios">
+            <a mat-list-item [routerLink]="'/home/patient-list'" matTooltip="Pacientes">
                 <mat-icon>supervisor_account</mat-icon>
                 <!-- <span>Assets</span>  -->
             </a>
@@ -62,16 +62,10 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-
-        <h1>Texto con formato Roboto</h1>
-        <button mat-button (click)="nuevo()">new</button>
-<app-file-upload></app-file-upload>
-            
-
-        <!-- <div class="background-spinner" *ngIf="loading">
+        <div class="background-spinner" *ngIf="loading">
         <mat-progress-spinner [diameter]="200" [strokeWidth]="5" color="primary" mode="indeterminate">
         </mat-progress-spinner>
-        </div> -->
+        </div>
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 

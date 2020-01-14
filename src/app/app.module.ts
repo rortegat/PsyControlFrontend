@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadComponent } from './components/file/file-upload/file-upload.component';
 import { AuthInterceptor } from './security/auth.interceptor';
 import { FileListComponent } from './components/file/file-list/file-list.component';
+import { PatientEditComponent } from './components/patient/patient-edit/patient-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FileListComponent } from './components/file/file-list/file-list.compone
     PatientListComponent,
     PatientAddComponent,
     FileUploadComponent,
-    FileListComponent
+    FileListComponent,
+    PatientEditComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { FileListComponent } from './components/file/file-list/file-list.compone
   ],
   bootstrap: [AppComponent],
   entryComponents:[
-    PatientAddComponent
+    PatientAddComponent,
+    PatientEditComponent
   ]
 })
 export class AppModule { }

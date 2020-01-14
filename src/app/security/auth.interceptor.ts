@@ -10,11 +10,10 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (req.url.includes("/api")) {
+    //if (req.url.includes("/api")) {
 
-      //let user = this.session.getUserData;
-      let user =  JSON.parse(sessionStorage.getItem("user"))
-      if (user.token) {
+      let user = this.session.getUserData()
+      if (user!=null) {
        console.log(user.token)
 
         req = req.clone({
@@ -25,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
       }
 
 
-    }
+    //}
 
     return next.handle(req);
   }

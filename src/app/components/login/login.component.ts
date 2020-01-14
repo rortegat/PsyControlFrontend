@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private login: LoginService,
+    private session: SessionService
   ) {
     this.loginForm = this.formBuilder.group({
       user: ['', Validators.required],
@@ -24,7 +28,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.messageInfo = "Contraseña incorrecta"
     this.isLoading = false
   }
 
@@ -33,10 +36,21 @@ export class LoginComponent implements OnInit {
       return
     }
     this.isLoading = true
-    setTimeout(() => {
-      this.isLoading = false
-      this.router.navigate(['home'])
-    }, 3000)
+
+    this.login.authenticate(
+      this.loginForm.controls.user.value,
+      this.loginForm.controls.password.value).subscribe(
+        (rsp) => {
+          console.log(rsp)
+          this.session.setUserData(rsp)
+          this.isLoading = false;
+          this.router.navigate(["home"])
+        },
+        (err) => {
+          console.log(err)
+          this.messageInfo = err.error.message
+          this.isLoading = false
+        })
   }
 
 }

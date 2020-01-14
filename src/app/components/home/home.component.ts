@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { PatientAddComponent } from '../patient/patient-add/patient-add.component';
+import { SessionService } from 'src/app/services/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,19 +11,23 @@ import { PatientAddComponent } from '../patient/patient-add/patient-add.componen
 export class HomeComponent implements OnInit, OnDestroy {
 
 
+  public loading: boolean
+
   public mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
 
 
   constructor(
-    private snack: MatSnackBar,
-    public dialog: MatDialog,
-    changeDetectorRef: ChangeDetectorRef, 
-    media: MediaMatcher
+    private session:  SessionService,
+    private router: Router,
+    public changeDetectorRef: ChangeDetectorRef, 
+    public media: MediaMatcher
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+    this.session.loading.subscribe(rsp=>this.loading=rsp)
    }
 
   ngOnInit() {
@@ -33,17 +37,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  nuevo(){
-
-    const dialogRef = this.dialog.open(PatientAddComponent, {
-      width: '650px',
-      //data: user
-    });
-    dialogRef.afterClosed().subscribe(rsp => {
-      console.log(rsp);
-      if(rsp!=undefined)
-      this.snack.open("Contacto agregado")._dismissAfter(2000)
-    })
+  logOut(){
+    this.session.removeUserData()
+    this.router.navigate(["login"])
   }
 
 }

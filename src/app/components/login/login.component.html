@@ -9,7 +9,7 @@
 
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-                <div *ngIf="messageInfo" style="color:indianred; font-weight: bold;">{{messageInfo}}</div>
+                <div *ngIf="messageInfo" style="color:indianred;">{{messageInfo}}</div>
 
                 <p>
                     <mat-form-field appearance="outline">
@@ -32,9 +32,6 @@
                 </p>
 
             </form>
-
-
-
 
         </mat-card-content>
 
