@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { SessionService } from 'src/app/services/session.service';
 import { Router } from '@angular/router';
+import { AuthenticatedUser } from 'src/app/models/authenticated-user';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +12,12 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit, OnDestroy {
 
 
-  public loading: boolean
+  public loading: boolean=false
+  public userInfo: AuthenticatedUser=null
+  public adminRole: boolean=false
 
-  public mobileQuery: MediaQueryList;
-  private _mobileQueryListener: () => void;
+  public mobileQuery: MediaQueryList = null
+  private _mobileQueryListener: () => void
 
 
   constructor(
@@ -28,9 +31,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
 
     this.session.loading.subscribe(rsp=>this.loading=rsp)
+    this.session.currentUser.subscribe((rsp)=>{
+      this.userInfo=rsp
+    })
    }
 
   ngOnInit() {
+
+    this.userInfo.roles.forEach(role => {
+      console.log(role)
+      switch(role.rolename){
+        case "ADMIN": this.adminRole=true; break;
+      }
+    })
+
   }
 
   ngOnDestroy(): void {

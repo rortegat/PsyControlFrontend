@@ -1,4 +1,4 @@
-import { MatButtonModule, MatCheckboxModule, MatSnackBarModule, MatTooltipModule, MatTabsModule, MatPaginatorModule, MatListModule, MatDividerModule, MatBadgeModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatSnackBarModule, MatTooltipModule, MatTabsModule, MatPaginatorModule, MatListModule, MatDividerModule, MatBadgeModule, MatSelectModule, MatOptionModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -37,7 +37,9 @@ import { NgModule } from '@angular/core';
         MatListModule,
         MatDividerModule,
         MatBadgeModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatSelectModule,
+        MatOptionModule
 
     ],
     exports: [
@@ -62,7 +64,9 @@ import { NgModule } from '@angular/core';
         MatListModule,
         MatDividerModule,
         MatBadgeModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatSelectModule,
+        MatOptionModule,
     ],
 })
 export class MaterialModule { }

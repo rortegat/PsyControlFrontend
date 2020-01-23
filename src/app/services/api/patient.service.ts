@@ -29,7 +29,7 @@ export class PatientService {
     return this.request.put(`${this.baseUrl}/update`, patient);
   }
 
-  deletePatient(id:string): Observable<Patient>{
+  deletePatient(id:number): Observable<Patient>{
     return this.request.delete(`${this.baseUrl}/delete/${id}`);
   }
 }

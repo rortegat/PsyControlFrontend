@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { RequestService } from '../request.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
 
-  SERVER_URL: string = "http://localhost:3000";
-  constructor(private httpClient: HttpClient) { }
+  private baseUrl='/files'
+  
+  constructor(private request: RequestService) { }
 
-  upload(data){
-    
+  uploadSingleFile(data):Observable<any>{
+    return this.request.post(`${this.baseUrl}/upload`,data)
   }
 
 }

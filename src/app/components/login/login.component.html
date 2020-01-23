@@ -1,38 +1,37 @@
 <mat-card class="mat-elevation-z10">
-    <mat-card class="mat-elevation-z10">
-        <mat-progress-bar *ngIf="isLoading" color="primary" mode="indeterminate">
-        </mat-progress-bar>
+    <mat-progress-bar *ngIf="isLoading" color="primary" mode="indeterminate">
+    </mat-progress-bar>
 
-        <div mat-card-image></div>
+    <div mat-card-image></div>
 
-        <mat-card-content>
+    <mat-card-content>
 
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-                <div *ngIf="messageInfo" style="color:indianred;">{{messageInfo}}</div>
+            <div *ngIf="messageInfo" style="color:indianred;">{{messageInfo}}</div>
 
-                <p>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Usuario</mat-label>
-                        <input matInput formControlName="user">
-                        <mat-error *ngIf="loginForm.controls['user'].errors?.required">Ingrese su usuario</mat-error>
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Contraseña</mat-label>
-                        <input type="password" matInput formControlName="password">
-                        <mat-error *ngIf="loginForm.controls['password'].errors?.required">Ingrese su contraseña
-                        </mat-error>
-                    </mat-form-field>
-                </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput formControlName="user">
+                    <mat-error *ngIf="loginForm.controls['user'].errors?.required">Ingrese su usuario</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input type="password" matInput formControlName="password">
+                    <mat-error *ngIf="loginForm.controls['password'].errors?.required">Ingrese su contraseña
+                    </mat-error>
+                </mat-form-field>
+            </p>
 
-                <p>
-                    <button mat-raised-button color="primary" type="submit">Ingresar</button>
-                </p>
+            <p>
+                <button mat-raised-button color="primary" type="submit">Ingresar</button>
+            </p>
 
-            </form>
+        </form>
 
-        </mat-card-content>
+    </mat-card-content>
 
-    </mat-card>
+</mat-card>

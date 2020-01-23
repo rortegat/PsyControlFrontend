@@ -24,9 +24,9 @@
 }
 
 .mat-list-item:hover {
-  background-color: rgba(52, 160, 233, 0.8);
+  background-color: rgba(52, 160, 233, 0.8) !important;
   color: white !important;
-  border-radius: 100%;
+  border-radius: 50%;
   height: 55px;
 }
 
@@ -37,8 +37,8 @@ a span {
 }
 
 .avatar-img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50em;
   margin-top: 5px;
   cursor: pointer;
@@ -46,10 +46,11 @@ a span {
 
 .user-info {
   text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .user-info img {
-  max-width: 100px;
+  width: 150px;
   border-radius: 50%;
 }
 

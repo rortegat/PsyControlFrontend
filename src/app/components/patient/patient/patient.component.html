@@ -1,1 +1,26 @@
-<p>patient works!</p>
+<h2>Expediente: 00000{{id}}</h2>
+<button mat-raised-button color="accent" (click)="deletePatient()">
+    <mat-icon>delete</mat-icon>
+    Eliminar expediente
+</button>
+
+<div *ngIf="consults.length==0">
+    No hay consultas registradas
+</div>
+
+<div *ngFor="let consult of consults">
+<mat-card class="mat-elevation-z5">
+    {{consult.reason}} - 
+    {{consult.createdDate | date: 'dd/MM/yyyy HH:mm:ss'}}
+    <button mat-icon-button style="color: rgb(207, 75, 75);" (click)="deleteConsult(consult.id)">
+        <mat-icon>delete</mat-icon>
+    </button>
+    <mat-card-content>
+        <p>{{consult.description}}</p>
+    </mat-card-content>
+</mat-card>
+</div>
+
+<button mat-raised-button color="primary" class="bottom-right" (click)="newConsult()">
+    <mat-icon >add</mat-icon><span>Nueva consulta</span>
+</button>

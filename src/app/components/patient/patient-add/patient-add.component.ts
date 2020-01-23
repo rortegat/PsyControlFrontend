@@ -11,8 +11,7 @@ export class PatientAddComponent implements OnInit {
 
 
   public addForm: FormGroup
-  public mismatch: boolean = false
-
+  
   constructor(
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<PatientAddComponent>

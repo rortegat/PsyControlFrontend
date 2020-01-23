@@ -1,5 +1,3 @@
-import { Record } from './record'
-
 export class Patient {
     id:number
     firstname:string
@@ -13,5 +11,5 @@ export class Patient {
     // address:string
     phone:string
     mobile:string
-    record:Record
+    //record:Record
 }

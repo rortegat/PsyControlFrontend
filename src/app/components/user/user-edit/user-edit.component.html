@@ -1,0 +1,56 @@
+
+
+    <h1 mat-dialog-title>Editar Usuario</h1>
+
+    <div class="formulario">
+
+    <div mat-dialog-content [formGroup]="editForm">
+
+
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username"
+                    placeholder="Identificador único">
+                <mat-error *ngIf="editForm.controls['username'].errors?.required">Obligatorio</mat-error>
+            </mat-form-field>
+        </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="firstname" placeholder="Nombre">
+                        <mat-error *ngIf="editForm.controls['firstname'].errors?.required">Obligatorio</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput formControlName="lastname" placeholder="Apellido">
+                        <mat-error *ngIf="editForm.controls['lastname'].errors?.required">Obligatorio</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Correo Electrónico</mat-label>
+                        <input matInput formControlName="email"
+                            placeholder="Correo Electrónico">
+                        <mat-error *ngIf="editForm.controls['email'].errors?.required">Obligatorio</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Roles</mat-label>
+                    <mat-select multiple [(ngModel)]="user.roles" formControlName="roles">
+                        <mat-option *ngFor="let role of rolesList" 
+                        [value]="role">{{role.rolename}}</mat-option>
+                     </mat-select>
+                    </mat-form-field>
+                </p>
+    </div>
+    
+</div>
+
+    <div mat-dialog-actions align="center">
+        <button mat-button color="primary" (click)="cancel()">Cancelar</button>
+        <button mat-raised-button color="primary" [disabled]="editForm.invalid"
+            [mat-dialog-close]="editForm.value">Guardar</button>
+    </div>
+

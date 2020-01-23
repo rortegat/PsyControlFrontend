@@ -6,6 +6,7 @@ import { SessionService } from 'src/app/services/session.service';
 import { PatientService } from 'src/app/services/api/patient.service';
 import { PatientAddComponent } from '../patient-add/patient-add.component';
 import { PatientEditComponent } from '../patient-edit/patient-edit.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-list',
@@ -17,14 +18,14 @@ export class PatientListComponent implements OnInit {
   public displayedColumns: string[] = ['firstname', 'lastname', 'email', 'phone', 'mobile', 'accion'];
   public patients: MatTableDataSource<Patient>;
 
-  public value;
-  public masterSelect: boolean;
+  public filterValue:string=""
 
   constructor(
     private snack: MatSnackBar,
     public dialog: MatDialog,
     private session: SessionService,
-    private patient: PatientService
+    private patient: PatientService,
+    private router: Router
   ) {
 
   }
@@ -39,7 +40,7 @@ export class PatientListComponent implements OnInit {
   }
 
   clear() {
-    this.value = "";
+    this.filterValue = "";
     this.patients.filter = "";
   }
 
@@ -69,7 +70,7 @@ export class PatientListComponent implements OnInit {
     this.patient.getPatient(id).subscribe(rsp => {
       console.log(rsp);
       const dialogRef = this.dialog.open(PatientEditComponent, {
-        //width: '650px',
+        width: '650px',
         data: rsp
       });
 
@@ -87,11 +88,13 @@ export class PatientListComponent implements OnInit {
 
 
     })
-
-
-
-
-
   }
+
+  onSelect(row:Patient) {
+    console.log(row)
+    this.router.navigate(["home/patient",row.id])
+  }
+
+
 
 }

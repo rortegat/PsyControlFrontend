@@ -1,0 +1,67 @@
+<h1 mat-dialog-title>Nuevo Usuario</h1>
+
+<div class="formulario">
+
+    <div mat-dialog-content [formGroup]="addForm">
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username">
+                <mat-error *ngIf="addForm.controls['username'].errors?.required">Obligatorio</mat-error>
+            </mat-form-field>
+        </p>
+
+         <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="firstname">
+                <mat-error *ngIf="addForm.controls['firstname'].errors?.required">Obligatorio</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Apellido</mat-label>
+                <input matInput formControlName="lastname" placeholder="Apellido">
+                <mat-error *ngIf="addForm.controls['lastname'].errors?.required">Obligatorio</mat-error>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input type="password" matInput formControlName="password">
+                <mat-error *ngIf="addForm.controls['password'].errors?.required">Obligatorio</mat-error>
+                <mat-error *ngIf="addForm.controls['password'].errors?.minlength">
+                    Password with less than 6 characters.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Confirmar Contraseña</mat-label>
+                <input type="password" matInput formControlName="confirmation" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="addForm.controls['confirmation'].errors?.required">Obligatorio</mat-error>
+                <mat-error
+                    *ngIf="!addForm.controls['confirmation'].errors?.required && addForm.errors?.passwordsNotEqual">Las
+                    contraseñas no coinciden</mat-error>
+            </mat-form-field>
+        </p>
+
+        
+
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Correo Electrónico</mat-label>
+                <input matInput formControlName="email">
+                <mat-error *ngIf="addForm.controls['email'].errors?.required">Obligatorio</mat-error>
+                <mat-error *ngIf="addForm.controls['email'].errors?.email">Formato no válido</mat-error>
+            </mat-form-field>
+        </p> 
+
+    </div>
+
+</div>
+
+<div mat-dialog-actions align="center">
+    <button mat-button color="primary" (click)="cancel()">Cancelar</button>
+    <button mat-raised-button color="primary" [disabled]="addForm.invalid"
+        [mat-dialog-close]="addForm.value">Agregar</button>
+</div>

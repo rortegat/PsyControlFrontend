@@ -1,0 +1,15 @@
+.bottom-right{
+    position: fixed !important;
+    right: 5%; /* Add this and change value to set the margin you want */
+    bottom: 5%
+}
+
+table { 
+    width: 100%;
+}
+
+.mat-row:hover {
+    margin: 10px !important;
+    background-color: rgba(2, 240, 248, 0.2); 
+    cursor: pointer;
+}

@@ -12,11 +12,17 @@ import { PatientAddComponent } from './components/patient/patient-add/patient-ad
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FileUploadComponent } from './components/file/file-upload/file-upload.component';
 import { AuthInterceptor } from './security/auth.interceptor';
 import { FileListComponent } from './components/file/file-list/file-list.component';
 import { PatientEditComponent } from './components/patient/patient-edit/patient-edit.component';
+import { ConsultComponent } from './components/consult/consult/consult.component';
+import { ConsultAddComponent } from './components/consult/consult-add/consult-add.component';
+import { HighLightSearchPipe } from './helpers/highLightSearch.pipe';
+import { UserListComponent } from './components/user/user-list/user-list.component';
+import { UserAddComponent } from './components/user/user-add/user-add.component';
+import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,13 @@ import { PatientEditComponent } from './components/patient/patient-edit/patient-
     PatientAddComponent,
     FileUploadComponent,
     FileListComponent,
-    PatientEditComponent
+    PatientEditComponent,
+    ConsultComponent,
+    ConsultAddComponent,
+    HighLightSearchPipe,
+    UserListComponent,
+    UserAddComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +52,8 @@ import { PatientEditComponent } from './components/patient/patient-edit/patient-
     HttpClientModule
   ],
   providers: [
+    HighLightSearchPipe,
+    Validators,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -49,7 +63,9 @@ import { PatientEditComponent } from './components/patient/patient-edit/patient-
   bootstrap: [AppComponent],
   entryComponents:[
     PatientAddComponent,
-    PatientEditComponent
+    PatientEditComponent,
+    UserAddComponent,
+    UserEditComponent
   ]
 })
 export class AppModule { }
