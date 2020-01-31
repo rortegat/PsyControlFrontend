@@ -9,7 +9,5 @@ table {
 }
 
 .mat-row:hover {
-    margin: 10px !important;
     background-color: rgba(2, 240, 248, 0.2); 
-    cursor: pointer;
 }

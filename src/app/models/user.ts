@@ -2,9 +2,9 @@ import { Role } from './role'
 
 export class User {
     username:string
+    password?:string
     firstname:string
     lastname:string
     email:string
-    password?:string
     roles:Role[]
 }

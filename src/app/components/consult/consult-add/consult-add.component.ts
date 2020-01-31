@@ -12,7 +12,7 @@ import { PatientService } from 'src/app/services/api/patient.service';
 })
 export class ConsultAddComponent implements OnInit {
 
-  public patient:Patient=null
+  public patientId:number
 
   public addForm: FormGroup
   public mismatch: boolean = false
@@ -28,30 +28,29 @@ export class ConsultAddComponent implements OnInit {
   }
 
   ngOnInit() {
+
     console.log(this.route.snapshot.paramMap.get('id'))
-    this.patientService.getPatient(parseInt(this.route.snapshot.paramMap.get('id'))).subscribe((rsp)=>{
-      console.log(rsp)
-      this.patient=rsp
-    }) 
-    
+    this.patientId= parseInt(this.route.snapshot.paramMap.get('id'))
+
     this.addForm = this.formBuilder.group({
       reason: ['', Validators.required],
-      description: ['', Validators.required],
-      patient: ['']
+      description: ['', Validators.required]
     })
 
 
-    this.addForm.controls.patient.setValue(this.patient)
+    
   }
 
   onSubmit(){
 
+    //this.addForm.controls.patient.setValue(this.patient)
+
     if (this.addForm.invalid) {
       return
     }
-    this.consult.createConsult(this.addForm.value).subscribe(
+    this.consult.createConsult(this.patientId, this.addForm.value).subscribe(
       (rsp)=>{
-        this.router.navigate(["home/patient",this.patient.id])
+        this.router.navigate(["home/patient",this.patientId])
       }
     )
 

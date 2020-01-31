@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/services/login.service';
 import { SessionService } from 'src/app/services/session.service';
+import { UserService } from 'src/app/services/api/user.service';
 
 @Component({
   selector: 'app-login',
@@ -11,18 +11,18 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class LoginComponent implements OnInit {
 
-  public messageInfo: string
+  public messageInfo: string=""
   public isLoading: boolean
   public loginForm: FormGroup
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private login: LoginService,
+    private user: UserService,
     private session: SessionService
   ) {
     this.loginForm = this.formBuilder.group({
-      user: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     })
   }
@@ -31,24 +31,29 @@ export class LoginComponent implements OnInit {
     this.isLoading = false
   }
 
+  createAccount(){
+    this.router.navigate(['signup'])
+  }
+
   onSubmit() {
     if (this.loginForm.invalid) {
       return
     }
     this.isLoading = true
 
-    this.login.authenticate(
-      this.loginForm.controls.user.value,
+    this.user.logIn(
+      this.loginForm.controls.username.value,
       this.loginForm.controls.password.value).subscribe(
         (rsp) => {
-          console.log(rsp)
           this.session.setUserData(rsp)
           this.isLoading = false;
           this.router.navigate(["home"])
         },
         (err) => {
-          console.log(err)
+          if(err.error.message!="")
           this.messageInfo = err.error.message
+          else
+          this.messageInfo="Error, contacte a un administrador"
           this.isLoading = false
         })
   }

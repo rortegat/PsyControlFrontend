@@ -25,7 +25,8 @@ export class PatientAddComponent implements OnInit {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', Validators.required],
-      phone:['',Validators.required]
+      phone:[''],
+      mobile:['']
     })
 
 

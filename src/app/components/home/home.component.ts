@@ -12,6 +12,7 @@ import { AuthenticatedUser } from 'src/app/models/authenticated-user';
 export class HomeComponent implements OnInit, OnDestroy {
 
 
+  public otherTheme: boolean=false
   public loading: boolean=false
   public userInfo: AuthenticatedUser=null
   public adminRole: boolean=false
@@ -39,7 +40,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.userInfo.roles.forEach(role => {
-      console.log(role)
       switch(role.rolename){
         case "ADMIN": this.adminRole=true; break;
       }
@@ -51,9 +51,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
+  changeTheme(){
+    this.otherTheme=!this.otherTheme
+  }
+
   logOut(){
-    this.session.removeUserData()
     this.router.navigate(["login"])
+    this.session.removeUserData()
   }
 
 }

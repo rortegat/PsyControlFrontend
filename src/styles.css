@@ -2,5 +2,11 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    background-image: url("assets/img/loginBackground.jpg");
+    background-repeat: no-repeat; 
+    background-size: cover;
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
 strong{background-color: yellow;}

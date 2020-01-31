@@ -10,7 +10,7 @@
 mat-card {
     text-align: center;
     position: fixed;
-    min-width: 400px;
+    min-width: 300px;
     min-height: 300px;
     padding: 0;
     margin-top: 11%;
@@ -35,6 +35,9 @@ mat-card {
   }
 
   :host {
+    /*background-image: url("../../../assets/img/loginBackground.jpg");
+    background-repeat: no-repeat; 
+    background-size: cover; */
     background-color: blue;
     display:flex;
     flex-direction: row;
@@ -43,6 +46,7 @@ mat-card {
 
   ::ng-deep .mat-form-field-flex>.mat-form-field-infix {
     padding: 0.4em 0px !important;
+    ;
   }
   
   ::ng-deep .mat-form-field-label-wrapper {

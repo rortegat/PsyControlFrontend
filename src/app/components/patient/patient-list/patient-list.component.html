@@ -1,61 +1,72 @@
-
-<button mat-fab color="primary" class="bottom-right" (click)="addPatient()">
-    <mat-icon >add</mat-icon>
+<button mat-fab color="accent" class="bottom-right" (click)="addPatient()">
+  <mat-icon>add</mat-icon>
 </button>
-  
+
 <mat-card>
   <mat-form-field>
-      <input matInput (keyup)="filterField($event.target.value)" placeholder="Buscar" [(ngModel)]="filterValue">
-      <button mat-button *ngIf="filterValue!=''" matSuffix mat-icon-button (click)="clear()">
-          <mat-icon>close</mat-icon>
-        </button>
-    </mat-form-field>
-  </mat-card>
+    <input matInput (keyup)="filterField($event.target.value)" placeholder="Buscar" [(ngModel)]="filterValue">
+    <button mat-button *ngIf="filterValue!=''" matSuffix mat-icon-button (click)="clear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</mat-card>
 
 <table mat-table [dataSource]="patients" class="mat-elevation-z8">
 
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let patient">
+      <button mat-icon-button aria-label="Editar" (click)="onSelect(patient)">
+        <mat-icon color="primary">assignment</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="firstname">
     <th mat-header-cell *matHeaderCellDef> Nombres </th>
-    <td mat-cell *matCellDef="let patient"
-    [innerHTML]="patient.firstname | highLightSearch: filterValue"> {{patient.firstname}} </td>
+    <td mat-cell *matCellDef="let patient" [innerHTML]="patient.firstname | highLightSearch: filterValue">
+      {{patient.firstname}} </td>
   </ng-container>
 
   <ng-container matColumnDef="lastname">
     <th mat-header-cell *matHeaderCellDef> Apellidos </th>
-    <td mat-cell *matCellDef="let patient"
-    [innerHTML]="patient.lastname | highLightSearch: filterValue"> {{patient.lastname}} </td>
+    <td mat-cell *matCellDef="let patient" [innerHTML]="patient.lastname | highLightSearch: filterValue">
+      {{patient.lastname}} </td>
   </ng-container>
 
   <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> email </th>
-    <td mat-cell *matCellDef="let patient"
-    [innerHTML]="patient.email | highLightSearch: filterValue"> {{patient.email}} </td>
-    
+    <th mat-header-cell *matHeaderCellDef> email </th>
+    <td mat-cell *matCellDef="let patient" [innerHTML]="patient.email | highLightSearch: filterValue"> {{patient.email}}
+    </td>
+
   </ng-container>
 
-   <ng-container matColumnDef="phone">
+  <ng-container matColumnDef="phone">
     <th mat-header-cell *matHeaderCellDef> Teléfono </th>
-        <td mat-cell *matCellDef="let patient"
-        [innerHTML]="patient.phone | highLightSearch: filterValue"> {{patient.phone}} </td>
-  </ng-container> 
+    <td mat-cell *matCellDef="let patient" [innerHTML]="patient.phone | highLightSearch: filterValue"> {{patient.phone}}
+    </td>
+  </ng-container>
   <ng-container matColumnDef="mobile">
     <th mat-header-cell *matHeaderCellDef> Celular </th>
-        <td mat-cell *matCellDef="let patient"
-        [innerHTML]="patient.mobile | highLightSearch: filterValue"> {{patient.mobile}} </td>
-  </ng-container> 
+    <td mat-cell *matCellDef="let patient" [innerHTML]="patient.mobile | highLightSearch: filterValue">
+      {{patient.mobile}} </td>
+  </ng-container>
 
   <ng-container matColumnDef="accion">
-    <th mat-header-cell *matHeaderCellDef> Acciones 
+    <th mat-header-cell *matHeaderCellDef> Acciones
     </th>
     <td mat-cell *matCellDef="let patient">
-        <button mat-icon-button aria-label="Editar" (click)="editPatient(patient.id)">
-            <mat-icon color="primary">edit</mat-icon>
-          </button>
+      <button mat-icon-button aria-label="Editar" (click)="editPatient(patient.id)">
+        <mat-icon color="primary">edit</mat-icon>
+      </button>
     </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelect(row)"></tr>
-  
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
 
 </table>
+
+<mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+</mat-paginator>

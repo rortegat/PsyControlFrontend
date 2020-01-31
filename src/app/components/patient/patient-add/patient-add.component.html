@@ -4,29 +4,31 @@
 
     <div mat-dialog-content [formGroup]="addForm">
 
-     
         <p>
             <mat-form-field appearance="outline">
-                <mat-label>Nombre</mat-label>
+                <mat-label>Nombre(s)</mat-label>
                 <input matInput formControlName="firstname">
                 <mat-error *ngIf="addForm.controls['firstname'].errors?.required">Obligatorio</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Apellido</mat-label>
+                <mat-label>Apellido(s)</mat-label>
                 <input matInput formControlName="lastname" placeholder="Apellido">
                 <mat-error *ngIf="addForm.controls['lastname'].errors?.required">Obligatorio</mat-error>
             </mat-form-field>
         </p>
-
         <p>
             <mat-form-field appearance="outline">
                 <mat-label>Teléfono</mat-label>
                 <input matInput formControlName="phone">
                 <mat-error *ngIf="addForm.controls['phone'].errors?.required">Obligatorio</mat-error>
             </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Celular</mat-label>
+                <input matInput formControlName="mobile">
+                <mat-error *ngIf="addForm.controls['mobile'].errors?.required">Obligatorio</mat-error>
+            </mat-form-field>
         </p>
-
         <p>
             <mat-form-field appearance="outline">
                 <mat-label>Correo Electrónico</mat-label>

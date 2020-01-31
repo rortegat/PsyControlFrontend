@@ -21,8 +21,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
     let user = this.session.getUserData()
     if (user != null) {
-      console.log(user.token)
-
       request = request.clone({
         setHeaders: {
           'Authorization': `Bearer ${user.token}`,

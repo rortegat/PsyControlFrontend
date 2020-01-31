@@ -13,10 +13,24 @@
   flex: 1 1 auto;
 }
 
+.themes{
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+  background-color: darkgoldenrod;
+  padding-left: 20px;
+}
+
 .mat-sidenav {
   background-color: rgb(42, 45, 49);
   position: fixed;
 }
+
+.mat-sidenav-content{
+  min-height: 700px;
+  background-color: rgb(246, 245, 250)
+} 
 
 .mat-list-item {
   color: white !important;

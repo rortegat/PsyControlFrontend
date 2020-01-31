@@ -9,7 +9,7 @@ export class RequestService {
 /**
  * This is a Global place to add all the request headers for every REST calls
  */
-private baseUrl = 'http://localhost:8080';
+private baseUrl = 'http://ec2-18-224-246-94.us-east-2.compute.amazonaws.com:8080/psycontrol'
 private httpHeaders = new HttpHeaders({ 
   'Content-Type': 'application/json',
  });
@@ -29,6 +29,12 @@ put(url:string, body:Object):Observable<any>{
 }
 
 delete(url:string):Observable<any>{
-    return this.http.delete(this.baseUrl + url, { headers:this.httpHeaders});
+    return this.http.delete(this.baseUrl + url, {
+        observe: 'response',
+        "responseType": "text",
+        headers: this.httpHeaders
+      })
+  
 }
+
 }

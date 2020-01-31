@@ -16,7 +16,12 @@ export class FileUploadComponent implements OnInit {
 
     this.uploadForm = this.formBuilder.group({
       file: ['']
-    });
+    })
+  
+  }
+
+  onSubmit(){
+    console.log(this.uploadForm.value)
   }
 
 }

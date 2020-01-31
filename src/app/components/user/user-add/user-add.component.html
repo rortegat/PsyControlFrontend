@@ -31,7 +31,7 @@
                 <input type="password" matInput formControlName="password">
                 <mat-error *ngIf="addForm.controls['password'].errors?.required">Obligatorio</mat-error>
                 <mat-error *ngIf="addForm.controls['password'].errors?.minlength">
-                    Password with less than 6 characters.
+                    La contraseña debe tener al menos 6 caracteres.
                 </mat-error>
             </mat-form-field>
 

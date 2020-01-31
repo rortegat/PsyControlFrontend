@@ -62,9 +62,9 @@ export class UserListComponent implements OnInit {
       user.lastname = rsp.lastname
       user.password = rsp.password
       user.email = rsp.email
-      console.log(user);
+      console.log(user)
       
-        this.userService.createUser(rsp).subscribe(
+        this.userService.createUser(user).subscribe(
           ()=>{
             this.userService.getUsers().subscribe(rsp=>this.users.data=rsp)
             this.snack.open("User agregado")._dismissAfter(2000)

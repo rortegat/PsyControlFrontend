@@ -39,7 +39,8 @@ import { NgModule } from '@angular/core';
         MatBadgeModule,
         MatProgressBarModule,
         MatSelectModule,
-        MatOptionModule
+        MatOptionModule,
+        MatPaginatorModule
 
     ],
     exports: [
@@ -67,6 +68,7 @@ import { NgModule } from '@angular/core';
         MatProgressBarModule,
         MatSelectModule,
         MatOptionModule,
+        MatPaginatorModule
     ],
 })
 export class MaterialModule { }

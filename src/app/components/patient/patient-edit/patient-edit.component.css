@@ -12,6 +12,7 @@ h1{
     padding: 24px 0 0;
     box-sizing: border-box;
     white-space: normal;
+    text-align: center;
 }
 
 .formulario .mat-form-field {

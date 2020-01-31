@@ -1,4 +1,9 @@
-<h2>Expediente: 00000{{id}}</h2>
+<br/>
+<a [routerLink]="'/home/patient-list'">< Regresar</a>
+<mat-card>
+<h2>Expediente: 00000{{patient.id}}</h2>
+<h3>{{patient.firstname}} {{patient.lastname}}</h3>
+</mat-card>
 <button mat-raised-button color="accent" (click)="deletePatient()">
     <mat-icon>delete</mat-icon>
     Eliminar expediente

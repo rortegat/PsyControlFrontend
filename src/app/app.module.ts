@@ -6,7 +6,6 @@ import { MaterialModule } from './app.material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PatientComponent } from './components/patient/patient/patient.component';
 import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
 import { PatientListComponent } from './components/patient/patient-list/patient-list.component';
 import { PatientAddComponent } from './components/patient/patient-add/patient-add.component';
 import { RouterModule } from '@angular/router';
@@ -23,13 +22,15 @@ import { HighLightSearchPipe } from './helpers/highLightSearch.pipe';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { UserAddComponent } from './components/user/user-add/user-add.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     PatientComponent,
     HomeComponent,
-    LoginComponent,
     PatientListComponent,
     PatientAddComponent,
     FileUploadComponent,
@@ -40,7 +41,8 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
     HighLightSearchPipe,
     UserListComponent,
     UserAddComponent,
-    UserEditComponent
+    UserEditComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

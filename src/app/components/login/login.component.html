@@ -1,7 +1,9 @@
 <mat-card class="mat-elevation-z10">
+
     <mat-progress-bar *ngIf="isLoading" color="primary" mode="indeterminate">
     </mat-progress-bar>
 
+    <div class="logo">LOGO APLICACIÓN</div>
     <div mat-card-image></div>
 
     <mat-card-content>
@@ -13,8 +15,8 @@
             <p>
                 <mat-form-field appearance="outline">
                     <mat-label>Usuario</mat-label>
-                    <input matInput formControlName="user">
-                    <mat-error *ngIf="loginForm.controls['user'].errors?.required">Ingrese su usuario</mat-error>
+                    <input matInput formControlName="username">
+                    <mat-error *ngIf="loginForm.controls['username'].errors?.required">Ingrese su usuario</mat-error>
                 </mat-form-field>
             </p>
             <p>
@@ -29,8 +31,16 @@
             <p>
                 <button mat-raised-button color="primary" type="submit">Ingresar</button>
             </p>
+            
 
         </form>
+        <p>
+            <button mat-stroked-button color="primary" (click)="createAccount()">Crear cuenta</button>
+        </p>
+        <p>
+            <a href="#">Olvidé mi contraseña</a>
+        </p>
+        <br/>
 
     </mat-card-content>
 

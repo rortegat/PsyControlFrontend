@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Patient } from 'src/app/models/patient';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatSnackBar, MatDialog, MatPaginator } from '@angular/material';
 import { SessionService } from 'src/app/services/session.service';
 import { PatientService } from 'src/app/services/api/patient.service';
 import { PatientAddComponent } from '../patient-add/patient-add.component';
@@ -15,10 +15,12 @@ import { Router } from '@angular/router';
 })
 export class PatientListComponent implements OnInit {
 
-  public displayedColumns: string[] = ['firstname', 'lastname', 'email', 'phone', 'mobile', 'accion'];
+  public displayedColumns: string[] = ['id','firstname', 'lastname', 'email', 'phone', 'mobile', 'accion'];
   public patients: MatTableDataSource<Patient>;
 
   public filterValue:string=""
+
+  @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator
 
   constructor(
     private snack: MatSnackBar,
@@ -35,6 +37,7 @@ export class PatientListComponent implements OnInit {
 
     this.patient.getPatients().subscribe((rsp) => {
       this.patients = new MatTableDataSource(rsp)
+      this.patients.paginator=this.paginator
       this.session.loading.next(false)
     })
   }
@@ -68,7 +71,7 @@ export class PatientListComponent implements OnInit {
   editPatient(id: number) {
 
     this.patient.getPatient(id).subscribe(rsp => {
-      console.log(rsp);
+      console.log(rsp)
       const dialogRef = this.dialog.open(PatientEditComponent, {
         width: '650px',
         data: rsp

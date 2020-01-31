@@ -22,8 +22,8 @@ export class ConsultService {
     return this.request.get(`${this.baseUrl}/${id}`)
   }
 
-  createConsult(consult: Consult):Observable<Consult>{
-    return this.request.post(`${this.baseUrl}/add`,consult)
+  createConsult(patientId:number, consult: Consult):Observable<Consult>{
+    return this.request.post(`${this.baseUrl}/add/${patientId}`,consult)
   }
 
   deleteConsult(id: number):Observable<any>{
