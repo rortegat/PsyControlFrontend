@@ -1,18 +1,41 @@
 import { Injectable } from '@angular/core';
-import { RequestService } from '../request.service';
 import { Observable } from 'rxjs';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import {ResponseContentType} from '@angular/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
 
-  private baseUrl='/files'
-  
-  constructor(private request: RequestService) { }
+  uploadURL: string = "http://localhost:8080/files";
 
-  uploadSingleFile(data):Observable<any>{
-    return this.request.post(`${this.baseUrl}/upload`,data)
+  constructor(private httpClient: HttpClient) { }
+
+  uploadSingleFile(data): Observable<any> {
+    return this.httpClient.post<any>(`${this.uploadURL}/upload`, data, {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(map((event) => {
+
+      switch (event.type) {
+
+        case HttpEventType.UploadProgress:
+          const progress = Math.round(100 * event.loaded / event.total);
+          return { status: 'progress', message: progress };
+
+        case HttpEventType.Response:
+          return event.body;
+        default:
+          return `Unhandled event: ${event.type}`;
+      }
+    })
+    )
+  }
+
+  downloadSingleFile(filename:string):Observable<any>{
+    return this.httpClient.get<any>(`${this.uploadURL}/download`)
   }
 
 }

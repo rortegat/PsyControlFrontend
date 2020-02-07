@@ -13,7 +13,7 @@ export class PatientService {
   constructor(private request: RequestService) { }
 
   getPatients(): Observable<Patient[]> {
-    return this.request.get(`${this.baseUrl}/list`).pipe(
+    return this.request.get(`${this.baseUrl}/all`).pipe(
       map(data => data as Patient[]));
   }
 

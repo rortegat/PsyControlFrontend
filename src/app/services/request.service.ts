@@ -9,7 +9,8 @@ export class RequestService {
 /**
  * This is a Global place to add all the request headers for every REST calls
  */
-private baseUrl = 'http://ec2-18-224-246-94.us-east-2.compute.amazonaws.com:8080/psycontrol'
+//private baseUrl = 'http://ec2-18-224-246-94.us-east-2.compute.amazonaws.com:8080/psycontrol'
+private baseUrl = 'http://localhost:8080'
 private httpHeaders = new HttpHeaders({ 
   'Content-Type': 'application/json',
  });

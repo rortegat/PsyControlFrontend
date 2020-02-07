@@ -3,9 +3,9 @@
 
 html, body { height: 100%; }
 body { 
-    background-image: url("assets/img/loginBackground.jpg");
+    /* background-image: url("assets/img/loginBackground.jpg");
     background-repeat: no-repeat; 
-    background-size: cover;
+    background-size: cover; */
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
