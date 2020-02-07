@@ -24,6 +24,8 @@ import { UserAddComponent } from './components/user/user-add/user-add.component'
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
+import { ServerErrorComponent } from './components/error/server-error/server-error.component';
+import { ApplicationErrorComponent } from './components/error/application-error/application-error.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { LoginComponent } from './components/login/login.component';
     UserListComponent,
     UserAddComponent,
     UserEditComponent,
-    SignupComponent
+    SignupComponent,
+    ServerErrorComponent,
+    ApplicationErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +71,9 @@ import { LoginComponent } from './components/login/login.component';
     PatientAddComponent,
     PatientEditComponent,
     UserAddComponent,
-    UserEditComponent
+    UserEditComponent,
+    ServerErrorComponent,
+    ApplicationErrorComponent
   ]
 })
 export class AppModule { }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource, MatSnackBar, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/api/user.service';
 import { SessionService } from 'src/app/services/session.service';

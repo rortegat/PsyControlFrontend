@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Patient } from 'src/app/models/patient';
-import { MatSnackBar, MatDialog, MatPaginator } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionService } from 'src/app/services/session.service';
 import { PatientService } from 'src/app/services/api/patient.service';
 import { PatientAddComponent } from '../patient-add/patient-add.component';
@@ -20,7 +22,7 @@ export class PatientListComponent implements OnInit {
 
   public filterValue:string=""
 
-  @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator
+  @ViewChild(MatPaginator) paginator: MatPaginator
 
   constructor(
     private snack: MatSnackBar,

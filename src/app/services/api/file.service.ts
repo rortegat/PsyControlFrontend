@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
-import {ResponseContentType} from '@angular/http';
 import { map } from 'rxjs/operators';
 
 @Injectable({

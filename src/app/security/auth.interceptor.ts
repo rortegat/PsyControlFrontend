@@ -4,7 +4,9 @@ import { Observable, of, throwError } from 'rxjs';
 import { SessionService } from '../services/session.service';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { ServerErrorComponent } from '../components/error/server-error/server-error.component';
+import { ApplicationErrorComponent } from '../components/error/application-error/application-error.component';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -12,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private session: SessionService,
     private router: Router,
-    private matDialog: MatDialog
+    private dialog: MatDialog
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -31,13 +33,27 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError(
         (error) => {
-          console.log(error)
-          if (error.status === 403) {
-            console.log('No authorized ' + error.status)
-            this.session.loading.next(false)
-            // this.session.removeUserData()
-            // this.router.navigate(['login'])
+          if (error.status === 401){
+            const dialogRef = this.dialog.open(ApplicationErrorComponent, {
+              width: '300px',
+              data: error
+            })
+            dialogRef.afterClosed().subscribe(() => {
+            this.session.removeUserData()
+            this.router.navigate(['login'])
+            })
           }
+          else if (error.status === 500){
+            console.log(error)
+          }
+          else{
+            this.dialog.open(ServerErrorComponent, {
+              width: '300px',
+              data: error
+            })
+          }
+          this.session.loading.next(false)
+          
           return throwError(error)
         }) as any
     )

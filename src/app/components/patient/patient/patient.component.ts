@@ -5,7 +5,7 @@ import { Consult } from 'src/app/models/consult';
 import { PatientService } from 'src/app/services/api/patient.service';
 import { Patient } from 'src/app/models/patient';
 import { SessionService } from 'src/app/services/session.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-patient',
