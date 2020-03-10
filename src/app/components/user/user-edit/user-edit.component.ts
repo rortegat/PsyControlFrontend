@@ -22,7 +22,14 @@ export class UserEditComponent implements OnInit {
     },
     {
       "id": 2,
-      "rolename": "USER"
+      "rolename": "DEMO"
+    }
+  ]
+
+  public testRoles: Role[] = [
+    {
+      "id": 2,
+      "rolename": "DEMO"
     }
   ]
 
@@ -33,28 +40,27 @@ export class UserEditComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<UserEditComponent>,
     @Inject(MAT_DIALOG_DATA) public user: User
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
-
-    this.rolesService.getRoles().subscribe((rsp) =>this.rolesList=rsp)
-
 
     this.editForm = this.formBuilder.group({
       username: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', Validators.required],
-      roles: ['']
+      roles: [{
+        "id": 2,
+        "rolename": "DEMO"
+      }]
     })
 
-    this.editForm.controls['username'].setValue(this.user.username)
-    this.editForm.controls['firstname'].setValue(this.user.firstname)
-    this.editForm.controls['lastname'].setValue(this.user.lastname)
-    this.editForm.controls['email'].setValue(this.user.email)
-    this.editForm.controls.roles.patchValue(this.user.roles)
+    this.editForm.controls['roles'].patchValue(this.testRoles)
+
+    // this.rolesService.getRoles().subscribe((rsp) =>{
+    //   this.rolesList=rsp
+    //   this.editForm.patchValue(this.user)
+    // })
 
   }
 

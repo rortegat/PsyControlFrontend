@@ -1,9 +1,8 @@
 <br/>
 <a [routerLink]="'/home/patient-list'">< Regresar</a>
-<mat-card>
-<h2>Expediente: 00000{{patient.id}}</h2>
-<h3>{{patient.firstname}} {{patient.lastname}}</h3>
-</mat-card>
+
+<h2 align="center">{{patient.firstname}} {{patient.lastname}}</h2>
+
 <button mat-raised-button color="accent" (click)="deletePatient()">
     <mat-icon>delete</mat-icon>
     Eliminar expediente
@@ -16,13 +15,9 @@
 <div *ngFor="let consult of consults">
 <mat-card class="mat-elevation-z5">
     {{consult.reason}} - 
-    {{consult.createdDate | date: 'dd/MM/yyyy HH:mm:ss'}}
-    <button mat-icon-button style="color: rgb(207, 75, 75);" (click)="deleteConsult(consult.id)">
-        <mat-icon>delete</mat-icon>
-    </button>
-    <mat-card-content>
-        <p>{{consult.description}}</p>
-    </mat-card-content>
+    {{consult.createdDate | date: 'dd/MM/yyyy HH:mm:ss'}}  
+<button mat-raised-button color="primary" [routerLink]="['/home/consult', consult.id]">Más información</button>
+
 </mat-card>
 </div>
 

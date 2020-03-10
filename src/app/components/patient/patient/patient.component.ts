@@ -58,21 +58,5 @@ export class PatientComponent implements OnInit {
       })
   }
 
-  deleteConsult(id: number) {
-    this.consultService.deleteConsult(id).subscribe(
-      () => {
-        this.snack.open("Consulta eliminada")._dismissAfter(2000)
-        this.consultService.getConsults(this.patient.id).subscribe(
-          (rsp) => {
-            this.consults = rsp
-          }
-        )
-
-      },
-      (err) => {
-        console.log(err)
-      })
-  }
-
 
 }

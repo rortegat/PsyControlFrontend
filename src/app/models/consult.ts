@@ -3,4 +3,5 @@ export class Consult {
     reason: string
     description: string
     createdDate: Date
+    lastModifiedDate: Date
 }

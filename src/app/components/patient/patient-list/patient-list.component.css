@@ -1,15 +1,34 @@
-table { 
-    width: 100%;
+mat-table{
+    width: 100hv;
 }
+
+.mobile-label {
+  display: none;
+}
+  
+  @media(max-width: 600px) {
+    .mobile-label {
+      width: 80px;
+      display: inline-block;
+      font-weight: bold;
+    }
+  
+    .mat-header-row {
+      display: none;
+    }
+  
+    .mat-row { 
+      flex-direction: column;
+      align-items: start;
+      padding: 8px 24px;
+    }
+
+  }
 
 .bottom-right{
     position: fixed !important;
     right: 5%; /* Add this and change value to set the margin you want */
     bottom: 5%
-}
-
-.mat-row:hover {
-    background-color: rgba(2, 240, 248, 0.2);
 }
 
 mat-paginator {

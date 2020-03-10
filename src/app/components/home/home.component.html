@@ -39,6 +39,9 @@
 
     </mat-toolbar>
 
+    <mat-progress-bar *ngIf="loading" color="accent" mode="indeterminate">
+    </mat-progress-bar>
+
     <mat-sidenav-container>
 
 
@@ -66,10 +69,10 @@
         </mat-sidenav>
 
         <mat-sidenav-content>
-            <div class="background-spinner" *ngIf="loading">
+            <!-- <div class="background-spinner" *ngIf="loading">
                 <mat-progress-spinner [diameter]="200" [strokeWidth]="5" color="primary" mode="indeterminate">
                 </mat-progress-spinner>
-            </div>
+            </div> -->
             <div class="container">
                 <router-outlet></router-outlet>
             </div>

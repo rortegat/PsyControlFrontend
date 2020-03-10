@@ -4,6 +4,7 @@ import { ConsultService } from 'src/app/services/api/consult.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Patient } from 'src/app/models/patient';
 import { PatientService } from 'src/app/services/api/patient.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-consult-add',
@@ -11,6 +12,51 @@ import { PatientService } from 'src/app/services/api/patient.service';
   styleUrls: ['./consult-add.component.css']
 })
 export class ConsultAddComponent implements OnInit {
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+      spellcheck: true,
+      height: 'auto',
+      minHeight: '0',
+      maxHeight: 'auto',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      placeholder: 'Enter text here...',
+      defaultParagraphSeparator: '',
+      defaultFontName: '',
+      defaultFontSize: '',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ],
+      customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['bold', 'italic'],
+      ['fontSize']
+    ]
+};
 
   public patientId:number
 
@@ -29,7 +75,6 @@ export class ConsultAddComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.route.snapshot.paramMap.get('id'))
     this.patientId= parseInt(this.route.snapshot.paramMap.get('id'))
 
     this.addForm = this.formBuilder.group({

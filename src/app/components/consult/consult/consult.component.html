@@ -1,1 +1,13 @@
-<p>consult works!</p>
+<mat-card>
+    <h3>{{consult.reason}}</h3>
+    <button mat-icon-button color="primary" [routerLink]="['/home/consult-edit', consult.id]">
+        <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button style="color: rgb(207, 75, 75);" (click)="deleteConsult(consult.id)">
+        <mat-icon>delete</mat-icon>
+    </button>
+    <mat-card-content>
+        <p>{{consult.createdDate | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
+        <p [innerHTML]="consult.description"></p>
+    </mat-card-content>
+</mat-card>

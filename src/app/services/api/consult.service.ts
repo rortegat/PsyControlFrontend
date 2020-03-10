@@ -26,6 +26,10 @@ export class ConsultService {
     return this.request.post(`${this.baseUrl}/add/${patientId}`,consult)
   }
 
+  updateConsult(consult:Consult):Observable<Consult>{
+    return this.request.put(`${this.baseUrl}/update`,consult)
+  }
+
   deleteConsult(id: number):Observable<any>{
     return this.request.delete(`${this.baseUrl}/delete/${id}`)
   }

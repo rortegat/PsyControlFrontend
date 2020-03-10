@@ -9,14 +9,17 @@
 </mat-form-field>
 </p>
 <p>
-    <mat-form-field appearance="outline">
+    <angular-editor formControlName="description" ></angular-editor>
+    <mat-error *ngIf="addForm.controls['description'].errors?.required">Obligatorio</mat-error>    
+
+    <!-- <mat-form-field appearance="outline">
         <mat-label>Descripción</mat-label>
         <textarea matInput formControlName="description"></textarea>
             <mat-error *ngIf="addForm.controls['description'].errors?.required">Obligatorio</mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
     </p>
     <button mat-button color="primary" [routerLink]="['/home/patient-list']">Cancelar</button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="addForm.invalid">Guardar</button>
+    <button mat-raised-button color="primary" type="submit" >Guardar</button>
 </form>
 </mat-card>
 

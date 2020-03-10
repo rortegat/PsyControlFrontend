@@ -29,12 +29,7 @@ export class PatientEditComponent implements OnInit {
       mobile:['']
     })
 
-    this.editForm.controls['id'].setValue(this.patient.id)
-    this.editForm.controls['firstname'].setValue(this.patient.firstname)
-    this.editForm.controls['lastname'].setValue(this.patient.lastname)
-    this.editForm.controls['email'].setValue(this.patient.email)
-    this.editForm.controls['phone'].setValue(this.patient.phone)
-    this.editForm.controls['mobile'].setValue(this.patient.mobile)
+    this.editForm.patchValue(this.patient)
 
   }
 

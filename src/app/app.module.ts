@@ -26,7 +26,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { ServerErrorComponent } from './components/error/server-error/server-error.component';
 import { ApplicationErrorComponent } from './components/error/application-error/application-error.component';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ConsultEditComponent } from './components/consult/consult-edit/consult-edit.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,8 @@ import { ApplicationErrorComponent } from './components/error/application-error/
     UserEditComponent,
     SignupComponent,
     ServerErrorComponent,
-    ApplicationErrorComponent
+    ApplicationErrorComponent,
+    ConsultEditComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,9 @@ import { ApplicationErrorComponent } from './components/error/application-error/
     RouterModule.forRoot(ROUTES),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularEditorModule
+
   ],
   providers: [
     HighLightSearchPipe,
@@ -73,7 +77,8 @@ import { ApplicationErrorComponent } from './components/error/application-error/
     UserAddComponent,
     UserEditComponent,
     ServerErrorComponent,
-    ApplicationErrorComponent
+    ApplicationErrorComponent,
+    
   ]
 })
 export class AppModule { }

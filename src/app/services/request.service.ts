@@ -10,23 +10,26 @@ export class RequestService {
  * This is a Global place to add all the request headers for every REST calls
  */
 //private baseUrl = 'http://ec2-18-224-246-94.us-east-2.compute.amazonaws.com:8080/psycontrol'
-private baseUrl = 'http://localhost:8080'
+private baseUrl = '/api'
 private httpHeaders = new HttpHeaders({ 
   'Content-Type': 'application/json',
- });
+ })
 
  constructor(private http: HttpClient) {}
 
 get(url:string, urlParams?:HttpParams):Observable<any>{
-    return this.http.get(this.baseUrl + url, {headers:this.httpHeaders,  params:urlParams} );
+    return this.http.get(this.baseUrl + url, 
+      {headers:this.httpHeaders,  params:urlParams} )
 }
 
 post(url:string, body:Object):Observable<any>{
-    return this.http.post(this.baseUrl + url, body, { headers:this.httpHeaders});
+    return this.http.post(this.baseUrl + url, body, 
+      { headers:this.httpHeaders})
 }
 
 put(url:string, body:Object):Observable<any>{
-    return this.http.put(this.baseUrl + url, body, { headers:this.httpHeaders});
+    return this.http.put(this.baseUrl + url, body, 
+      { headers:this.httpHeaders})
 }
 
 delete(url:string):Observable<any>{
