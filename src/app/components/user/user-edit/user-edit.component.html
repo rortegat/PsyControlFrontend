@@ -39,7 +39,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Roles</mat-label>
                     <mat-select multiple formControlName="roles">
-                        <mat-option *ngFor="let role of roleSelect" [value]="role">
+                        <mat-option *ngFor="let role of rolesList" [value]="role">
                         {{role.rolename}}
                     </mat-option>
                      </mat-select>

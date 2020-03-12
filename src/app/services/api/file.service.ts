@@ -33,7 +33,7 @@ export class FileService {
     )
   }
 
-  downloadSingleFile(filename:string):Observable<any>{
+  downloadSingleFile(filename: string): Observable<any> {
     return this.httpClient.get<any>(`${this.uploadURL}/download`)
   }
 

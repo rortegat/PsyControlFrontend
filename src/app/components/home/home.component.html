@@ -1,4 +1,4 @@
-<div [class.alternative]="otherTheme">
+
     <mat-toolbar color="primary" class="mat-elevation-z5">
         <mat-toolbar-row>
 
@@ -17,9 +17,10 @@
 
                 <div class="user-info">
                     <img src="../../../assets/img/avatar.png">
-                    <h3>{{userInfo.firstname}} {{userInfo.lastname}}</h3>
-                    <h5>{{userInfo.email}}</h5>
+                    <p mat-menu-item>{{userInfo.firstname}} {{userInfo.lastname}}</p>
+                    <p mat-menu-item>{{userInfo.email}}</p>
                 </div>
+                
 
                 <mat-divider></mat-divider>
                 <button mat-menu-item>
@@ -48,20 +49,22 @@
         <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches">
 
             <mat-nav-list>
-                <div style="height: 60px"></div>
-                <a mat-list-item [routerLink]="'/home'" matTooltip="Home">
-                    <mat-icon>home
-                    </mat-icon>
+                <a mat-list-item [routerLink]="'/home'">
+                    <mat-icon>riot</mat-icon>
+                    <span>space</span>
                 </a>
-                <a *ngIf="adminRole" mat-list-item [routerLink]="'/home/file-upload'" matTooltip="Files">
+                <a *ngIf="adminRole" mat-list-item [routerLink]="'/home/file-upload'" >
                     <mat-icon>library_books</mat-icon>
+                    <span>Archivos</span>
                     <!-- <span>Dashboard</span> matBadge="8" matBadgePosition="below after" matBadgeColor="warn" matBadgeSize="small"-->
                 </a>
-                <a mat-list-item [routerLink]="'/home/patient-list'" matTooltip="Pacientes">
-                    <mat-icon>check</mat-icon>
+                <a mat-list-item [routerLink]="'/home/patient-list'">
+                    <mat-icon>assignment_ind</mat-icon>
+                    <span>Pacientes</span>
                 </a>
-                <a *ngIf="adminRole" mat-list-item [routerLink]="'/home/user-list'" matTooltip="Usuarios">
+                <a *ngIf="adminRole" mat-list-item [routerLink]="'/home/user-list'" >
                     <mat-icon>supervisor_account</mat-icon>
+                    <span>Usuarios</span>
                 </a>
 
             </mat-nav-list>
@@ -69,10 +72,6 @@
         </mat-sidenav>
 
         <mat-sidenav-content>
-            <!-- <div class="background-spinner" *ngIf="loading">
-                <mat-progress-spinner [diameter]="200" [strokeWidth]="5" color="primary" mode="indeterminate">
-                </mat-progress-spinner>
-            </div> -->
             <div class="container">
                 <router-outlet></router-outlet>
             </div>
@@ -80,6 +79,3 @@
 
 
     </mat-sidenav-container>
-
-
-</div>

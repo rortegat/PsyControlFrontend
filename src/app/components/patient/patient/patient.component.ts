@@ -6,6 +6,9 @@ import { PatientService } from 'src/app/services/api/patient.service';
 import { Patient } from 'src/app/models/patient';
 import { SessionService } from 'src/app/services/session.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
+import { ApplicationErrorComponent } from '../../modal/application-error/application-error.component';
 
 @Component({
   selector: 'app-patient',
@@ -21,6 +24,7 @@ export class PatientComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snack: MatSnackBar,
+    private dialog: MatDialog,
     private consultService: ConsultService,
     private patientService: PatientService,
     private sessionService: SessionService
@@ -47,6 +51,22 @@ export class PatientComponent implements OnInit {
     this.router.navigate(['/home/consult-add', this.patient.id])
   }
 
+  deletePatientButton(){
+    var info:any = {
+      action: "Eliminar paciente",
+      message: "Está seguro de eliminar al paciente "+this.patient.firstname,
+    }
+    const dialogRef = this.dialog.open(ApplicationInfoComponent, {
+      width: '300px',
+      data: info
+    })
+
+    dialogRef.afterClosed().subscribe(rsp => {
+      if (rsp==true)
+      this.deletePatient()
+    })
+  }
+
   deletePatient() {
     this.patientService.deletePatient(this.patient.id).subscribe(
       () => {
@@ -55,6 +75,10 @@ export class PatientComponent implements OnInit {
       },
       (err) => {
         console.log(err)
+        this.dialog.open(ApplicationErrorComponent, {
+          //width:'300px',
+          data: err
+        })
       })
   }
 

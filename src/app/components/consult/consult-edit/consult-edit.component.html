@@ -12,8 +12,8 @@
             </mat-form-field>
         </p>
         <p>
-            <angular-editor formControlName="description"></angular-editor>
-            <mat-error *ngIf="editForm.controls['description'].errors?.required">Obligatorio</mat-error>
+            <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
+            <!-- <mat-error *ngIf="editForm.controls['description'].errors?.required">Obligatorio</mat-error> -->
         </p>
         <button mat-button color="primary" [routerLink]="['/home/consult',consultId]">Cancelar</button>
         <button mat-raised-button color="primary" type="submit">Guardar</button>

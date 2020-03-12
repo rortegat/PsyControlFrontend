@@ -18,19 +18,19 @@ export class ConsultService {
       map(data => data as Consult[]))
   }
 
-  getConsult(id:number): Observable<Consult>{
+  getConsult(id: number): Observable<Consult> {
     return this.request.get(`${this.baseUrl}/${id}`)
   }
 
-  createConsult(patientId:number, consult: Consult):Observable<Consult>{
-    return this.request.post(`${this.baseUrl}/add/${patientId}`,consult)
+  createConsult(patientId: number, consult: Consult): Observable<Consult> {
+    return this.request.post(`${this.baseUrl}/add/${patientId}`, consult)
   }
 
-  updateConsult(consult:Consult):Observable<Consult>{
-    return this.request.put(`${this.baseUrl}/update`,consult)
+  updateConsult(consult: Consult): Observable<Consult> {
+    return this.request.put(`${this.baseUrl}/update`, consult)
   }
 
-  deleteConsult(id: number):Observable<any>{
+  deleteConsult(id: number): Observable<any> {
     return this.request.delete(`${this.baseUrl}/delete/${id}`)
   }
 }

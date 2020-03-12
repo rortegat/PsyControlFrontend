@@ -13,18 +13,18 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 })
 export class ConsultAddComponent implements OnInit {
 
-  editorConfig: AngularEditorConfig = {
+  public editorConfig: AngularEditorConfig = {
     editable: true,
       spellcheck: true,
       height: 'auto',
-      minHeight: '0',
+      minHeight: '30vh',
       maxHeight: 'auto',
       width: 'auto',
       minWidth: '0',
       translate: 'yes',
       enableToolbar: true,
       showToolbar: true,
-      placeholder: 'Enter text here...',
+      placeholder: 'Escriba aquí...',
       defaultParagraphSeparator: '',
       defaultFontName: '',
       defaultFontSize: '',
@@ -53,10 +53,10 @@ export class ConsultAddComponent implements OnInit {
     sanitize: true,
     toolbarPosition: 'top',
     toolbarHiddenButtons: [
-      ['bold', 'italic'],
-      ['fontSize']
+      ['superscript', 'italic'],
+      ['subscript']
     ]
-};
+}
 
   public patientId:number
 
@@ -67,8 +67,7 @@ export class ConsultAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private consult: ConsultService,
     private router: Router,
-    private route: ActivatedRoute,
-    private patientService: PatientService
+    private route: ActivatedRoute
     ) {
       
   }

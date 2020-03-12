@@ -1,6 +1,6 @@
-<h1 mat-dialog-title style="color:indianred;">{{error.error.error}}</h1>
+<h1 mat-dialog-title style="color:indianred;">{{error.statusText}}</h1>
 <div mat-dialog-content>
-    {{error.error.message}}
+    {{error.error}}
 </div>
 <div mat-dialog-actions align="center">
     <button mat-raised-button color="primary" (click)="closeDialog()">Ok</button>

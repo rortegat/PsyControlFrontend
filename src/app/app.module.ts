@@ -24,10 +24,13 @@ import { UserAddComponent } from './components/user/user-add/user-add.component'
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
-import { ServerErrorComponent } from './components/error/server-error/server-error.component';
-import { ApplicationErrorComponent } from './components/error/application-error/application-error.component';
+import { ServerErrorComponent } from './components/modal/server-error/server-error.component';
+import { ApplicationErrorComponent } from './components/modal/application-error/application-error.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ConsultEditComponent } from './components/consult/consult-edit/consult-edit.component'
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { SessionService } from './services/session.service';
+import { ApplicationInfoComponent } from './components/modal/application-info/application-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +51,8 @@ import { ConsultEditComponent } from './components/consult/consult-edit/consult-
     SignupComponent,
     ServerErrorComponent,
     ApplicationErrorComponent,
-    ConsultEditComponent
+    ConsultEditComponent,
+    ApplicationInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -71,14 +75,24 @@ import { ConsultEditComponent } from './components/consult/consult-edit/consult-
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents:[
+  entryComponents: [
     PatientAddComponent,
     PatientEditComponent,
     UserAddComponent,
     UserEditComponent,
     ServerErrorComponent,
     ApplicationErrorComponent,
-    
+    ApplicationInfoComponent
   ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(overlayContainer: OverlayContainer, sessionService: SessionService) {
+    sessionService.theme.subscribe(rsp=>{
+      if(rsp)
+        overlayContainer.getContainerElement().classList.add("alternative")
+      else
+      overlayContainer.getContainerElement().classList.remove("alternative")
+    })
+    
+  }
+}

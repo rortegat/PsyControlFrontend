@@ -1,0 +1,8 @@
+<h1 mat-dialog-title style="color:rgb(92, 122, 205);">{{info.action}}</h1>
+<div mat-dialog-content>
+    {{info.message}}
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-stroked-button color="accent" (click)="closeDialog(false)">Cancelar</button>
+    <button mat-raised-button color="accent" (click)="closeDialog(true)">Aceptar</button>
+</div>

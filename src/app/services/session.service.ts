@@ -9,35 +9,40 @@ import { Router } from '@angular/router';
 })
 export class SessionService {
 
-  public currentUser: BehaviorSubject<AuthenticatedUser>=new BehaviorSubject<AuthenticatedUser>(null);
-  public loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public currentUser: BehaviorSubject<AuthenticatedUser> = new BehaviorSubject<AuthenticatedUser>(null)
+  public loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  public theme: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
-  constructor( 
+  constructor(
     private router: Router
-  ) { 
-    if(sessionStorage.getItem('authUser')!=null){
-    this.currentUser = new BehaviorSubject<AuthenticatedUser>(JSON.parse(sessionStorage.getItem('authUser')))
-    this.router.navigate(["home"])
+  ) {
+    if (sessionStorage.getItem('authUser') != null) {
+      this.currentUser = new BehaviorSubject<AuthenticatedUser>(JSON.parse(sessionStorage.getItem('authUser')))
+      this.router.navigate(["home"])
     }
   }
 
-  setUserData(user: AuthenticatedUser){
+  setUserData(user: AuthenticatedUser) {
     this.currentUser.next(user)
-    sessionStorage.setItem("authUser",JSON.stringify(user))
+    sessionStorage.setItem("authUser", JSON.stringify(user))
   }
 
-  getUserData():AuthenticatedUser | null{
-    if(sessionStorage.getItem('authUser')!=null)
-    return JSON.parse(sessionStorage.getItem("authUser"))
+  getUserData(): AuthenticatedUser | null {
+    if (sessionStorage.getItem('authUser') != null)
+      return JSON.parse(sessionStorage.getItem("authUser"))
     else
-    return null
+      return null
   }
 
-  removeUserData(){
+  removeUserData() {
     this.currentUser.next(null);
     sessionStorage.removeItem("authUser");
   }
 
-  
+  changeTheme(){
+    this.theme.next(!this.theme.getValue())
+  }
+
+
 
 }

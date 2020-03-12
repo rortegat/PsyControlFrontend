@@ -17,7 +17,7 @@ export class PatientService {
       map(data => data as Patient[]));
   }
 
-  createPatient(patient: Patient):Observable<Patient>{
+  createPatient(patient: Patient): Observable<Patient> {
     return this.request.post(`${this.baseUrl}/add`, patient);
   }
 
@@ -25,11 +25,11 @@ export class PatientService {
     return this.request.get(`${this.baseUrl}/${id}`);
   }
 
-  updatePatient(patient:Patient): Observable<Patient> {
+  updatePatient(patient: Patient): Observable<Patient> {
     return this.request.put(`${this.baseUrl}/update`, patient);
   }
 
-  deletePatient(id:number): Observable<Patient>{
+  deletePatient(id: number): Observable<Patient> {
     return this.request.delete(`${this.baseUrl}/delete/${id}`);
   }
 }

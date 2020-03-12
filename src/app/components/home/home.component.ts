@@ -12,7 +12,7 @@ import { AuthenticatedUser } from 'src/app/models/authenticated-user';
 export class HomeComponent implements OnInit, OnDestroy {
 
 
-  public otherTheme: boolean=false
+  //public otherTheme: boolean=false
   public loading: boolean=false
   public userInfo: AuthenticatedUser=null
   public adminRole: boolean=false
@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    private session:  SessionService,
+    private sessionService:  SessionService,
     private router: Router,
     public changeDetectorRef: ChangeDetectorRef, 
     public media: MediaMatcher
@@ -31,10 +31,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.session.loading.subscribe(rsp=>this.loading=rsp)
-    this.session.currentUser.subscribe((rsp)=>{
-      this.userInfo=rsp
-    })
+    this.sessionService.loading.subscribe(rsp=>this.loading=rsp)
+    this.sessionService.currentUser.subscribe((rsp)=>{ this.userInfo=rsp})
    }
 
   ngOnInit() {
@@ -52,12 +50,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   changeTheme(){
-    this.otherTheme=!this.otherTheme
+    this.sessionService.changeTheme()
   }
 
   logOut(){
     this.router.navigate(["login"])
-    this.session.removeUserData()
+    this.sessionService.removeUserData()
   }
 
 }

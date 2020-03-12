@@ -60,7 +60,6 @@ export class PatientListComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(rsp => {
-      console.log(rsp)
       if (rsp != undefined) {
         this.patient.createPatient(rsp).subscribe(() => {
           this.patient.getPatients().subscribe(rsp => this.patients.data = rsp)
@@ -73,14 +72,12 @@ export class PatientListComponent implements OnInit {
   editPatient(id: number) {
 
     this.patient.getPatient(id).subscribe(rsp => {
-      console.log(rsp)
       const dialogRef = this.dialog.open(PatientEditComponent, {
         width: '650px',
         data: rsp
       });
 
       dialogRef.afterClosed().subscribe(rsp => {
-        console.log(rsp);
         if (rsp != undefined) {
           this.patient.updatePatient(rsp).subscribe(
             () => {
