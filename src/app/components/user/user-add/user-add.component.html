@@ -55,6 +55,16 @@
                 <mat-error *ngIf="addForm.controls['email'].errors?.email">Formato no válido</mat-error>
             </mat-form-field>
         </p> 
+        <p>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Roles</mat-label>
+                    <mat-select multiple formControlName="roles">
+                        <mat-option *ngFor="let role of rolesList" [value]="role">
+                        {{role.rolename}}
+                    </mat-option>
+                     </mat-select>
+                    </mat-form-field>
+                </p>
 
     </div>
 

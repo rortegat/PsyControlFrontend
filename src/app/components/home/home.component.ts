@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { SessionService } from 'src/app/services/session.service';
 import { Router } from '@angular/router';
 import { AuthenticatedUser } from 'src/app/models/authenticated-user';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-home',
@@ -11,15 +12,19 @@ import { AuthenticatedUser } from 'src/app/models/authenticated-user';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
+  @ViewChild('snav',{static: true}) navbar: MatSidenav
 
   //public otherTheme: boolean=false
   public loading: boolean=false
   public userInfo: AuthenticatedUser=null
   public adminRole: boolean=false
 
+  public panelOpenState: boolean = false
+  public allExpandState = false
+  public slideBool: boolean = false
+
   public mobileQuery: MediaQueryList = null
   private _mobileQueryListener: () => void
-
 
   constructor(
     private sessionService:  SessionService,
@@ -32,10 +37,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
 
     this.sessionService.loading.subscribe(rsp=>this.loading=rsp)
-    this.sessionService.currentUser.subscribe((rsp)=>{ this.userInfo=rsp})
+    this.sessionService.currentUser.subscribe(rsp=>this.userInfo=rsp)
+    this.sessionService.theme.subscribe(rsp=>this.slideBool=rsp)
    }
 
   ngOnInit() {
+
+    this.navbar.open()
 
     this.userInfo.roles.forEach(role => {
       switch(role.rolename){
@@ -49,11 +57,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  changeTheme(){
+  changeTheme(): void{
     this.sessionService.changeTheme()
   }
 
-  logOut(){
+  logOut(): void{
     this.router.navigate(["login"])
     this.sessionService.removeUserData()
   }

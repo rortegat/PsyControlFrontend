@@ -1,49 +1,57 @@
-.mat-toolbar {
+.mat-sidenav {
+  /* background-color: rgb(170, 181, 196); */
+  position: fixed;
+}
+
+.main-menu {
+  position: fixed;
+  top: 3%;
+  left: 3%;
+  z-index: 100;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.mat-list-item:hover {
+  border-radius: 25px;
+}
+
+.navbar-logo {
   position: sticky;
   position: -webkit-sticky;
   top: 0;
   z-index: 1000;
+  text-align: center;
+  width: 250px;
+  height: 100px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
-
-.toolbar-icon {
-  padding: 0 14px;
-}
-
-.toolbar-spacer {
-  flex: 1 1 auto;
-}
-
-.mat-sidenav {
-  /* background-color: rgb(42, 45, 49); */
-  position: fixed;
-}
-
-/* .mat-sidenav-content{
-  min-height: 700px;
-  background-color: rgb(246, 245, 250)
-} */
-
- .mat-list-item {
-  height: 55px !important;
-}
-
-/* .mat-list-item:hover {
-  background-color: rgba(52, 160, 233, 0.8) !important;
-  color: white !important;
-  border-radius: 50%;
-  height: 55px;
-} */
 
 a span {
-  margin-left: 10px;
-} 
+  margin-left: 30px;
+}
+
+.is-active {
+  color: rgb(121, 114, 211) !important;
+  width: fit-content;
+  padding: 8px;
+  border-radius: 25px;
+}
 
 .avatar-img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50em;
-  margin-top: 5px;
   cursor: pointer;
+  position: fixed;
+  top: 3%;
+  right: 3%;
+  z-index: 100;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
 }
 
 .user-info {
@@ -51,23 +59,17 @@ a span {
 }
 
 .user-info img {
-  width: 150px;
+  width: 100px;
   border-radius: 50%;
 }
 
 .user-info .mat-menu-item {
   text-align: center;
-  line-height:20px;
-  height:20px;
-}
-
-
-
-::ng-deep .mat-menu-panel {
-  width: 300px !important;
-  padding: 0 10px !important;
+  line-height: 20px;
+  height: 20px;
 }
 
 .container {
   height: 100vh;
+  padding: 5% 20px 0px 20px;
 }

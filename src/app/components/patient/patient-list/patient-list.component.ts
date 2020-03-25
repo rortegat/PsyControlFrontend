@@ -9,18 +9,19 @@ import { PatientService } from 'src/app/services/api/patient.service';
 import { PatientAddComponent } from '../patient-add/patient-add.component';
 import { PatientEditComponent } from '../patient-edit/patient-edit.component';
 import { Router } from '@angular/router';
+import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
+import { ApplicationErrorComponent } from '../../modal/application-error/application-error.component';
 
 @Component({
   selector: 'app-patient-list',
   templateUrl: './patient-list.component.html',
-  styleUrls: ['./patient-list.component.css']
+  styleUrls: ['./patient-list.component.scss']
 })
 export class PatientListComponent implements OnInit {
 
-  public displayedColumns: string[] = ['id','firstname', 'lastname', 'email', 'phone', 'mobile', 'accion'];
-  public patients: MatTableDataSource<Patient>;
-
-  public filterValue:string=""
+  public displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'phone', 'mobile', 'accion']
+  public patients: MatTableDataSource<Patient>
+  public filterValue: string = ""
 
   @ViewChild(MatPaginator) paginator: MatPaginator
 
@@ -35,11 +36,14 @@ export class PatientListComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+
     setTimeout(() => { this.session.loading.next(true) }, 0)
 
     this.patient.getPatients().subscribe((rsp) => {
       this.patients = new MatTableDataSource(rsp)
-      this.patients.paginator=this.paginator
+      this.patients.paginator = this.paginator
       this.session.loading.next(false)
     })
   }
@@ -54,10 +58,7 @@ export class PatientListComponent implements OnInit {
   }
 
   addPatient() {
-    const dialogRef = this.dialog.open(PatientAddComponent, {
-      //width: '650px',
-      //data: asset
-    })
+    const dialogRef = this.dialog.open(PatientAddComponent, {})
 
     dialogRef.afterClosed().subscribe(rsp => {
       if (rsp != undefined) {
@@ -73,28 +74,54 @@ export class PatientListComponent implements OnInit {
 
     this.patient.getPatient(id).subscribe(rsp => {
       const dialogRef = this.dialog.open(PatientEditComponent, {
-        width: '650px',
         data: rsp
-      });
+      })
 
       dialogRef.afterClosed().subscribe(rsp => {
         if (rsp != undefined) {
+          console.log(rsp)
           this.patient.updatePatient(rsp).subscribe(
             () => {
               this.patient.getPatients().subscribe(rsp => this.patients.data = rsp)
               this.snack.open("Paciente modificado")._dismissAfter(2000)
             }
-          );
+          )
         }
-      });
-
-
+      })
     })
   }
 
-  onSelect(row:Patient) {
+  deletePatientButton(patient: Patient) {
+    var info: any = {
+      action: "Eliminar paciente",
+      message: "Está seguro de eliminar al paciente " + patient.firstname,
+    }
+    const dialogRef = this.dialog.open(ApplicationInfoComponent, {
+      data: info
+    })
+    dialogRef.afterClosed().subscribe(rsp => {
+      if (rsp == true)
+        this.deletePatient(patient)
+    })
+  }
+
+  deletePatient(patient: Patient) {
+    this.patient.deletePatient(patient.id).subscribe(
+      () => {
+        this.snack.open("Paciente Eliminado")._dismissAfter(2000)
+        this.router.navigate(['/home/patient-list'])
+      },
+      (error) => {
+        console.log(error)
+        this.dialog.open(ApplicationErrorComponent, {
+          data: error
+        })
+      })
+  }
+
+  onSelect(row: Patient) {
     console.log(row)
-    this.router.navigate(["home/patient",row.id])
+    this.router.navigate(["home/patient", row.id])
   }
 
 

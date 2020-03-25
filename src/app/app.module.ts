@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgxChartsModule, PieChartModule, NumberCardModule } from '@swimlane/ngx-charts';
+
 import { FileUploadComponent } from './components/file/file-upload/file-upload.component';
 import { AuthInterceptor } from './security/auth.interceptor';
 import { FileListComponent } from './components/file/file-list/file-list.component';
@@ -31,6 +33,7 @@ import { ConsultEditComponent } from './components/consult/consult-edit/consult-
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { SessionService } from './services/session.service';
 import { ApplicationInfoComponent } from './components/modal/application-info/application-info.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,18 +55,21 @@ import { ApplicationInfoComponent } from './components/modal/application-info/ap
     ServerErrorComponent,
     ApplicationErrorComponent,
     ConsultEditComponent,
-    ApplicationInfoComponent
+    ApplicationInfoComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     MaterialModule,
+    NgxChartsModule,
+    PieChartModule,
+    NumberCardModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AngularEditorModule
-
   ],
   providers: [
     HighLightSearchPipe,

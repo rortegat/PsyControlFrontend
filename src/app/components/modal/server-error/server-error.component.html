@@ -1,7 +1,9 @@
-<h1 mat-dialog-title style="color:indianred;">Server Error: {{error.status}}</h1>
+<div mat-dialog-title>
+    <span style="color:indianred;">Error {{error.status}} - {{error.statusText}}</span>
+</div>
 <div mat-dialog-content>
-    {{error.name}}
+    <p>{{error.error?.message}}</p>
 </div>
 <div mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" (click)="closeDialog()">Ok</button>
+    <button mat-raised-button color="primary" (click)="closeDialog()">OK</button>
 </div>

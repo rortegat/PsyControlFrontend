@@ -21,6 +21,8 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatCardModule } from '@angular/material/card'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
+import {MatExpansionModule} from '@angular/material/expansion'
+import {MatSlideToggleModule} from '@angular/material/slide-toggle'
 
 import { NgModule } from '@angular/core';
 
@@ -50,7 +52,9 @@ import { NgModule } from '@angular/core';
         MatProgressBarModule,
         MatSelectModule,
         MatOptionModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatExpansionModule,
+        MatSlideToggleModule
 
     ],
     exports: [
@@ -78,7 +82,9 @@ import { NgModule } from '@angular/core';
         MatProgressBarModule,
         MatSelectModule,
         MatOptionModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatExpansionModule,
+        MatSlideToggleModule
     ],
 })
 export class MaterialModule { }

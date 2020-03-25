@@ -1,16 +1,19 @@
 <mat-card class="mat-elevation-z10">
 
+    
+
     <mat-progress-bar *ngIf="isLoading" color="primary" mode="indeterminate">
     </mat-progress-bar>
-
-    <div class="logo">LOGO APLICACIÓN</div>
-    <div mat-card-image></div>
+    <div ><img class="logo" src="../../../assets/img/logo.png"></div>
+    <div mat-card-image>
+        
+    </div>
 
     <mat-card-content>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-            <div *ngIf="messageInfo" style="color:indianred;">{{messageInfo}}</div>
+            <div  style="color:indianred;">{{messageInfo}}</div>
 
             <p>
                 <mat-form-field appearance="outline">
@@ -29,7 +32,8 @@
             </p>
 
             <p>
-                <button mat-raised-button color="primary" type="submit">Ingresar</button>
+                <button mat-raised-button color="primary" type="submit"
+                [disabled]="!loginForm.enabled">Ingresar</button>
             </p>
             
 

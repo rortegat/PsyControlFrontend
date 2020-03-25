@@ -100,8 +100,9 @@ export class ConsultEditComponent implements OnInit {
     if (this.editForm.invalid) {
       return
     }
+    console.log(this.editForm.value)
     this.consultService.updateConsult(this.editForm.value).subscribe(
-      (rsp)=>{
+      ()=>{
         this.snack.open("Consulta modificada")._dismissAfter(2000)
         this.router.navigate(["home/consult",this.consultId])
       }

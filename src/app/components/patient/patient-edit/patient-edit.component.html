@@ -45,5 +45,5 @@
 <div mat-dialog-actions align="center">
     <button mat-button color="primary" (click)="cancel()">Cancelar</button>
     <button mat-raised-button color="primary" [disabled]="editForm.invalid"
-        [mat-dialog-close]="patient">Guardar</button>
+        [mat-dialog-close]="editForm.value">Guardar</button>
 </div>

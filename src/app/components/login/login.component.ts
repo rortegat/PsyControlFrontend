@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
 import { UserService } from 'src/app/services/api/user.service';
 
@@ -12,23 +12,27 @@ import { UserService } from 'src/app/services/api/user.service';
 export class LoginComponent implements OnInit {
 
   public messageInfo: string=""
-  public isLoading: boolean
+  public isLoading: boolean = false
   public loginForm: FormGroup
+  public returnUrl: string
 
   constructor(
     private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router,
     private user: UserService,
     private session: SessionService
-  ) {
+  ) {}
+
+  ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home/dashboard'
+    if(this.session.getUserData()!=null)
+    this.router.navigate([this.returnUrl])
+    console.log(this.returnUrl)
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     })
-  }
-
-  ngOnInit() {
-    this.isLoading = false
   }
 
   createAccount(){
@@ -40,6 +44,7 @@ export class LoginComponent implements OnInit {
       return
     }
     this.isLoading = true
+    this.loginForm.disable()
 
     this.user.logIn(
       this.loginForm.controls.username.value,
@@ -47,9 +52,10 @@ export class LoginComponent implements OnInit {
         (rsp) => {
           this.session.setUserData(rsp)
           this.isLoading = false;
-          this.router.navigate(["home"])
+          this.router.navigate([this.returnUrl])
         },
         (err) => {
+          this.loginForm.enable()
           if(err.error.message!="")
           this.messageInfo = err.error.message
           else

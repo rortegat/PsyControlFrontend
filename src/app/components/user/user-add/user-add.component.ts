@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { PasswordValidation, EmailValidation, RepeatPasswordValidator, RepeatPasswordStateMatcher } from 'src/app/helpers/validators';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Role } from 'src/app/models/role';
+import { RoleService } from 'src/app/services/api/role.service';
 
 @Component({
   selector: 'app-user-add',
@@ -14,13 +16,18 @@ export class UserAddComponent implements OnInit {
   public mismatch: boolean = false
   public matcher = new RepeatPasswordStateMatcher()
 
+  public rolesList: Role[] = []
+
   constructor(
     private formBuilder: FormBuilder,
+    private rolesService: RoleService,
     public dialogRef: MatDialogRef<UserAddComponent>
     ) {
   }
 
   ngOnInit() {
+
+    this.rolesService.getRoles().subscribe((rsp)=>this.rolesList = rsp)
     
     this.addForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -29,6 +36,7 @@ export class UserAddComponent implements OnInit {
       password: ['', PasswordValidation],
       confirmation: ['',Validators.required],
       email: ['', EmailValidation],
+      roles:['']
     },
     { 
       validator: RepeatPasswordValidator 

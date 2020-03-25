@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/api/user.service';
 import { SessionService } from 'src/app/services/session.service';
 import { UserAddComponent } from '../user-add/user-add.component';
 import { UserEditComponent } from '../user-edit/user-edit.component';
+import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
 
 @Component({
   selector: 'app-user-list',
@@ -49,22 +50,21 @@ export class UserListComponent implements OnInit {
   }
 
   addUser(){
-    let user: User  =  new User()
-
+    
     const dialogRef = this.dialog.open(UserAddComponent, {
-      width: '650px',
-      //data: user
+      //width: '650px'
     });
 
     dialogRef.afterClosed().subscribe(rsp => {
-      console.log(rsp)
+      
       if(rsp!=undefined){
+      let user: User = new User()
       user.username = rsp.username
       user.firstname = rsp.firstname
       user.lastname = rsp.lastname
       user.password = rsp.password
       user.email = rsp.email
-      console.log(user)
+      user.roles = rsp.roles
       
         this.userService.createUser(user).subscribe(
           ()=>{
@@ -107,6 +107,20 @@ export class UserListComponent implements OnInit {
       })
 
       
+    })
+  }
+
+  deleteUserButton(username:string){
+    var info:any = {
+      action: "Eliminar usuario",
+      message: "Está seguro de eliminar al usuario "+username,
+    }
+    const dialogRef = this.dialog.open(ApplicationInfoComponent, {
+      data: info
+    })
+    dialogRef.afterClosed().subscribe(rsp => {
+      if (rsp==true)
+      this.deleteUser(username)
     })
   }
 

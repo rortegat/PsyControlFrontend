@@ -22,3 +22,11 @@ mat-form-field {
 mat-card {
   margin: 5px;
 }
+
+::ng-deep .angular-editor-button{
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+::ng-deep .angular-editor-toolbar{
+  background-color: rgba(0, 0, 0, 0) !important;
+}

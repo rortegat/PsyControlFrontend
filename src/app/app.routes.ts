@@ -11,6 +11,7 @@ import { FileUploadComponent } from './components/file/file-upload/file-upload.c
 import { SignupComponent } from './components/signup/signup.component';
 import { ConsultComponent } from './components/consult/consult/consult.component';
 import { ConsultEditComponent } from './components/consult/consult-edit/consult-edit.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 export const ROUTES: Routes = [
     { path: 'login', component: LoginComponent },
@@ -20,6 +21,7 @@ export const ROUTES: Routes = [
         component: HomeComponent,
         canActivate:[AuthGuard],
         children: [
+            {path: 'dashboard',component: DashboardComponent},
             { path: 'user-list', component: UserListComponent },
             { path: 'file-list', component: FileListComponent },
             { path: 'file-upload', component: FileUploadComponent },

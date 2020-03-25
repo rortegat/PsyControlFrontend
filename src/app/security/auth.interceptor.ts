@@ -32,28 +32,32 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError(
-        (error) => {
-          if (error.status === 401) {
-            const dialogRef = this.dialog.open(ApplicationErrorComponent, {
-              width: '300px',
+        (error) => {  
+          switch(error.status){
+            
+            case 401: 
+            const dialogRef = this.dialog.open(ServerErrorComponent, {
               data: error
-            })
+            });
             dialogRef.afterClosed().subscribe(() => {
               this.session.removeUserData()
               this.router.navigate(['login'])
-            })
-          }
-          else if (error.status === 500) {
-            console.log(error)
-          }
-          else {
-            this.dialog.open(ServerErrorComponent, {
-              width: '300px',
-              data: error
-            })
-          }
-          this.session.loading.next(false)
+            });
+            break;
 
+            case 500:
+              console.log(error);
+              break;
+
+            default:
+            console.log(error); 
+            this.dialog.open(ServerErrorComponent, {
+              data: error
+            });
+
+          }
+
+          this.session.loading.next(false)
           return throwError(error)
         }) as any
     )

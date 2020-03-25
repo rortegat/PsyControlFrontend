@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
 import { ApplicationErrorComponent } from '../../modal/application-error/application-error.component';
+import { ServerErrorComponent } from '../../modal/server-error/server-error.component';
 
 @Component({
   selector: 'app-patient',
@@ -57,10 +58,8 @@ export class PatientComponent implements OnInit {
       message: "Está seguro de eliminar al paciente "+this.patient.firstname,
     }
     const dialogRef = this.dialog.open(ApplicationInfoComponent, {
-      width: '300px',
       data: info
     })
-
     dialogRef.afterClosed().subscribe(rsp => {
       if (rsp==true)
       this.deletePatient()
@@ -73,11 +72,10 @@ export class PatientComponent implements OnInit {
         this.snack.open("Paciente Eliminado")._dismissAfter(2000)
         this.router.navigate(['/home/patient-list'])
       },
-      (err) => {
-        console.log(err)
+      (error) => {
+        console.log(error)
         this.dialog.open(ApplicationErrorComponent, {
-          //width:'300px',
-          data: err
+          data: error
         })
       })
   }

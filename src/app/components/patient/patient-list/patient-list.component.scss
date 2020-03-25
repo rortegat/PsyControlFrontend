@@ -1,0 +1,82 @@
+mat-form-field {
+  width: 100% !important;
+}
+
+mat-table {
+  width: 100hv;
+}
+
+.mobile-label {
+  display: none;
+}
+
+.mat-column-id {
+  flex: 0 0 6% !important;
+}
+
+.mat-column-accion {
+  flex: 0 0 4% !important;
+}
+
+.mat-column-email {
+  word-wrap: break-word !important;
+  /* white-space: unset !important;
+  flex: 0 0 28% !important;
+  width: 28% !important; */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+@media(max-width: 600px) {
+  .mobile-label {
+    width: 80px;
+    display: inline-block;
+    font-weight: bold;
+  }
+  .mat-header-row {
+    display: none;
+  }
+  .mat-row {
+    flex-direction: column;
+    align-items: start;
+    padding: 8px 24px;
+  }
+  .mat-cell, .mat-header-cell, .mat-footer-cell {
+    min-height: 25px;
+  }
+}
+
+.bottom-right {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  z-index: 100;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+
+:host ::ng-deep.mat-paginator{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  
+  .mat-paginator-container{
+    justify-content: center;
+  }
+
+}
+
+/* :host
+::ng-deep .mat-paginator {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+::ng-deep .mat-paginator-container{
+  align-content: center !important;
+} */
+
+

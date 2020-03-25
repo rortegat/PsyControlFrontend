@@ -1,0 +1,47 @@
+<div class="main-chart">
+    <h2 >Consultas del día</h2>
+    <ngx-charts-number-card
+    [ngClass]="tema"
+    [view]="[500, 200]"
+    [results]="cardData"
+    [innerPadding]="[5,10,10,10]"
+    (select)="onSelect($event)">
+  </ngx-charts-number-card>
+
+    <h2>Pacientes totales</h2>
+    <ngx-charts-pie-chart
+        [ngClass]="tema"
+        [view]="[550,400]"
+        [animations]="true"
+        [scheme]="'picnic'"
+        [results]="pieData"
+        [gradient]="false"
+        [labels]="true"
+        [doughnut]="false"
+        [legend]="true"
+        (select)="onSelect($event)">
+    </ngx-charts-pie-chart>
+
+<h2>Línea del tiempo</h2>
+  <!-- (window:resize)="onResize($event)" -->  
+<ngx-charts-line-chart
+    [ngClass]="tema"
+    [view]="[700,300]"
+    [animations]="true"
+    [scheme]="'vivid'"
+    [results]="data"
+    [gradient]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [legend]="true"
+    [legendPosition]="'right'"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxisLabel]="'Mes'"
+    [yAxisLabel]="'Consultas'"
+    (select)="onSelect($event)">
+</ngx-charts-line-chart>
+
+</div>
+
+

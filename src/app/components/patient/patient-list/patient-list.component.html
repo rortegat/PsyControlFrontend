@@ -11,10 +11,12 @@
   </mat-form-field>
 </mat-card>
 
-<mat-table [dataSource]="patients" class="mat-elevation-z8">
+<div  class="mat-elevation-z8">
+
+<mat-table [dataSource]="patients">
 
   <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let patient">
       <button mat-icon-button aria-label="Editar" (click)="onSelect(patient)">
         <mat-icon color="primary">assignment</mat-icon>
@@ -63,21 +65,37 @@
   </ng-container>
 
   <ng-container matColumnDef="accion">
-    <mat-header-cell *matHeaderCellDef> 
-      Acciones
-    </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let patient">
-      <span class="mobile-label">Acciones:</span>
-      <button mat-icon-button aria-label="Editar" (click)="editPatient(patient.id)">
-        <mat-icon color="primary">edit</mat-icon>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
       </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editPatient(patient.id)">
+          <mat-icon>edit</mat-icon>
+          <span>Editar</span>
+        </button>
+          <button mat-menu-item (click)="deletePatientButton(patient)">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar</span>
+        </button>
+      </mat-menu>
+
+      
     </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
 </mat-table>
 
-<mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+<mat-paginator
+#paginator
+[pageSize]="10" 
+[hidePageSize]="true"
+[showFirstLastButtons]="true">
 </mat-paginator>
+
+</div>
+

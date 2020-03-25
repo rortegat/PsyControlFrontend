@@ -1,55 +1,56 @@
 <button mat-fab color="accent" class="bottom-right" (click)="addUser()">
     <mat-icon >add</mat-icon>
 </button>
-  
-<!-- <div class="busqueda">
-  <mat-form-field>
-      <input matInput (keyup)="filterField($event.target.value)" placeholder="Buscar" [(ngModel)]="value">
-      <button mat-button *ngIf="value" matSuffix mat-icon-button (click)="clear()">
-          <mat-icon>close</mat-icon>
-        </button>
-    </mat-form-field>
-  </div> -->
 
-<table mat-table [dataSource]="users" class="mat-elevation-z8">
+<mat-table [dataSource]="users" class="mat-elevation-z8">
 
 
   <ng-container matColumnDef="username">
-    <th mat-header-cell *matHeaderCellDef> username </th>
-    <td mat-cell *matCellDef="let user"> {{user.username}} </td>
+    <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+    <mat-cell *matCellDef="let user"> 
+      <span class="mobile-label">Username: </span>
+      <span>{{user.username}}</span>
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="firstname">
-        <th mat-header-cell *matHeaderCellDef> Nombre </th>
-        <td mat-cell *matCellDef="let user"> {{user.firstname}} </td>
+        <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <span class="mobile-label">Nombre: </span>
+          <span>{{user.firstname}}</span>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="lastname">
-            <th mat-header-cell *matHeaderCellDef> Apellido </th>
-            <td mat-cell *matCellDef="let user"> {{user.lastname}} </td>
+            <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
+            <mat-cell *matCellDef="let user"> 
+              <span class="mobile-label">Apellido: </span>
+              <span>{{user.lastname}}</span>
+            </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef> Correo </th>
-                <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+                <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+                <mat-cell *matCellDef="let user">
+                  <span class="mobile-label">email: </span>
+                  <span>{{user.email}}</span>
+                </mat-cell>
               </ng-container>
      
    <ng-container matColumnDef="acciones">
-    <th mat-header-cell *matHeaderCellDef> Acciones 
-    </th>
-    <td mat-cell *matCellDef="let user">
+    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+    <mat-cell *matCellDef="let user">
         <button mat-icon-button aria-label="Editar" (click)="editUser(user.username)">
             <mat-icon color="primary">edit</mat-icon>
           </button>
-          <button mat-icon-button style="color: rgb(207, 75, 75);" (click)="deleteUser(user.username)">
+          <button mat-icon-button style="color: rgb(207, 75, 75);" (click)="deleteUserButton(user.username)">
             <mat-icon>delete</mat-icon>
         </button>
           
-    </td>
+    </mat-cell>
   </ng-container> 
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
-</table>
+</mat-table>
