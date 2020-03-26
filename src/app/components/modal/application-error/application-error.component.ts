@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-application-error',
   templateUrl: './application-error.component.html',
-  styleUrls: ['./application-error.component.css']
+  styleUrls: ['./application-error.component.scss']
 })
 export class ApplicationErrorComponent implements OnInit {
 

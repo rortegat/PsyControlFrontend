@@ -6,7 +6,7 @@ import { FileService } from 'src/app/services/api/file.service';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
-  styleUrls: ['./file-upload.component.css'],
+  styleUrls: ['./file-upload.component.scss'],
   animations: [
     trigger('fadeInOut', [
           state('in', style({ opacity: 100 })),

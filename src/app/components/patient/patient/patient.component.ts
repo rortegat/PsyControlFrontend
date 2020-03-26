@@ -14,7 +14,7 @@ import { ServerErrorComponent } from '../../modal/server-error/server-error.comp
 @Component({
   selector: 'app-patient',
   templateUrl: './patient.component.html',
-  styleUrls: ['./patient.component.css']
+  styleUrls: ['./patient.component.scss']
 })
 export class PatientComponent implements OnInit {
 

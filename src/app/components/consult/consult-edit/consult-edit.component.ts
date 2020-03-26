@@ -9,7 +9,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor'
 @Component({
   selector: 'app-consult-edit',
   templateUrl: './consult-edit.component.html',
-  styleUrls: ['./consult-edit.component.css']
+  styleUrls: ['./consult-edit.component.scss']
 })
 export class ConsultEditComponent implements OnInit {
 

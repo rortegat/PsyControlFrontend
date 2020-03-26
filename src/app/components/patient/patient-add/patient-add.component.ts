@@ -5,7 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-patient-add',
   templateUrl: './patient-add.component.html',
-  styleUrls: ['./patient-add.component.css']
+  styleUrls: ['./patient-add.component.scss']
 })
 export class PatientAddComponent implements OnInit {
 

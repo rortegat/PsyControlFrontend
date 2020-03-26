@@ -6,7 +6,7 @@ import { Patient } from 'src/app/models/patient';
 @Component({
   selector: 'app-patient-edit',
   templateUrl: './patient-edit.component.html',
-  styleUrls: ['./patient-edit.component.css']
+  styleUrls: ['./patient-edit.component.scss']
 })
 export class PatientEditComponent implements OnInit {
 
