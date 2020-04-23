@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "theme.scss"
             ],
             "scripts": []
@@ -90,7 +90,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
@@ -126,5 +126,10 @@
   "defaultProject": "psycontrol",
   "cli": {
     "analytics": "f20628a2-befb-413f-8060-5611891aea71"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
   }
 }

@@ -10,7 +10,7 @@ export class AppComponent {
 
   public otherTheme: boolean
 
-  constructor(private sessionService: SessionService){
-    this.sessionService.theme.subscribe((rsp)=>this.otherTheme=rsp)
+  constructor(private sessionService: SessionService) {
+    this.sessionService.theme.subscribe((rsp) => this.otherTheme = rsp)
   }
 }

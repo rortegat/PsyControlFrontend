@@ -53,14 +53,14 @@
     <mat-header-cell *matHeaderCellDef> Teléfono </mat-header-cell>
     <mat-cell *matCellDef="let patient"> 
     <span class="mobile-label">Telefono:</span>
-    <span [innerHTML]="patient.phone | highLightSearch: filterValue"></span>
+    <span *ngIf="patient.phone" [innerHTML]="patient.phone | highLightSearch: filterValue"></span>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="mobile">
     <mat-header-cell *matHeaderCellDef> Celular </mat-header-cell>
     <mat-cell *matCellDef="let patient">
       <span class="mobile-label">Celular:</span>
-      <span [innerHTML]="patient.mobile | highLightSearch: filterValue"></span>
+      <span *ngIf="patient.mobile" [innerHTML]="patient.mobile | highLightSearch: filterValue"></span>
     </mat-cell>
   </ng-container>
 

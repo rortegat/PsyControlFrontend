@@ -3,7 +3,7 @@ mat-form-field {
 }
 
 mat-table {
-  width: 100hv;
+  width: 100%;
 }
 
 .mobile-label {
@@ -58,14 +58,11 @@ mat-table {
 }
 
 
-:host ::ng-deep.mat-paginator{
+:host ::ng-deep.mat-paginator .mat-paginator-container{
   position: fixed;
   bottom: 0;
   width: 100%;
-  
-  .mat-paginator-container{
-    justify-content: center;
-  }
+  justify-content: center;
 
 }
 

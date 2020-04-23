@@ -9,17 +9,17 @@ import { FileService } from 'src/app/services/api/file.service';
   styleUrls: ['./file-upload.component.scss'],
   animations: [
     trigger('fadeInOut', [
-          state('in', style({ opacity: 100 })),
-          transition('* => void', [
-                animate(300, style({ opacity: 0 }))
-          ])
+      state('in', style({ opacity: 100 })),
+      transition('* => void', [
+        animate(300, style({ opacity: 0 }))
+      ])
     ])
-]
+  ]
 })
 export class FileUploadComponent implements OnInit {
 
   public form: FormGroup
-  
+
   constructor(private formBuilder: FormBuilder,
     private fileService: FileService) { }
 
@@ -28,7 +28,7 @@ export class FileUploadComponent implements OnInit {
     this.form = this.formBuilder.group({
       file: ['']
     })
-  
+
   }
 
   onFileChange(event) {
@@ -39,7 +39,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   onSubmit() {
-    const formData = new FormData();
+    const formData = new FormData()
     formData.append('file', this.form.get('file').value)
 
     this.fileService.uploadSingleFile(formData).subscribe(
@@ -48,7 +48,7 @@ export class FileUploadComponent implements OnInit {
     )
   }
 
-  download(){
+  download() {
     this.fileService.downloadSingleFile("android.png")
   }
 

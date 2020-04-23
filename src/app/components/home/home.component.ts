@@ -13,8 +13,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class HomeComponent implements OnInit, OnDestroy {
 
   @ViewChild('snav',{static: true}) navbar: MatSidenav
-
-  //public otherTheme: boolean=false
+  
   public loading: boolean=false
   public userInfo: AuthenticatedUser=null
   public adminRole: boolean=false
