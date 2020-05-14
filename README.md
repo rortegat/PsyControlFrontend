@@ -1,6 +1,6 @@
-# Piciosa
+# PsyControl frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+This is the frontend project for psychological records management application
 
 ## Development server
 
