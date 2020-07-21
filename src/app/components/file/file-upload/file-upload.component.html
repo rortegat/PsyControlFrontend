@@ -1,9 +1,30 @@
-<h1>Subir archivo</h1>
-
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <input type="file" name="file" (change)="onFileChange($event)" />
-    <button mat-raised-button color="primary" type="submit">Upload</button>
-  </form>
-
-  <button mat-raised-button color="accent" (click)="download()">Download</button>
-
+<mat-card>
+  <ngx-file-drop dropZoneLabel="Arrastre imágenes aquí" 
+  (onFileDrop)="dropped($event)" 
+  (onFileOver)="fileOver($event)"
+  (onFileLeave)="fileLeave($event)">
+    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+    Arrastra y pega archivos aquí
+    <mat-icon>upload</mat-icon>
+    <button mat-raised-button color="accent" (click)="openFileSelector()">Seleccionar</button>
+    </ng-template>
+  </ngx-file-drop>
+  </mat-card>
+  
+  <button mat-stroked-button color="primary" [routerLink]="'/home/file-list'">
+  Regresar
+  </button>
+  <button mat-raised-button color="primary" 
+  (click)="uploadImages()"
+  [disabled]="files.length==0">
+    Subir <mat-icon>cloud_upload</mat-icon>
+  </button>
+  
+  
+  <mat-card *ngFor="let file of files; let i = index;">
+    <button mat-icon-button (click)="files.splice(i,1); progress.splice(i,1)">
+      <mat-icon>close</mat-icon>
+    </button>
+    {{file.name}} - {{file.size}}
+    <mat-progress-bar mode="determinate" [value]="progress[i]"></mat-progress-bar>
+  </mat-card>

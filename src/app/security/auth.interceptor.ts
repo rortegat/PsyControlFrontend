@@ -19,48 +19,50 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    //if (req.url.includes("/api")) {
+    if (request.url.includes("/api")) {
 
-    let user = this.session.getUserData()
-    if (user != null) {
-      request = request.clone({
-        setHeaders: {
-          'Authorization': `Bearer ${user.token}`,
-        },
-      })
+      let user = this.session.getUserData();
+      if (user != null) {
+        request = request.clone({
+          setHeaders: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        });
+      }
+
     }
 
     return next.handle(request).pipe(
       catchError(
-        (error) => {  
-          switch(error.status){
-            
-            case 401: 
-            const dialogRef = this.dialog.open(ServerErrorComponent, {
-              data: error
-            });
-            dialogRef.afterClosed().subscribe(() => {
-              this.session.removeUserData()
-              this.router.navigate(['login'])
-            });
-            break;
+        (error) => {
+          switch (error.status) {
+
+            case 401:
+              const dialogRef = this.dialog.open(ServerErrorComponent, {
+                data: error
+              });
+              dialogRef.afterClosed().subscribe(() => {
+                this.session.removeUserData()
+                this.router.navigate(['login'])
+              });
+              break;
 
             case 500:
               console.log(error);
               break;
 
             default:
-            console.log(error); 
-            this.dialog.open(ServerErrorComponent, {
-              data: error
-            });
+              console.log(error);
+              this.dialog.open(ServerErrorComponent, {
+                data: error
+              });
 
           }
 
           this.session.loading.next(false)
           return throwError(error)
         }) as any
-    )
+    );
 
   }
 

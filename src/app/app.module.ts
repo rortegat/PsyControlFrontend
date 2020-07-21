@@ -13,6 +13,7 @@ import { ROUTES } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxChartsModule, PieChartModule, NumberCardModule } from '@swimlane/ngx-charts';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 import { FileUploadComponent } from './components/file/file-upload/file-upload.component';
 import { AuthInterceptor } from './security/auth.interceptor';
@@ -62,6 +63,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     BrowserModule,
     MaterialModule,
     NgxChartsModule,
+    NgxFileDropModule,
     PieChartModule,
     NumberCardModule,
     BrowserAnimationsModule,

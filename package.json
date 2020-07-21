@@ -24,12 +24,13 @@
     "@kolkov/angular-editor": "^1.1.0",
     "@swimlane/ngx-charts": "^13.0.2",
     "core-js": "^3.6.4",
+    "ngx-file-drop": "^9.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.900.7",
+    "@angular-devkit/build-angular": "^0.1000.3",
     "@angular/cli": "^9.0.7",
     "@angular/compiler-cli": "~9.0.7",
     "@angular/language-service": "~9.0.7",

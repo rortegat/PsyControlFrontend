@@ -1,1 +1,12 @@
 
+<mat-card *ngFor="let file of fileList">
+    <button mat-icon-button color="warn" (click)="deleteImageButton(file)">
+            <mat-icon>delete</mat-icon>
+    </button>
+    <!-- <mat-checkbox color="primary" [value]="dbFile.checked" (change)="checkUndcheck(file)"></mat-checkbox> -->
+    <img [src]="'/api/files/preview/'+file.id">
+</mat-card>
+
+<button mat-fab color="accent" class="bottom-right" [routerLink]="'/home/file-upload'">
+    <mat-icon>add</mat-icon>
+</button>
