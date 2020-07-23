@@ -11,7 +11,7 @@
             </mat-form-field>
         </p>
 
-         <p>
+        <p>
             <mat-form-field appearance="outline">
                 <mat-label>Nombre</mat-label>
                 <input matInput formControlName="firstname">
@@ -45,7 +45,7 @@
             </mat-form-field>
         </p>
 
-        
+
 
         <p>
             <mat-form-field appearance="outline">
@@ -54,17 +54,17 @@
                 <mat-error *ngIf="addForm.controls['email'].errors?.required">Obligatorio</mat-error>
                 <mat-error *ngIf="addForm.controls['email'].errors?.email">Formato no válido</mat-error>
             </mat-form-field>
-        </p> 
+        </p>
         <p>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Roles</mat-label>
-                    <mat-select multiple formControlName="roles">
-                        <mat-option *ngFor="let role of rolesList" [value]="role">
+            <mat-form-field appearance="outline">
+                <mat-label>Roles</mat-label>
+                <mat-select multiple formControlName="roles">
+                    <mat-option *ngFor="let role of rolesList" [value]="role">
                         {{role.rolename}}
                     </mat-option>
-                     </mat-select>
-                    </mat-form-field>
-                </p>
+                </mat-select>
+            </mat-form-field>
+        </p>
 
     </div>
 

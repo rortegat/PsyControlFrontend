@@ -1,0 +1,56 @@
+<button mat-fab color="accent" class="bottom-right" (click)="addRole()">
+    <mat-icon>add</mat-icon>
+</button>
+
+<div class="mat-elevation-z8">
+
+    <mat-table [dataSource]="roles">
+
+        <ng-container matColumnDef="rolename">
+            <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+            <mat-cell *matCellDef="let role">
+                {{role.rolename}}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="privileges">
+            <mat-header-cell *matHeaderCellDef> Privilegios </mat-header-cell>
+            <mat-cell *matCellDef="let role">
+                <div *ngIf="role.privileges">
+                    <mat-chip-list cdkDropListOrientation="horizontal">
+                        <mat-chip *ngFor="let privilege of role.privileges">
+                            {{privilege.privilegename}}
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="accion">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let role">
+
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="editRole(role.id)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Editar</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteRoleButton(role)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Eliminar</span>
+                    </button>
+                </mat-menu>
+
+
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+</div>

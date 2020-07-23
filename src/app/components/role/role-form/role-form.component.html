@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Nuevo Rol</h1>
+
+<div class="formulario">
+
+    <div mat-dialog-content [formGroup]="roleForm">
+
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Rolename</mat-label>
+                <input matInput formControlName="rolename">
+                <mat-error *ngIf="roleForm.controls['rolename'].errors?.required">Obligatorio</mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Roles</mat-label>
+                <mat-select multiple formControlName="privileges">
+                    <mat-option *ngFor="let privilege of privilegesList" [value]="privilege">
+                        {{privilege.privilegename}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+
+
+    </div>
+
+</div>
+
+<div mat-dialog-actions align="center">
+
+    <button mat-button color="primary" (click)="cancel()">Cancelar</button>
+    <button mat-raised-button color="primary" [disabled]="roleForm.invalid"
+        [mat-dialog-close]="roleForm.value">Agregar</button>
+</div>

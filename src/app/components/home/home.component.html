@@ -28,6 +28,10 @@
                 <mat-icon>supervisor_account</mat-icon>
                 <span class="list-item">Usuarios</span>
             </a>
+            <a mat-list-item *ngIf="adminRole" [routerLink]="'/home/role-list'" [routerLinkActive]="['is-active']">
+                <mat-icon>check</mat-icon>
+                <span class="list-item">Roles</span>
+            </a>
 
 
         </mat-nav-list>

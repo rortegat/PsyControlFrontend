@@ -42,8 +42,8 @@ export class AuthInterceptor implements HttpInterceptor {
                 data: error
               });
               dialogRef.afterClosed().subscribe(() => {
-                this.session.removeUserData()
-                this.router.navigate(['login'])
+                this.session.removeUserData();
+                this.router.navigate(['login']);
               });
               break;
 
@@ -60,7 +60,7 @@ export class AuthInterceptor implements HttpInterceptor {
           }
 
           this.session.loading.next(false)
-          return throwError(error)
+          return throwError(error);
         }) as any
     );
 

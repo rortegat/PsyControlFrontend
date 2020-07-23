@@ -8,6 +8,7 @@ import { SessionService } from 'src/app/services/session.service';
 import { UserAddComponent } from '../user-add/user-add.component';
 import { UserEditComponent } from '../user-edit/user-edit.component';
 import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
+import { ApplicationErrorComponent } from '../../modal/application-error/application-error.component';
 
 @Component({
   selector: 'app-user-list',
@@ -16,8 +17,8 @@ import { ApplicationInfoComponent } from '../../modal/application-info/applicati
 })
 export class UserListComponent implements OnInit {
 
-  public  displayedColumns: string[] = ['username', 'firstname','lastname','email', 'acciones'];
-  public users : MatTableDataSource<User>; 
+  public displayedColumns: string[] = ['username', 'firstname', 'lastname', 'email', 'acciones'];
+  public users: MatTableDataSource<User>;
 
   public value;
   public masterSelect: boolean;
@@ -27,108 +28,107 @@ export class UserListComponent implements OnInit {
     public dialog: MatDialog,
     private userService: UserService,
     private sessionService: SessionService
-    ) {
-      this.sessionService.loading.next(true);
+  ) {
   }
 
-  ngOnInit() {
-    
-    this.userService.getUsers().subscribe(data =>{ 
-      console.log(data)
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(): void {
+    this.sessionService.loading.next(true);
+    this.userService.getUsers().subscribe(data => {
       this.users = new MatTableDataSource(data);
       this.sessionService.loading.next(false);
-    } );
+    });
   }
 
-  clear(){
-    this.value="";
-    this.users.filter="";
+  clear(): void {
+    this.value = "";
+    this.users.filter = "";
   }
 
-  filterField(filterValue: string) {
+  filterField(filterValue: string): void {
     this.users.filter = filterValue.trim().toLowerCase();
   }
 
-  addUser(){
-    
+  addUser(): void {
     const dialogRef = this.dialog.open(UserAddComponent, {
       //width: '650px'
     });
 
     dialogRef.afterClosed().subscribe(rsp => {
-      
-      if(rsp!=undefined){
-      let user: User = new User()
-      user.username = rsp.username
-      user.firstname = rsp.firstname
-      user.lastname = rsp.lastname
-      user.password = rsp.password
-      user.email = rsp.email
-      user.roles = rsp.roles
-      
-        this.userService.createUser(user).subscribe(
-          ()=>{
-            this.userService.getUsers().subscribe(rsp=>this.users.data=rsp)
-            this.snack.open("User agregado")._dismissAfter(2000)
-          },
-          (error)=>{
-            console.log(error)
-            console.log(error.error.message)
-          }
-        );
-      
+      if (rsp != undefined) {
+        let user: User = new User();
+        user.username = rsp.username;
+        user.firstname = rsp.firstname;
+        user.lastname = rsp.lastname;
+        user.password = rsp.password;
+        user.email = rsp.email;
+        user.roles = rsp.roles;
+        this.userService.createUser(user).subscribe(() => {
+          this.loadData();
+          this.snack.open("Usuario agregado")._dismissAfter(2000);
+        },
+          (error) => {
+            console.log(error);
+            this.dialog.open(ApplicationErrorComponent, {
+              data: error
+            });
+          });
       }
     });
   }
 
-  editUser(username:string){
-
-    let user: User  =  new User()
-
-    this.userService.getUser(username).subscribe(rsp=>{
-      console.log(rsp);
-      user=rsp;
-
+  editUser(username: string): void {
+    this.userService.getUser(username).subscribe(rsp => {
       const dialogRef = this.dialog.open(UserEditComponent, {
         width: '650px',
-        data: user
-      })
-  
+        data: rsp
+      });
       dialogRef.afterClosed().subscribe(rsp => {
-        console.log(rsp)
-        if(rsp!=undefined){
-          this.userService.updateUser(rsp).subscribe(
-            ()=>{
-              this.userService.getUsers().subscribe(rsp=>this.users.data=rsp)
-              this.snack.open("User modificado")._dismissAfter(2000)
-            }
-          )
+        let user: User = new User();
+        user.username = rsp.username;
+        user.firstname = rsp.firstname;
+        user.lastname = rsp.lastname;
+        user.password = rsp.password;
+        user.email = rsp.email;
+        user.roles = rsp.roles;
+        user = rsp;
+        if (rsp != undefined) {
+          this.userService.updateUser(user).subscribe(() => {
+            this.loadData();
+            this.snack.open("User modificado")._dismissAfter(2000)
+          });
         }
-      })
-
-      
-    })
+      });
+    });
   }
 
-  deleteUserButton(username:string){
-    var info:any = {
+  deleteUserButton(username: string): void {
+    var info: any = {
       action: "Eliminar usuario",
-      message: "Está seguro de eliminar al usuario "+username,
-    }
+      message: "Está seguro de eliminar al usuario " + username,
+    };
     const dialogRef = this.dialog.open(ApplicationInfoComponent, {
       data: info
-    })
+    });
     dialogRef.afterClosed().subscribe(rsp => {
-      if (rsp==true)
-      this.deleteUser(username)
-    })
+      if (rsp == true)
+        this.deleteUser(username);
+    });
   }
 
-  deleteUser(username:string){
-    this.userService.deleteUser(username).subscribe(()=>{
-      this.userService.getUsers().subscribe((rsp)=>this.users.data=rsp)
+  deleteUser(username: string): void {
+    this.userService.deleteUser(username).subscribe(() => {
+      this.loadData();
     },
-    (error)=>console.log(error))
+      (error) => {
+        console.log(error)
+        this.dialog.open(ApplicationErrorComponent, {
+          data: error
+        });
+      });
   }
 
 

@@ -19,11 +19,11 @@ import { ApplicationErrorComponent } from '../../modal/application-error/applica
 })
 export class PatientListComponent implements OnInit {
 
-  public displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'phone', 'mobile', 'accion']
-  public patients: MatTableDataSource<Patient>
-  public filterValue: string = ""
+  public displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'phone', 'mobile', 'accion'];
+  public patients: MatTableDataSource<Patient>;
+  public filterValue: string = "";
 
-  @ViewChild(MatPaginator) paginator: MatPaginator
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private snack: MatSnackBar,
@@ -31,21 +31,19 @@ export class PatientListComponent implements OnInit {
     private session: SessionService,
     private patient: PatientService,
     private router: Router
-  ) {
+  ) { }
 
+  ngOnInit(): void {
+    this.loadData();
   }
 
-  ngOnInit() {
-
-
-
-    setTimeout(() => { this.session.loading.next(true) }, 0)
-
+  loadData(): void {
+    setTimeout(() => { this.session.loading.next(true) }, 0);
     this.patient.getPatients().subscribe((rsp) => {
-      this.patients = new MatTableDataSource(rsp)
-      this.patients.paginator = this.paginator
-      this.session.loading.next(false)
-    })
+      this.patients = new MatTableDataSource(rsp);
+      this.patients.paginator = this.paginator;
+      this.session.loading.next(false);
+    });
   }
 
   clear() {
@@ -57,73 +55,69 @@ export class PatientListComponent implements OnInit {
     this.patients.filter = filterValue.trim().toLowerCase();
   }
 
-  addPatient() {
+  addPatient(): void {
     const dialogRef = this.dialog.open(PatientAddComponent, {})
 
     dialogRef.afterClosed().subscribe(rsp => {
       if (rsp != undefined) {
         this.patient.createPatient(rsp).subscribe(() => {
-          this.patient.getPatients().subscribe(rsp => this.patients.data = rsp)
-          this.snack.open("Paciente Agregado")._dismissAfter(2000)
-        })
+          this.loadData();
+          this.snack.open("Paciente Agregado")._dismissAfter(2000);
+        });
       }
-    })
+    });
   }
 
-  editPatient(id: number) {
+  editPatient(id: number): void {
 
     this.patient.getPatient(id).subscribe(rsp => {
       const dialogRef = this.dialog.open(PatientEditComponent, {
         data: rsp
-      })
+      });
 
       dialogRef.afterClosed().subscribe(rsp => {
         if (rsp != undefined) {
-          console.log(rsp)
           this.patient.updatePatient(rsp).subscribe(
             () => {
-              this.patient.getPatients().subscribe(rsp => this.patients.data = rsp)
-              this.snack.open("Paciente modificado")._dismissAfter(2000)
-            }
-          )
+              this.loadData();
+              this.snack.open("Paciente modificado")._dismissAfter(2000);
+            });
         }
-      })
-    })
+      });
+    });
   }
 
-  deletePatientButton(patient: Patient) {
+  deletePatientButton(patient: Patient): void {
     var info: any = {
       action: "Eliminar paciente",
       message: "Está seguro de eliminar al paciente " + patient.firstname,
-    }
+    };
     const dialogRef = this.dialog.open(ApplicationInfoComponent, {
       data: info
-    })
+    });
     dialogRef.afterClosed().subscribe(rsp => {
       if (rsp == true)
-        this.deletePatient(patient)
-    })
+        this.deletePatient(patient);
+    });
   }
 
-  deletePatient(patient: Patient) {
+  deletePatient(patient: Patient): void {
     this.patient.deletePatient(patient.id).subscribe(
       () => {
-        this.snack.open("Paciente Eliminado")._dismissAfter(2000)
-        this.router.navigate(['/home/patient-list'])
+        this.snack.open("Paciente Eliminado")._dismissAfter(2000);
+        this.router.navigate(['/home/patient-list']);
       },
       (error) => {
-        console.log(error)
+        console.log(error);
         this.dialog.open(ApplicationErrorComponent, {
           data: error
-        })
-      })
+        });
+      });
   }
 
-  onSelect(row: Patient) {
-    console.log(row)
-    this.router.navigate(["home/patient", row.id])
+  onSelect(row: Patient): void {
+    console.log(row);
+    this.router.navigate(["home/patient", row.id]);
   }
-
-
 
 }

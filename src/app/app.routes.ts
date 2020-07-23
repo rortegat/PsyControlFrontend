@@ -12,6 +12,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ConsultComponent } from './components/consult/consult/consult.component';
 import { ConsultEditComponent } from './components/consult/consult-edit/consult-edit.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RoleListComponent } from './components/role/role-list/role-list.component';
 
 export const ROUTES: Routes = [
     { path: 'login', component: LoginComponent },
@@ -19,17 +20,18 @@ export const ROUTES: Routes = [
     {
         path: 'home',
         component: HomeComponent,
-        canActivate:[AuthGuard],
+        canActivate: [AuthGuard],
         children: [
-            {path: 'dashboard',component: DashboardComponent},
+            { path: 'dashboard', component: DashboardComponent },
             { path: 'user-list', component: UserListComponent },
+            { path: 'role-list', component: RoleListComponent },
             { path: 'file-list', component: FileListComponent },
             { path: 'file-upload', component: FileUploadComponent },
             { path: 'patient/:id', component: PatientComponent },
             { path: 'patient-list', component: PatientListComponent },
             { path: 'consult-add/:id', component: ConsultAddComponent },
-            {path: 'consult-edit/:id', component: ConsultEditComponent},
-            { path: 'consult/:id', component: ConsultComponent}
+            { path: 'consult-edit/:id', component: ConsultEditComponent },
+            { path: 'consult/:id', component: ConsultComponent }
         ]
     },
     { path: '**', pathMatch: 'full', redirectTo: '/login' }

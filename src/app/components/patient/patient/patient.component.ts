@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
 import { ApplicationErrorComponent } from '../../modal/application-error/application-error.component';
-import { ServerErrorComponent } from '../../modal/server-error/server-error.component';
+
 
 @Component({
   selector: 'app-patient',

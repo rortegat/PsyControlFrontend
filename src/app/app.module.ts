@@ -35,6 +35,8 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { SessionService } from './services/session.service';
 import { ApplicationInfoComponent } from './components/modal/application-info/application-info.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RoleListComponent } from './components/role/role-list/role-list.component';
+import { RoleAddComponent } from './components/role/role-form/role-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +59,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     ApplicationErrorComponent,
     ConsultEditComponent,
     ApplicationInfoComponent,
-    DashboardComponent
+    DashboardComponent,
+    RoleListComponent,
+    RoleAddComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +92,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     PatientEditComponent,
     UserAddComponent,
     UserEditComponent,
+    RoleAddComponent,
     ServerErrorComponent,
     ApplicationErrorComponent,
     ApplicationInfoComponent
