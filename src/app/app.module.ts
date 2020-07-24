@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PatientComponent } from './components/patient/patient/patient.component';
 import { HomeComponent } from './components/home/home.component';
 import { PatientListComponent } from './components/patient/patient-list/patient-list.component';
-import { PatientAddComponent } from './components/patient/patient-add/patient-add.component';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -18,13 +17,12 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import { FileUploadComponent } from './components/file/file-upload/file-upload.component';
 import { AuthInterceptor } from './security/auth.interceptor';
 import { FileListComponent } from './components/file/file-list/file-list.component';
-import { PatientEditComponent } from './components/patient/patient-edit/patient-edit.component';
-import { ConsultComponent } from './components/consult/consult/consult.component';
+import { PatientFormComponent } from './components/patient/patient-form/patient-form.component';
+import { ConsultListComponent } from './components/consult/consult-list/consult-list.component';
 import { ConsultAddComponent } from './components/consult/consult-add/consult-add.component';
 import { HighLightSearchPipe } from './helpers/highLightSearch.pipe';
 import { UserListComponent } from './components/user/user-list/user-list.component';
-import { UserAddComponent } from './components/user/user-add/user-add.component';
-import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { UserFormComponent } from './components/user/user-edit/user-form.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { ServerErrorComponent } from './components/modal/server-error/server-error.component';
@@ -36,24 +34,24 @@ import { SessionService } from './services/session.service';
 import { ApplicationInfoComponent } from './components/modal/application-info/application-info.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RoleListComponent } from './components/role/role-list/role-list.component';
-import { RoleAddComponent } from './components/role/role-form/role-form.component';
+import { RoleFormComponent } from './components/role/role-form/role-form.component';
+import { UserAddComponent } from './components/user/user-add/user-add.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    PatientComponent,
     HomeComponent,
+    PatientComponent,
+    PatientFormComponent,
     PatientListComponent,
-    PatientAddComponent,
     FileUploadComponent,
     FileListComponent,
-    PatientEditComponent,
-    ConsultComponent,
+    ConsultListComponent,
     ConsultAddComponent,
     HighLightSearchPipe,
     UserListComponent,
+    UserFormComponent,
     UserAddComponent,
-    UserEditComponent,
     SignupComponent,
     ServerErrorComponent,
     ApplicationErrorComponent,
@@ -61,7 +59,7 @@ import { RoleAddComponent } from './components/role/role-form/role-form.componen
     ApplicationInfoComponent,
     DashboardComponent,
     RoleListComponent,
-    RoleAddComponent
+    RoleFormComponent
   ],
   imports: [
     BrowserModule,
@@ -88,11 +86,10 @@ import { RoleAddComponent } from './components/role/role-form/role-form.componen
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    PatientAddComponent,
-    PatientEditComponent,
+    PatientFormComponent,
+    UserFormComponent,
     UserAddComponent,
-    UserEditComponent,
-    RoleAddComponent,
+    RoleFormComponent,
     ServerErrorComponent,
     ApplicationErrorComponent,
     ApplicationInfoComponent
@@ -100,12 +97,12 @@ import { RoleAddComponent } from './components/role/role-form/role-form.componen
 })
 export class AppModule {
   constructor(overlayContainer: OverlayContainer, sessionService: SessionService) {
-    sessionService.theme.subscribe(rsp=>{
-      if(rsp)
+    sessionService.theme.subscribe(rsp => {
+      if (rsp)
         overlayContainer.getContainerElement().classList.add("alternative")
       else
-      overlayContainer.getContainerElement().classList.remove("alternative")
+        overlayContainer.getContainerElement().classList.remove("alternative")
     })
-    
+
   }
 }

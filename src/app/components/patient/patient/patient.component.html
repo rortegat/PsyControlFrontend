@@ -1,5 +1,5 @@
-<br/>
-<a [routerLink]="'/home/patient-list'">< Regresar</a>
+<br />
+<a [routerLink]="'/home/patient-list'">Regresar</a>
 
 <h2 align="center">{{patient.firstname}} {{patient.lastname}}</h2>
 
@@ -7,20 +7,15 @@
     <mat-icon>delete</mat-icon>
     Eliminar expediente
 </button>
-
-<div *ngIf="consults.length==0">
-    No hay consultas registradas
-</div>
-
-<div *ngFor="let consult of consults">
-<mat-card class="mat-elevation-z5">
-    {{consult.reason}} - 
-    {{consult.createdDate | date: 'dd/MM/yyyy HH:mm:ss'}}  
-<button mat-raised-button color="primary" [routerLink]="['/home/consult', consult.id]">Más información</button>
-
-</mat-card>
-</div>
-
 <button mat-raised-button color="primary" class="bottom-right" (click)="newConsult()">
-    <mat-icon >add</mat-icon><span>Nueva consulta</span>
+    <mat-icon>add</mat-icon>
+    Nueva consulta
 </button>
+<div class="group-container">
+    <div class="consult-container" *ngIf="patient.id">
+        <app-consult-list [id]="patient.id"></app-consult-list>
+    </div>
+    <div class="editor-container">
+            <!-- <app-consult-edit></app-consult-edit> -->
+    </div>
+</div>

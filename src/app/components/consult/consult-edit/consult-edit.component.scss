@@ -11,14 +11,7 @@
   width: 133.33333%;
 }
 
-h2{
-  text-align: center;
-}
-
-mat-form-field {
-  width: 100% !important;
-}
-
-mat-card {
-  margin: 5px;
+::ng-deep .angular-editor-toolbar{
+  //background: rgba(0,0,0,0) !important;
+  //border: none !important;
 }

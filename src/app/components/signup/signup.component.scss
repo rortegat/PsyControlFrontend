@@ -1,59 +1,55 @@
 @media (max-width: 480px) {
   mat-card {
+    //background-color: rgba(255, 255, 255, 1);
     text-align: center;
-    width: 100% !important;
-    height: 100% !important;
+    width: 100vw !important;
+    height: 100vh !important;
     margin: 0 !important;
   }
 }
-
+@media (max-height: 480px) {
+  mat-card {
+    height: 480px !important;
+  }
+}
 mat-card {
-    text-align: center;
-    position: fixed;
-    min-width: 300px;
-    min-height: 300px;
-    padding: 0;
-    margin-top: 11%;
-  }
+  //background-color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  width: 550px;
+  min-height: 300px;
+  margin: auto;
+  margin-top: 15vh;
+  padding: 0;
+}
 
-  .logo{
-    height: 100px;
-    color: cornflowerblue;
-  }
-  
-  /* ::ng-deep .mat-card-image{
-    background-color:rgb(141, 117, 245); 
-    height: 200px;
-    margin: 0 !important;
-  } */
-  
-  mat-progress-bar{
-    width: 100% !important;
-  }
-  button {
-    min-width: 150px;
-  }
+.logo {
+  width: 150px;
+  margin: 10px;
+}
 
-  :host {
-    /*background-image: url("../../../assets/img/loginBackground.jpg");
-    background-repeat: no-repeat; 
-    background-size: cover; */
-    background-color: blue;
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-  }
+mat-progress-bar {
+  margin-top: 0 !important;
+  width: 100% !important;
+}
+button {
+  min-width: 150px;
+}
 
-  ::ng-deep .mat-form-field-flex>.mat-form-field-infix {
-    padding: 0.4em 0px !important;
-    ;
-  }
-  
-  ::ng-deep .mat-form-field-label-wrapper {
-    top: -1.5em;
-  }
-  
-  ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-    transform: translateY(-1.1em) scale(.75);
-    width: 133.33333%;
-  }
+:host {
+  display: flex;
+}
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+  padding: 0.4em 0px !important;
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+  top: -1.5em;
+}
+
+::ng-deep
+  .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label {
+  transform: translateY(-1.1em) scale(0.75);
+  width: 133.33333%;
+}

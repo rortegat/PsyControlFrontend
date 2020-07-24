@@ -10,7 +10,7 @@ import { Role } from 'src/app/models/role';
   templateUrl: './role-form.component.html',
   styleUrls: ['./role-form.component.scss']
 })
-export class RoleAddComponent implements OnInit {
+export class RoleFormComponent implements OnInit {
 
   public roleForm: FormGroup;
 
@@ -20,7 +20,7 @@ export class RoleAddComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private privilegeService: PrivilegeService,
-    public dialogRef: MatDialogRef<RoleAddComponent>,
+    public dialogRef: MatDialogRef<RoleFormComponent>,
     @Inject(MAT_DIALOG_DATA) private role: Role
   ) {
   }

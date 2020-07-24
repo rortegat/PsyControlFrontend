@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConsultService } from 'src/app/services/api/consult.service';
-import { Consult } from 'src/app/models/consult';
 import { PatientService } from 'src/app/services/api/patient.service';
 import { Patient } from 'src/app/models/patient';
 import { SessionService } from 'src/app/services/session.service';
@@ -18,66 +16,55 @@ import { ApplicationErrorComponent } from '../../modal/application-error/applica
 })
 export class PatientComponent implements OnInit {
 
-  public patient: Patient = new Patient()
-  public consults: Consult[] = []
+  public patient: Patient = new Patient();
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private snack: MatSnackBar,
     private dialog: MatDialog,
-    private consultService: ConsultService,
     private patientService: PatientService,
     private sessionService: SessionService
   ) {
     this.sessionService.loading.next(true)
   }
 
-  ngOnInit() {
-
-
-
+  ngOnInit(): void {
     this.patientService.getPatient(parseInt(this.route.snapshot.paramMap.get('id'))).subscribe((rsp) => {
-      this.patient = rsp
-      this.consultService.getConsults(this.patient.id).subscribe(
-        (rsp) => {
-          this.consults = rsp
-          this.sessionService.loading.next(false)
-        }
-      )
-    })
+      this.sessionService.loading.next(false);
+      this.patient = rsp;
+    });
   }
 
-  newConsult() {
-    this.router.navigate(['/home/consult-add', this.patient.id])
+  newConsult(): void {
+    this.router.navigate(['/home/consult-add', this.patient.id]);
   }
 
-  deletePatientButton(){
-    var info:any = {
+  deletePatientButton(): void {
+    var info: any = {
       action: "Eliminar paciente",
-      message: "Está seguro de eliminar al paciente "+this.patient.firstname,
-    }
+      message: "Está seguro de eliminar al paciente " + this.patient.firstname,
+    };
     const dialogRef = this.dialog.open(ApplicationInfoComponent, {
       data: info
-    })
+    });
     dialogRef.afterClosed().subscribe(rsp => {
-      if (rsp==true)
-      this.deletePatient()
-    })
+      if (rsp == true)
+        this.deletePatient();
+    });
   }
 
-  deletePatient() {
-    this.patientService.deletePatient(this.patient.id).subscribe(
-      () => {
-        this.snack.open("Paciente Eliminado")._dismissAfter(2000)
-        this.router.navigate(['/home/patient-list'])
+  deletePatient(): void {
+    this.patientService.deletePatient(this.patient.id).subscribe(() => {
+        this.snack.open("Paciente Eliminado")._dismissAfter(2000);
+        this.router.navigate(['/home/patient-list']);
       },
       (error) => {
         console.log(error)
         this.dialog.open(ApplicationErrorComponent, {
           data: error
-        })
-      })
+        });
+      });
   }
 
 

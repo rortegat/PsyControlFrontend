@@ -15,26 +15,26 @@ export class ConsultAddComponent implements OnInit {
 
   public editorConfig: AngularEditorConfig = {
     editable: true,
-      spellcheck: true,
-      height: 'auto',
-      minHeight: '30vh',
-      maxHeight: 'auto',
-      width: 'auto',
-      minWidth: '0',
-      translate: 'yes',
-      enableToolbar: true,
-      showToolbar: true,
-      placeholder: 'Escriba aquí...',
-      defaultParagraphSeparator: '',
-      defaultFontName: '',
-      defaultFontSize: '',
-      fonts: [
-        {class: 'arial', name: 'Arial'},
-        {class: 'times-new-roman', name: 'Times New Roman'},
-        {class: 'calibri', name: 'Calibri'},
-        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
-      ],
-      customClasses: [
+    spellcheck: true,
+    height: 'auto',
+    minHeight: '30vh',
+    maxHeight: 'auto',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Escriba aquí...',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+    ],
+    customClasses: [
       {
         name: 'quote',
         class: 'quote',
@@ -49,55 +49,42 @@ export class ConsultAddComponent implements OnInit {
         tag: 'h1',
       },
     ],
-    uploadUrl: 'v1/image',
+    uploadUrl: '/api/files/upload',
     sanitize: true,
     toolbarPosition: 'top',
     toolbarHiddenButtons: [
       ['superscript', 'italic'],
       ['subscript']
     ]
-}
+  };
 
-  public patientId:number
-
-  public addForm: FormGroup
-  public mismatch: boolean = false
+  public patientId: number;
+  public addForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private consult: ConsultService,
     private router: Router,
     private route: ActivatedRoute
-    ) {
-      
+  ) {
+    this.patientId = parseInt(this.route.snapshot.paramMap.get('id'));
   }
 
-  ngOnInit() {
-
-    this.patientId= parseInt(this.route.snapshot.paramMap.get('id'))
-
+  ngOnInit(): void {
     this.addForm = this.formBuilder.group({
       reason: ['', Validators.required],
       description: ['', Validators.required]
-    })
-
-
-    
+    });
   }
 
-  onSubmit(){
-
+  onSubmit(): void {
     //this.addForm.controls.patient.setValue(this.patient)
-
     if (this.addForm.invalid) {
-      return
+      return;
     }
-    this.consult.createConsult(this.patientId, this.addForm.value).subscribe(
-      (rsp)=>{
-        this.router.navigate(["home/patient",this.patientId])
-      }
-    )
-
+    this.consult.createConsult(this.patientId, this.addForm.value).subscribe((rsp) => {
+      this.router.navigate(["home/patient", this.patientId]);
+    });
   }
 
 }

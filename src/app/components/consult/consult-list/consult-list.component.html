@@ -1,0 +1,32 @@
+<!-- <mat-card>
+    <h3>{{consult.reason}}</h3>
+   
+    <mat-card-content>
+        <p>{{consult.createdDate | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
+        <p [innerHTML]="consult.description"></p>
+    </mat-card-content>
+</mat-card> -->
+
+
+<div *ngIf="consults.length==0">
+    No hay consultas registradas
+</div>
+
+<div *ngFor="let consult of consults">
+
+    <mat-card class="mat-elevation-z5"> {{consult.reason}} - {{consult.createdDate | date: 'dd/MM/yyyy HH:mm:ss'}}
+        <button mat-icon-button color="primary" [routerLink]="['/home/consult-edit', consult.id]">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button style="color: rgb(207, 75, 75);" (click)="deleteConsult(consult.id)">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <!-- <button mat-raised-button color="primary" [routerLink]="['/home/consult', consult.id]">
+            Abrir
+        </button> -->
+        <mat-card-content>
+            <p [innerHTML]="consult.description"></p>
+        </mat-card-content>
+    </mat-card>
+
+</div>

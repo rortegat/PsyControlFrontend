@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SessionService } from 'src/app/services/session.service';
 import { RoleService } from 'src/app/services/api/role.service';
 import { Router } from '@angular/router';
-import { RoleAddComponent } from '../role-form/role-form.component';
+import { RoleFormComponent } from '../role-form/role-form.component';
 import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
 import { ApplicationErrorComponent } from '../../modal/application-error/application-error.component';
 
@@ -42,7 +42,7 @@ export class RoleListComponent implements OnInit {
   }
 
   addRole(): void {
-    const dialogRef = this.dialog.open(RoleAddComponent, {});
+    const dialogRef = this.dialog.open(RoleFormComponent, {});
 
     dialogRef.afterClosed().subscribe(rsp => {
       if (rsp != undefined) {
@@ -56,7 +56,7 @@ export class RoleListComponent implements OnInit {
 
   editRole(id: number): void {
     this.role.getRole(id).subscribe(rsp => {
-      const dialogRef = this.dialog.open(RoleAddComponent, {
+      const dialogRef = this.dialog.open(RoleFormComponent, {
         data: rsp
       });
 

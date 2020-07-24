@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PasswordValidation, EmailValidation, RepeatPasswordValidator } from 'src/app/helpers/validators';
+import { PasswordValidation, EmailValidation, RepeatPasswordValidator, RepeatPasswordStateMatcher } from 'src/app/helpers/validators';
 import { UserService } from 'src/app/services/api/user.service';
 
 @Component({
@@ -11,9 +11,13 @@ import { UserService } from 'src/app/services/api/user.service';
 })
 export class SignupComponent implements OnInit {
 
-  public messageInfo: string=""
-  public isLoading: boolean
-  public signUpForm: FormGroup
+  public messageInfo: string="";
+  public isLoading: boolean;
+  public signUpForm: FormGroup;
+
+
+  public mismatch: boolean = false;
+  public matcher = new RepeatPasswordStateMatcher();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,19 +30,19 @@ export class SignupComponent implements OnInit {
       confirmation: ['',Validators.required],
       email: ['', EmailValidation],
     },
-    { validator: RepeatPasswordValidator })
+    { validator: RepeatPasswordValidator });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isLoading = false
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.signUpForm.invalid) {
-      return
+      return;
     }
     //this.isLoading = true
-    this.messageInfo = "Función no habilitada por el administrador"
+    this.messageInfo = "Función no habilitada por el administrador";
 
     /*this.user.signUp(
       this.signUpForm.controls.username.value,
@@ -51,7 +55,7 @@ export class SignupComponent implements OnInit {
         (err) => {
           this.messageInfo = "Error message"
           this.isLoading = false
-        })*/
+        });*/
   }
 
 }

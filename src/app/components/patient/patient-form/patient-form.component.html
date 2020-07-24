@@ -2,41 +2,36 @@
 
 <div class="formulario">
 
-    <div mat-dialog-content [formGroup]="editForm">
-
-
-        <input formControlName="id" hidden>
-
-
+    <div mat-dialog-content [formGroup]="patientForm">
         <p>
             <mat-form-field appearance="outline">
                 <mat-label>Nombre(s)</mat-label>
                 <input matInput formControlName="firstname">
-                <mat-error *ngIf="editForm.controls['firstname'].errors?.required">Obligatorio</mat-error>
+                <mat-error *ngIf="patientForm.controls['firstname'].errors?.required">Obligatorio</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Apellido(s)</mat-label>
                 <input matInput formControlName="lastname">
-                <mat-error *ngIf="editForm.controls['lastname'].errors?.required">Obligatorio</mat-error>
+                <mat-error *ngIf="patientForm.controls['lastname'].errors?.required">Obligatorio</mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="outline">
                 <mat-label>Teléfono</mat-label>
                 <input matInput formControlName="phone">
-                <mat-error *ngIf="editForm.controls['phone'].errors?.required">Obligatorio</mat-error>
+                <mat-error *ngIf="patientForm.controls['phone'].errors?.required">Obligatorio</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Celular</mat-label>
                 <input matInput formControlName="mobile">
-                <mat-error *ngIf="editForm.controls['mobile'].errors?.required">Obligatorio</mat-error>
+                <mat-error *ngIf="patientForm.controls['mobile'].errors?.required">Obligatorio</mat-error>
             </mat-form-field>
         </p>
         <p>
             <mat-form-field appearance="outline">
                 <mat-label>email</mat-label>
                 <input matInput formControlName="email">
-                <mat-error *ngIf="editForm.controls['email'].errors?.required">Obligatorio</mat-error>
+                <mat-error *ngIf="patientForm.controls['email'].errors?.required">Obligatorio</mat-error>
             </mat-form-field>
         </p>
     </div>
@@ -44,6 +39,6 @@
 
 <div mat-dialog-actions align="center">
     <button mat-button color="primary" (click)="cancel()">Cancelar</button>
-    <button mat-raised-button color="primary" [disabled]="editForm.invalid"
-        [mat-dialog-close]="editForm.value">Guardar</button>
+    <button mat-raised-button color="primary" [disabled]="patientForm.invalid"
+        [mat-dialog-close]="patientForm.value">Guardar</button>
 </div>

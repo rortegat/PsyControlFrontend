@@ -1,19 +1,18 @@
 <mat-card>
-<h2>Nueva consulta</h2>
-<form [formGroup]="addForm" (ngSubmit)="onSubmit()">
-    <p>
-<mat-form-field appearance="outline">
-    <mat-label>Motivo</mat-label>
-    <input matInput formControlName="reason">
-    <mat-error *ngIf="addForm.controls['reason'].errors?.required">Obligatorio</mat-error>
-</mat-form-field>
-</p>
-<p>
-    <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
-    <!-- <mat-error *ngIf="addForm.controls['description'].errors?.required">Obligatorio</mat-error>     -->
-    </p>
-    <button mat-button color="primary" [routerLink]="['/home/patient/',patientId]">Cancelar</button>
-    <button mat-raised-button color="primary" type="submit" >Guardar</button>
-</form>
+    <h2>Nueva consulta</h2>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Motivo</mat-label>
+                <input matInput formControlName="reason">
+                <mat-error *ngIf="addForm.controls['reason'].errors?.required">Obligatorio</mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
+            <!-- <mat-error *ngIf="addForm.controls['description'].errors?.required">Obligatorio</mat-error>     -->
+        </p>
+        <button mat-button color="primary" [routerLink]="['/home/patient/',patientId]">Cancelar</button>
+        <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </form>
 </mat-card>
-

@@ -5,10 +5,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/api/user.service';
 import { SessionService } from 'src/app/services/session.service';
-import { UserAddComponent } from '../user-add/user-add.component';
-import { UserEditComponent } from '../user-edit/user-edit.component';
+import { UserFormComponent } from '../user-edit/user-form.component';
 import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
 import { ApplicationErrorComponent } from '../../modal/application-error/application-error.component';
+import { UserAddComponent } from '../user-add/user-add.component';
 
 @Component({
   selector: 'app-user-list',
@@ -36,7 +36,7 @@ export class UserListComponent implements OnInit {
   }
 
   loadData(): void {
-    this.sessionService.loading.next(true);
+    setTimeout(() => this.sessionService.loading.next(true), 0);
     this.userService.getUsers().subscribe(data => {
       this.users = new MatTableDataSource(data);
       this.sessionService.loading.next(false);
@@ -54,7 +54,7 @@ export class UserListComponent implements OnInit {
 
   addUser(): void {
     const dialogRef = this.dialog.open(UserAddComponent, {
-      //width: '650px'
+      width: '650px'
     });
 
     dialogRef.afterClosed().subscribe(rsp => {
@@ -82,20 +82,20 @@ export class UserListComponent implements OnInit {
 
   editUser(username: string): void {
     this.userService.getUser(username).subscribe(rsp => {
-      const dialogRef = this.dialog.open(UserEditComponent, {
+      const dialogRef = this.dialog.open(UserFormComponent, {
         width: '650px',
         data: rsp
       });
       dialogRef.afterClosed().subscribe(rsp => {
-        let user: User = new User();
-        user.username = rsp.username;
-        user.firstname = rsp.firstname;
-        user.lastname = rsp.lastname;
-        user.password = rsp.password;
-        user.email = rsp.email;
-        user.roles = rsp.roles;
-        user = rsp;
         if (rsp != undefined) {
+          let user: User = new User();
+          user.username = rsp.username;
+          user.firstname = rsp.firstname;
+          user.lastname = rsp.lastname;
+          user.password = rsp.password;
+          user.email = rsp.email;
+          user.roles = rsp.roles;
+          user = rsp;
           this.userService.updateUser(user).subscribe(() => {
             this.loadData();
             this.snack.open("User modificado")._dismissAfter(2000)
@@ -130,8 +130,5 @@ export class UserListComponent implements OnInit {
         });
       });
   }
-
-
-
 
 }

@@ -6,8 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionService } from 'src/app/services/session.service';
 import { PatientService } from 'src/app/services/api/patient.service';
-import { PatientAddComponent } from '../patient-add/patient-add.component';
-import { PatientEditComponent } from '../patient-edit/patient-edit.component';
+import { PatientFormComponent } from '../patient-form/patient-form.component';
 import { Router } from '@angular/router';
 import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
 import { ApplicationErrorComponent } from '../../modal/application-error/application-error.component';
@@ -56,7 +55,7 @@ export class PatientListComponent implements OnInit {
   }
 
   addPatient(): void {
-    const dialogRef = this.dialog.open(PatientAddComponent, {})
+    const dialogRef = this.dialog.open(PatientFormComponent, {})
 
     dialogRef.afterClosed().subscribe(rsp => {
       if (rsp != undefined) {
@@ -71,7 +70,7 @@ export class PatientListComponent implements OnInit {
   editPatient(id: number): void {
 
     this.patient.getPatient(id).subscribe(rsp => {
-      const dialogRef = this.dialog.open(PatientEditComponent, {
+      const dialogRef = this.dialog.open(PatientFormComponent, {
         data: rsp
       });
 
