@@ -36,6 +36,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RoleListComponent } from './components/role/role-list/role-list.component';
 import { RoleFormComponent } from './components/role/role-form/role-form.component';
 import { UserAddComponent } from './components/user/user-add/user-add.component';
+import { AuthImagePipe } from './security/auth-image.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { UserAddComponent } from './components/user/user-add/user-add.component'
     ConsultListComponent,
     ConsultAddComponent,
     HighLightSearchPipe,
+    AuthImagePipe,
     UserListComponent,
     UserFormComponent,
     UserAddComponent,

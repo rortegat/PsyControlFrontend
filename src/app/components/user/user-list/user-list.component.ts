@@ -17,7 +17,7 @@ import { UserAddComponent } from '../user-add/user-add.component';
 })
 export class UserListComponent implements OnInit {
 
-  public displayedColumns: string[] = ['username', 'firstname', 'lastname', 'email', 'acciones'];
+  public displayedColumns: string[] = ['username', 'firstname', 'lastname', 'email', 'action'];
   public users: MatTableDataSource<User>;
 
   public value;
@@ -105,17 +105,17 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  deleteUserButton(username: string): void {
+  deleteUserButton(user: User): void {
     var info: any = {
       action: "Eliminar usuario",
-      message: "Está seguro de eliminar al usuario " + username,
+      message: "Está seguro de eliminar al usuario " + user.username,
     };
     const dialogRef = this.dialog.open(ApplicationInfoComponent, {
       data: info
     });
     dialogRef.afterClosed().subscribe(rsp => {
       if (rsp == true)
-        this.deleteUser(username);
+        this.deleteUser(user.username);
     });
   }
 

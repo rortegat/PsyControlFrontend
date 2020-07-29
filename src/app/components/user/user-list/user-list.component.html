@@ -37,16 +37,22 @@
                 </mat-cell>
               </ng-container>
      
-   <ng-container matColumnDef="acciones">
+   <ng-container matColumnDef="action">
     <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
     <mat-cell *matCellDef="let user">
-        <button mat-icon-button aria-label="Editar" (click)="editUser(user.username)">
-            <mat-icon color="primary">edit</mat-icon>
-          </button>
-          <button mat-icon-button style="color: rgb(207, 75, 75);" (click)="deleteUserButton(user.username)">
-            <mat-icon>delete</mat-icon>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editUser(user.username)">
+          <mat-icon>edit</mat-icon>
+          <span>Editar</span>
         </button>
-          
+          <button mat-menu-item (click)="deleteUserButton(user)">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar</span>
+        </button>
+      </mat-menu>
     </mat-cell>
   </ng-container> 
 

@@ -6,6 +6,10 @@ mat-table {
   .mobile-label {
     display: none;
   }
+
+  .mat-column-action {
+    flex: 0 0 4% !important;
+  }
   
   @media(max-width: 600px) {
     .mobile-label {

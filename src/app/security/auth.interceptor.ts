@@ -6,8 +6,6 @@ import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ServerErrorComponent } from '../components/modal/server-error/server-error.component';
-import { ApplicationErrorComponent } from '../components/modal/application-error/application-error.component';
-
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
