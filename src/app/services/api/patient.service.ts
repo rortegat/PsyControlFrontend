@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { RequestService } from '../request.service';
 import { Patient } from 'src/app/models/patient';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Page } from 'src/app/models/page';
+import { Pageable } from 'src/app/models/pageable';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,8 @@ export class PatientService {
 
   constructor(private request: RequestService) { }
 
-  getPatients(): Observable<Patient[]> {
-    return this.request.get(`${this.baseUrl}/all`).pipe(
-      map(data => data as Patient[]));
+  getPatients(pageable: Pageable): Observable<Page<Patient>> {
+    return this.request.page(`${this.baseUrl}/all`, pageable);
   }
 
   createPatient(patient: Patient): Observable<Patient> {

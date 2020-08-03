@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Patient } from 'src/app/models/patient';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionService } from 'src/app/services/session.service';
 import { PatientService } from 'src/app/services/api/patient.service';
@@ -10,6 +10,7 @@ import { PatientFormComponent } from '../patient-form/patient-form.component';
 import { Router } from '@angular/router';
 import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
 import { ApplicationErrorComponent } from '../../modal/application-error/application-error.component';
+import { Page } from 'src/app/models/page';
 
 @Component({
   selector: 'app-patient-list',
@@ -17,6 +18,11 @@ import { ApplicationErrorComponent } from '../../modal/application-error/applica
   styleUrls: ['./patient-list.component.scss']
 })
 export class PatientListComponent implements OnInit {
+
+  public page: Page<Patient> = new Page();
+  public pageSize: number = 10;
+  public pageIndex: number = 0;
+  public length: number = 0;
 
   public displayedColumns: string[] = ['id', 'firstname', 'lastname', 'email', 'phone', 'mobile', 'accion'];
   public patients: MatTableDataSource<Patient>;
@@ -36,22 +42,33 @@ export class PatientListComponent implements OnInit {
     this.loadData();
   }
 
+  getServerData(event: PageEvent): void {
+    this.page.pageable.pageSize = event.pageSize;
+    this.page.pageable.pageNumber = event.pageIndex;
+    this.loadData();
+  }
+
   loadData(): void {
     setTimeout(() => { this.session.loading.next(true) }, 0);
-    this.patient.getPatients().subscribe((rsp) => {
-      this.patients = new MatTableDataSource(rsp);
+    this.patient.getPatients(this.page.pageable).subscribe((page) => {
+      this.page = page;
+      console.log(this.page.totalElements);
+      this.length = this.page.totalElements;
+      this.pageSize = this.page.size;
+      this.pageIndex = this.page.number;
+      this.patients = new MatTableDataSource(page.content);
       this.patients.paginator = this.paginator;
       this.session.loading.next(false);
     });
   }
 
-  clear() {
+  clear(): void {
+    console.log("Por implementar")
     this.filterValue = "";
-    this.patients.filter = "";
   }
 
-  filterField(filterValue: string) {
-    this.patients.filter = filterValue.trim().toLowerCase();
+  filterField(filterValue: string): void {
+    console.log(filterValue.trim().toLowerCase());
   }
 
   addPatient(): void {

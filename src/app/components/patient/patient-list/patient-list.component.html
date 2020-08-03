@@ -11,91 +11,87 @@
   </mat-form-field>
 </mat-card>
 
-<div  class="mat-elevation-z8">
+<div class="mat-elevation-z8">
 
-<mat-table [dataSource]="patients">
+  <mat-table [dataSource]="patients">
 
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let patient">
-      <button mat-icon-button aria-label="Editar" (click)="onSelect(patient)">
-        <mat-icon color="primary">assignment</mat-icon>
-      </button>
-    </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="firstname">
-    <mat-header-cell *matHeaderCellDef> Nombres </mat-header-cell>
-    <mat-cell *matCellDef="let patient">
-    <span class="mobile-label">Nombres: </span>
-    <span [innerHTML]="patient.firstname | highLightSearch: filterValue"></span>
-    </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="lastname">
-    <mat-header-cell *matHeaderCellDef> Apellidos </mat-header-cell>
-    <mat-cell *matCellDef="let patient" >
-    <span class="mobile-label">Apellidos:</span>
-    <span [innerHTML]="patient.lastname | highLightSearch: filterValue"></span>
-    </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="email">
-    <mat-header-cell *matHeaderCellDef> email </mat-header-cell>
-    <mat-cell *matCellDef="let patient" >
-    <span class="mobile-label">e-mail:</span>
-    <span [innerHTML]="patient.email | highLightSearch: filterValue"></span>
-    </mat-cell>
-
-  </ng-container>
-
-  <ng-container matColumnDef="phone">
-    <mat-header-cell *matHeaderCellDef> Teléfono </mat-header-cell>
-    <mat-cell *matCellDef="let patient"> 
-    <span class="mobile-label">Telefono:</span>
-    <span *ngIf="patient.phone" [innerHTML]="patient.phone | highLightSearch: filterValue"></span>
-    </mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="mobile">
-    <mat-header-cell *matHeaderCellDef> Celular </mat-header-cell>
-    <mat-cell *matCellDef="let patient">
-      <span class="mobile-label">Celular:</span>
-      <span *ngIf="patient.mobile" [innerHTML]="patient.mobile | highLightSearch: filterValue"></span>
-    </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="accion">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let patient">
-
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="editPatient(patient.id)">
-          <mat-icon>edit</mat-icon>
-          <span>Editar</span>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let patient">
+        <button mat-icon-button aria-label="Editar" (click)="onSelect(patient)">
+          <mat-icon color="primary">assignment</mat-icon>
         </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstname">
+      <mat-header-cell *matHeaderCellDef> Nombres </mat-header-cell>
+      <mat-cell *matCellDef="let patient">
+        <span class="mobile-label">Nombres: </span>
+        <span [innerHTML]="patient.firstname | highLightSearch: filterValue"></span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+      <mat-header-cell *matHeaderCellDef> Apellidos </mat-header-cell>
+      <mat-cell *matCellDef="let patient">
+        <span class="mobile-label">Apellidos:</span>
+        <span [innerHTML]="patient.lastname | highLightSearch: filterValue"></span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> email </mat-header-cell>
+      <mat-cell *matCellDef="let patient">
+        <span class="mobile-label">e-mail:</span>
+        <span [innerHTML]="patient.email | highLightSearch: filterValue"></span>
+      </mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <mat-header-cell *matHeaderCellDef> Teléfono </mat-header-cell>
+      <mat-cell *matCellDef="let patient">
+        <span class="mobile-label">Telefono:</span>
+        <span *ngIf="patient.phone" [innerHTML]="patient.phone | highLightSearch: filterValue"></span>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="mobile">
+      <mat-header-cell *matHeaderCellDef> Celular </mat-header-cell>
+      <mat-cell *matCellDef="let patient">
+        <span class="mobile-label">Celular:</span>
+        <span *ngIf="patient.mobile" [innerHTML]="patient.mobile | highLightSearch: filterValue"></span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="accion">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let patient">
+
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editPatient(patient.id)">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
           <button mat-menu-item (click)="deletePatientButton(patient)">
             <mat-icon>delete</mat-icon>
             <span>Eliminar</span>
-        </button>
-      </mat-menu>
+          </button>
+        </mat-menu>
 
-      
-    </mat-cell>
-  </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+      </mat-cell>
+    </ng-container>
 
-<mat-paginator
-#paginator
-[pageSize]="10" 
-[hidePageSize]="true"
-[showFirstLastButtons]="true">
-</mat-paginator>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25, 50]" (page)="getServerData($event)">
+  </mat-paginator>
 
 </div>
-
