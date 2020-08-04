@@ -13,6 +13,7 @@ import { Role } from 'src/app/models/role';
 export class RoleFormComponent implements OnInit {
 
   public roleForm: FormGroup;
+  public title: string="Nuevo rol";
 
   public privilegesList: Privilege[] = [];
   public rolePrivileges: Privilege[] = [];
@@ -37,6 +38,7 @@ export class RoleFormComponent implements OnInit {
       this.privilegesList = rsp;
 
       if (this.role != null) {
+        this.title="Modificar rol"
         this.privilegesList.forEach((privilege, index) => {
           this.role.privileges.forEach((rolePrivilege) => {
             if (privilege.privilegename === rolePrivilege.privilegename)

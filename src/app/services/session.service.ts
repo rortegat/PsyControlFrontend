@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../models/user';
 import { AuthenticatedUser } from '../models/authenticated-user';
 import { Router } from '@angular/router';
 
@@ -31,13 +30,12 @@ export class SessionService {
   }
 
   getUserData(): AuthenticatedUser | null {
-    if (localStorage.getItem('authUser') != null)
-      return JSON.parse(localStorage.getItem("authUser"))
-    else
-      return null
+    return localStorage.getItem('authUser')
+      ? JSON.parse(localStorage.getItem("authUser"))
+      : null;
   }
 
-  removeUserData() {
+  removeUserData(): void {
     this.currentUser.next(null);
     localStorage.removeItem("authUser");
   }
@@ -47,14 +45,14 @@ export class SessionService {
   }
 
   getPreferredTheme(): boolean | null {
-    if (localStorage.getItem("theme") != null)
-      return JSON.parse(localStorage.getItem("theme")).dark
-    else return null
+    return localStorage.getItem("theme")
+      ? JSON.parse(localStorage.getItem("theme")).dark
+      : null;
   }
 
-  changeTheme() {
-    this.setPreferredTheme(!this.theme.getValue())
-    this.theme.next(!this.theme.getValue())
+  changeTheme(): void {
+    this.setPreferredTheme(!this.theme.getValue());
+    this.theme.next(!this.theme.getValue());
   }
 
 

@@ -11,6 +11,7 @@ import { Patient } from 'src/app/models/patient';
 export class PatientFormComponent implements OnInit {
 
   public patientForm: FormGroup;
+  public title: string = "Nuevo paciente";
 
   constructor(
     public dialogRef: MatDialogRef<PatientFormComponent>,
@@ -29,8 +30,10 @@ export class PatientFormComponent implements OnInit {
       mobile: ['']
     })
 
-    if (this.patient != null)
+    if (this.patient != null) {
+      this.title = "Modificar paciente";
       this.patientForm.patchValue(this.patient);
+    }
 
   }
 

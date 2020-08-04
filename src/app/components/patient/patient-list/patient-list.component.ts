@@ -28,8 +28,6 @@ export class PatientListComponent implements OnInit {
   public patients: MatTableDataSource<Patient>;
   public filterValue: string = "";
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
   constructor(
     private snack: MatSnackBar,
     public dialog: MatDialog,
@@ -39,6 +37,7 @@ export class PatientListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    setTimeout(() => { this.session.loading.next(true) }, 0);
     this.loadData();
   }
 
@@ -49,15 +48,14 @@ export class PatientListComponent implements OnInit {
   }
 
   loadData(): void {
-    setTimeout(() => { this.session.loading.next(true) }, 0);
+    setTimeout(()=>this.session.loading.next(true),0);
     this.patient.getPatients(this.page.pageable).subscribe((page) => {
+      console.log(page);
       this.page = page;
-      console.log(this.page.totalElements);
       this.length = this.page.totalElements;
       this.pageSize = this.page.size;
       this.pageIndex = this.page.number;
       this.patients = new MatTableDataSource(page.content);
-      this.patients.paginator = this.paginator;
       this.session.loading.next(false);
     });
   }
