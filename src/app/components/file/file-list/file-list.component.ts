@@ -19,13 +19,12 @@ export class FileListComponent implements OnInit {
     private sessionService: SessionService) { }
 
   ngOnInit(): void {
-    this.loadData()
+    this.loadData();
   }
 
   loadData(): void {
     setTimeout(() => { this.sessionService.loading.next(true) }, 0);
-    this.fileService.getAllUserFiles().subscribe(
-      (rsp) => {
+    this.fileService.getAllUserFiles().subscribe((rsp) => {
         this.fileList = rsp;
         // rsp.forEach((image)=>{
         //   let obj = {

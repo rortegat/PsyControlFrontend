@@ -11,10 +11,10 @@ import { UserService } from 'src/app/services/api/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  public messageInfo: string=""
-  public isLoading: boolean = false
-  public loginForm: FormGroup
-  public returnUrl: string
+  public messageInfo: string = "";
+  public isLoading: boolean = false;
+  public loginForm: FormGroup;
+  public returnUrl: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,46 +22,44 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private user: UserService,
     private session: SessionService
-  ) {}
+  ) { }
 
-  ngOnInit() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home/dashboard'
-    if(this.session.getUserData()!=null)
-    this.router.navigate([this.returnUrl])
-    console.log(this.returnUrl)
+  ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home/dashboard';
+    if (this.session.getUserData() != null)
+      this.router.navigate([this.returnUrl]);
+    console.log(this.returnUrl);
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
-    })
+    });
   }
 
-  createAccount(){
+  createAccount(): void {
     this.router.navigate(['signup'])
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.loginForm.invalid) {
-      return
+      return;
     }
-    this.isLoading = true
-    this.loginForm.disable()
+    this.isLoading = true;
+    this.loginForm.disable();
 
-    this.user.logIn(
-      this.loginForm.controls.username.value,
-      this.loginForm.controls.password.value).subscribe(
-        (rsp) => {
-          this.session.setUserData(rsp)
-          this.isLoading = false;
-          this.router.navigate([this.returnUrl])
-        },
+    this.user.logIn(this.loginForm.controls.username.value,
+      this.loginForm.controls.password.value).subscribe((rsp) => {
+        this.session.setUserData(rsp);
+        this.isLoading = false;
+        this.router.navigate([this.returnUrl]);
+      },
         (err) => {
-          this.loginForm.enable()
-          if(err.error.message!="")
-          this.messageInfo = err.error.message
+          this.loginForm.enable();
+          if (err.error.message != "")
+            this.messageInfo = err.error.message;
           else
-          this.messageInfo="Error, contacte a un administrador"
-          this.isLoading = false
-        })
+            this.messageInfo = "Error, contacte a un administrador";
+          this.isLoading = false;
+        });
   }
 
 }
