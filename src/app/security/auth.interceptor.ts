@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     if (request.url.includes("/api")) {
 
-      let user = this.session.getUserData();
+      let user = this.session.getTokenData();
       if (user != null) {
         request = request.clone({
           setHeaders: {

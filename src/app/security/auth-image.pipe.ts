@@ -13,7 +13,7 @@ export class AuthImagePipe implements PipeTransform {
     ) { }
 
     async transform(src: string): Promise<string> {
-        const token = this.sessionService.getUserData().token;
+        const token = this.sessionService.getTokenData().token;
         const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
         const imageBlob = await this.http.get(src, { headers, responseType: 'blob' }).toPromise();
         const reader = new FileReader();

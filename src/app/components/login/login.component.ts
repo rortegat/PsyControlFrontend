@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
-import { UserService } from 'src/app/services/api/user.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { User } from 'src/app/models/user';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +17,13 @@ export class LoginComponent implements OnInit {
   public isLoading: boolean = false;
   public loginForm: FormGroup;
   public returnUrl: string;
+  private jwt: JwtHelperService = new JwtHelperService();
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private user: UserService,
+    private auth: AuthService,
     private session: SessionService
   ) { }
 
@@ -46,9 +49,11 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.loginForm.disable();
 
-    this.user.logIn(this.loginForm.controls.username.value,
+    this.auth.logIn(this.loginForm.controls.username.value,
       this.loginForm.controls.password.value).subscribe((rsp) => {
-        this.session.setUserData(rsp);
+        let user: User = this.extractUser(rsp.token);
+        this.session.setTokenData(rsp);
+        this.session.setUserData(user);
         this.isLoading = false;
         this.router.navigate([this.returnUrl]);
       },
@@ -60,6 +65,18 @@ export class LoginComponent implements OnInit {
             this.messageInfo = "Error, contacte a un administrador";
           this.isLoading = false;
         });
+  }
+
+  extractUser(token: string): User {
+    let user: User = new User();
+    let jwtData = this.jwt.decodeToken(token);
+    user.username = jwtData['username'];
+    user.firstname = jwtData['firstname'];
+    user.lastname = jwtData['lastname'];
+    user.email = jwtData['email'];
+    user.roles = jwtData['roles'];
+    console.log(user);
+    return user;
   }
 
 }

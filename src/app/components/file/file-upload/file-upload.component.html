@@ -22,9 +22,9 @@
   
   
   <mat-card *ngFor="let file of files; let i = index;">
-    <button mat-icon-button (click)="files.splice(i,1); progress.splice(i,1)">
+    <button mat-icon-button (click)="fileSplice(i)">
       <mat-icon>close</mat-icon>
     </button>
-    {{file.name}} - {{file.size}}
+    {{file.name}} - {{file.size}} - {{progress[i]}}%
     <mat-progress-bar mode="determinate" [value]="progress[i]"></mat-progress-bar>
   </mat-card>

@@ -29,7 +29,7 @@ export class FileService {
       reportProgress: true,
       observe: 'events'
     }).pipe(map((event) => {
-
+      console.log(event);
       switch (event.type) {
 
         case HttpEventType.UploadProgress:

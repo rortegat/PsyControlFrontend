@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { FileService } from 'src/app/services/api/file.service';
 import { FileSystemDirectoryEntry, NgxFileDropEntry, FileSystemFileEntry } from 'ngx-file-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { ServerErrorComponent } from '../../modal/server-error/server-error.component';
 
 @Component({
   selector: 'app-file-upload',
@@ -10,37 +11,34 @@ import { FileSystemDirectoryEntry, NgxFileDropEntry, FileSystemFileEntry } from 
 })
 export class FileUploadComponent implements OnInit {
 
-  public form: FormGroup;
   public ngxFiles: NgxFileDropEntry[] = [];
   public files: File[] = [];
   public progress: number[] = [];
 
-  constructor(private formBuilder: FormBuilder,
-    private fileService: FileService) { }
+  constructor(private fileService: FileService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-
-    // this.form = this.formBuilder.group({
-    //   file: ['']
-    // })
-
   }
 
   uploadImages(): void {
     this.files.forEach((file, index) => {
       this.fileService.uploadSingleFile(file).subscribe(
         (rsp) => {
-          if (rsp.message != undefined)
-            this.progress[index] = rsp.message;
-            console.log(this.progress[index])
-            //this.progress.splice(index);
+          if (rsp.message!=undefined)
+            //console.log(rsp.message)
+          this.progress[index] = rsp.message;
+          if(this.progress[index]==100)
+          console.log("COMPLETADO")
+          //this.progress.splice(index);
         },
-        (err) => console.log(err)
-      );
+        (err) => {
+          this.dialog.open(ServerErrorComponent,{data:err});
+          this.fileSplice(index);
+        });
     });
   }
 
-dropped(files: NgxFileDropEntry[]): void {
+  dropped(files: NgxFileDropEntry[]): void {
     this.ngxFiles = files;
     for (const droppedFile of files) {
       // Is it a file?
@@ -62,12 +60,17 @@ dropped(files: NgxFileDropEntry[]): void {
     }
   }
 
-  public fileOver(event) {
+  fileOver(event): void {
     console.log(event);
   }
 
-  public fileLeave(event) {
+  fileLeave(event): void {
     console.log(event);
+  }
+
+  public fileSplice(index: number): void {
+    this.files.splice(index, 1);
+    this.progress.splice(index, 1);
   }
 
 }

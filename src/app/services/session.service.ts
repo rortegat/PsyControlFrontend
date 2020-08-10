@@ -1,52 +1,67 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { AuthenticatedUser } from '../models/authenticated-user';
-import { Router } from '@angular/router';
+import { AuthToken } from '../models/auth-token';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  public currentUser: BehaviorSubject<AuthenticatedUser> = new BehaviorSubject<AuthenticatedUser>(null)
-  public loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-  public theme: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  public currentUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  public loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public theme: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(
-    private router: Router
-  ) {
+  private storage = localStorage;
+
+  constructor() {
     if (this.getUserData() != null) {
-      this.currentUser = new BehaviorSubject<AuthenticatedUser>(this.getUserData())
-      //this.router.navigate(["home"])
+      this.currentUser = new BehaviorSubject<User>(this.getUserData());
     }
     if (this.getPreferredTheme() != null) {
-      this.theme.next(this.getPreferredTheme())
+      this.theme.next(this.getPreferredTheme());
     }
   }
 
-  setUserData(user: AuthenticatedUser) {
-    this.currentUser.next(user)
-    localStorage.setItem("authUser", JSON.stringify(user))
+  setTokenData(auth: AuthToken): void{
+    this.storage.setItem("auth", JSON.stringify(auth));
   }
 
-  getUserData(): AuthenticatedUser | null {
-    return localStorage.getItem('authUser')
-      ? JSON.parse(localStorage.getItem("authUser"))
+  getTokenData(): AuthToken | null{
+    let auth: string = this.storage.getItem("auth");
+    return auth
+    ? JSON.parse(auth)
+    : null;
+  }
+
+  removeTokenData(): void{
+    this.storage.removeItem("auth");
+  }
+
+  setUserData(user: User): void {
+    this.currentUser.next(user);
+    this.storage.setItem("user", JSON.stringify(user));
+  }
+
+  getUserData(): User | null {
+    let user: string = this.storage.getItem('user');
+    return user
+      ? JSON.parse(user)
       : null;
   }
 
   removeUserData(): void {
     this.currentUser.next(null);
-    localStorage.removeItem("authUser");
+    this.storage.removeItem("user");
   }
 
-  setPreferredTheme(theme: boolean) {
-    localStorage.setItem("theme", JSON.stringify({ "dark": theme }))
+  setPreferredTheme(theme: boolean): void {
+    this.storage.setItem("theme", JSON.stringify({ "dark": theme }))
   }
 
   getPreferredTheme(): boolean | null {
-    return localStorage.getItem("theme")
-      ? JSON.parse(localStorage.getItem("theme")).dark
+    return this.storage.getItem("theme")
+      ? JSON.parse(this.storage.getItem("theme")).dark
       : null;
   }
 

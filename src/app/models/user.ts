@@ -1,10 +1,8 @@
-import { Role } from './role'
-
 export class User {
-    username:string
-    password?:string
-    firstname:string
-    lastname:string
-    email:string
-    roles:Role[]
+    username: string;
+    password?: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    roles?: string[];
 }

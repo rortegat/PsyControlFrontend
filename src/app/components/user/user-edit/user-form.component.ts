@@ -43,7 +43,7 @@ export class UserFormComponent implements OnInit {
       if (this.user != null) {
         this.rolesList.forEach((role, index) => {
           this.user.roles.forEach((roleUser) => {
-            if (role.rolename === roleUser.rolename)
+            if (role.rolename === roleUser)
               this.userRoles.push(this.rolesList[index]);
           });
         });
