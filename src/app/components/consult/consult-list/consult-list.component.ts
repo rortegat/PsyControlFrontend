@@ -4,6 +4,8 @@ import { ConsultService } from 'src/app/services/api/consult.service';
 import { Consult } from 'src/app/models/consult';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionService } from 'src/app/services/session.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
 
 @Component({
   selector: 'app-consult-list',
@@ -17,39 +19,55 @@ export class ConsultListComponent implements OnInit {
   public consults: Consult[] = [];
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private consultService: ConsultService,
     private sessionService: SessionService,
+    private dialog: MatDialog,
     private snack: MatSnackBar) {
-
   }
 
   ngOnInit(): void {
-    this.loadData(this.id);
+    this.loadData();
   }
 
   ngOnChanges(changes) {
     if (changes['id']) {
-      this.loadData(changes.id.currentValue);
+      this.loadData();
     }
   }
 
-  loadData(id: number): void {
+  loadData(): void {
+    this.sessionService.loading.next(true);
     setTimeout(() => { this.sessionService.loading.next(true) }, 0);
-    this.consultService.getConsults(id).subscribe((rsp) => {
+    this.consultService.getConsults(this.id).subscribe((rsp) => {
       this.consults = rsp;
       this.sessionService.loading.next(false);
     });
   }
 
+  deleteConsultButton(id: number): void {
+    var info: any = {
+      action: "Eliminar consulta",
+      message: "Está seguro de eliminar esta consulta?",
+    };
+    const dialogRef = this.dialog.open(ApplicationInfoComponent, {
+      data: info
+    });
+    dialogRef.afterClosed().subscribe(rsp => {
+      if (rsp == true)
+        this.deleteConsult(id);
+    });
+  }
+
   deleteConsult(id: number): void {
+    this.sessionService.loading.next(true);
     this.consultService.deleteConsult(id).subscribe(() => {
       this.snack.open("Consulta eliminada")._dismissAfter(2000);
-      this.router.navigate(['/home/consult-list']);
+      this.loadData();
     },
       (err) => {
         console.log(err);
+        this.sessionService.loading.next(false);
       });
   }
 

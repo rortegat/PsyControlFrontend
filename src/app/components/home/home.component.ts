@@ -37,11 +37,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
 
     this.sessionService.loading.subscribe(rsp => this.loading = rsp);
-    this.sessionService.currentUser.subscribe(rsp => this.userInfo = rsp);
+    this.sessionService.currentUser.subscribe(rsp => {
+      if (rsp == null)
+        this.router.navigate(['/login']);
+      else
+        this.userInfo = rsp
+    });
     this.sessionService.theme.subscribe(rsp => this.slideBool = rsp);
   }
 
   ngOnInit(): void {
+    setTimeout(() => { this.sessionService.loading.next(false) }, 1000);
     this.navbar.open();
     this.getRoles().forEach((role) => {
       if (role === "ADMIN")
@@ -58,8 +64,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   logOut(): void {
-    this.router.navigate(["login"]);
     this.sessionService.removeUserData();
+    this.sessionService.removeTokenData();
   }
 
   getRoles(): string[] {

@@ -50,7 +50,6 @@ export class PatientListComponent implements OnInit {
   loadData(): void {
     setTimeout(()=>this.session.loading.next(true),0);
     this.patient.getPatients(this.page.pageable).subscribe((page) => {
-      console.log(page);
       this.page = page;
       this.length = this.page.totalElements;
       this.pageSize = this.page.size;
@@ -83,7 +82,6 @@ export class PatientListComponent implements OnInit {
   }
 
   editPatient(id: number): void {
-
     this.patient.getPatient(id).subscribe(rsp => {
       const dialogRef = this.dialog.open(PatientFormComponent, {
         data: rsp

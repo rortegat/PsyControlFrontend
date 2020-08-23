@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SessionService } from '../services/session.service';
+import { SessionService } from '../session.service';
 
 @Pipe({
     name: 'authImage'

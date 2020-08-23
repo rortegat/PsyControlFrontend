@@ -16,7 +16,7 @@ export class UserAddComponent implements OnInit {
   public mismatch: boolean = false
   public matcher = new RepeatPasswordStateMatcher()
 
-  public rolesList: Role[] = []
+  public rolesList: string[] = []
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +27,7 @@ export class UserAddComponent implements OnInit {
 
   ngOnInit() {
 
-    this.rolesService.getRoles().subscribe((rsp)=>this.rolesList = rsp)
+    this.rolesService.getRoles().subscribe((rsp)=>this.rolesList = rsp.map(role=>role.rolename));
     
     this.addForm = this.formBuilder.group({
       username: ['', Validators.required],

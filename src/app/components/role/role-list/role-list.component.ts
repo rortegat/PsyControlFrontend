@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { SessionService } from 'src/app/services/session.service';
 import { RoleService } from 'src/app/services/api/role.service';
-import { Router } from '@angular/router';
 import { RoleFormComponent } from '../role-form/role-form.component';
 import { ApplicationInfoComponent } from '../../modal/application-info/application-info.component';
 import { ApplicationErrorComponent } from '../../modal/application-error/application-error.component';
@@ -17,17 +16,15 @@ import { ApplicationErrorComponent } from '../../modal/application-error/applica
 })
 export class RoleListComponent implements OnInit {
 
-  public displayedColumns: string[] = ['rolename', 'privileges', 'accion']
-  public roles: MatTableDataSource<Role>
+  public displayedColumns: string[] = ['rolename', 'privileges', 'accion'];
+  public roles: MatTableDataSource<Role>;
 
   constructor(
     private snack: MatSnackBar,
     public dialog: MatDialog,
     private session: SessionService,
-    private role: RoleService
-  ) {
-
-  }
+    private roleService: RoleService
+  ) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -35,7 +32,7 @@ export class RoleListComponent implements OnInit {
 
   loadData(): void {
     setTimeout(() => { this.session.loading.next(true) }, 0);
-    this.role.getRoles().subscribe((rsp) => {
+    this.roleService.getRoles().subscribe((rsp) => {
       this.roles = new MatTableDataSource(rsp);
       this.session.loading.next(false);
     });
@@ -46,7 +43,7 @@ export class RoleListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(rsp => {
       if (rsp != undefined) {
-        this.role.createRole(rsp).subscribe(() => {
+        this.roleService.createRole(rsp).subscribe(() => {
           this.loadData();
           this.snack.open("Rol agregado")._dismissAfter(2000);
         });
@@ -55,30 +52,27 @@ export class RoleListComponent implements OnInit {
   }
 
   editRole(id: number): void {
-    this.role.getRole(id).subscribe(rsp => {
+    this.roleService.getRole(id).subscribe(rsp => {
       const dialogRef = this.dialog.open(RoleFormComponent, {
         data: rsp
       });
 
       dialogRef.afterClosed().subscribe(rsp => {
         if (rsp != undefined) {
-          console.log(rsp)
-          this.role.updateRole(rsp).subscribe(
-            () => {
-              this.loadData();
-              this.snack.open("Rol modificado")._dismissAfter(2000)
-            }
-          )
+          this.roleService.updateRole(rsp).subscribe(() => {
+            this.loadData();
+            this.snack.open("Rol modificado")._dismissAfter(2000);
+          });
         }
-      })
-    })
+      });
+    });
   }
 
   deleteRoleButton(role: Role): void {
     var info: any = {
       action: "Eliminar rol",
       message: "Está seguro de eliminar el rol " + role.rolename,
-    }
+    };
     const dialogRef = this.dialog.open(ApplicationInfoComponent, {
       data: info
     });
@@ -89,7 +83,7 @@ export class RoleListComponent implements OnInit {
   }
 
   deleteRole(role: Role): void {
-    this.role.deleteRole(role.id).subscribe(() => {
+    this.roleService.deleteRole(role.id).subscribe(() => {
       this.loadData();
       this.snack.open("Rol eliminado")._dismissAfter(2000);
     },

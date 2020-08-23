@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { PatientComponent } from './components/patient/patient/patient.component';
-import { AuthGuard } from './security/auth.guard';
+import { AuthGuard } from './services/auth/auth.guard';
 import { PatientListComponent } from './components/patient/patient-list/patient-list.component';
 import { ConsultAddComponent } from './components/consult/consult-add/consult-add.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';

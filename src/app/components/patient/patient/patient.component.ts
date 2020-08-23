@@ -26,7 +26,7 @@ export class PatientComponent implements OnInit {
     private patientService: PatientService,
     private sessionService: SessionService
   ) {
-    this.sessionService.loading.next(true)
+    this.sessionService.loading.next(true);
   }
 
   ngOnInit(): void {

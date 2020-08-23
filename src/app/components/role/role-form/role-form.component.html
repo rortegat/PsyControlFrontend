@@ -16,7 +16,7 @@
                 <mat-label>Roles</mat-label>
                 <mat-select multiple formControlName="privileges">
                     <mat-option *ngFor="let privilege of privilegesList" [value]="privilege">
-                        {{privilege.privilegename}}
+                        {{privilege}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

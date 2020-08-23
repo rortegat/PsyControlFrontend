@@ -73,8 +73,10 @@ export class ConsultAddComponent implements OnInit {
   ngOnInit(): void {
     this.addForm = this.formBuilder.group({
       reason: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      patientId: ['']
     });
+    this.addForm.controls['patientId'].setValue(this.patientId);
   }
 
   onSubmit(): void {
@@ -82,7 +84,7 @@ export class ConsultAddComponent implements OnInit {
     if (this.addForm.invalid) {
       return;
     }
-    this.consult.createConsult(this.patientId, this.addForm.value).subscribe((rsp) => {
+    this.consult.createConsult(this.addForm.value).subscribe((rsp) => {
       this.router.navigate(["home/patient", this.patientId]);
     });
   }

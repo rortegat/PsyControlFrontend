@@ -14,8 +14,8 @@ import { RepeatPasswordStateMatcher, PasswordValidation, EmailValidation, Repeat
 export class UserFormComponent implements OnInit {
 
   public userForm: FormGroup;
-  public rolesList: Role[] = [];
-  public userRoles: Role[] = [];
+  public rolesList: string[] = [];
+  public userRoles: string[] = [];
 
   public mismatch: boolean = false;
   public matcher = new RepeatPasswordStateMatcher();
@@ -39,11 +39,11 @@ export class UserFormComponent implements OnInit {
     });
 
     this.rolesService.getRoles().subscribe((rsp) => {
-      this.rolesList = rsp;
+      this.rolesList = rsp.map(role=>role.rolename);
       if (this.user != null) {
         this.rolesList.forEach((role, index) => {
           this.user.roles.forEach((roleUser) => {
-            if (role.rolename === roleUser)
+            if (role === roleUser)
               this.userRoles.push(this.rolesList[index]);
           });
         });

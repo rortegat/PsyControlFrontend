@@ -19,7 +19,7 @@
                 <div *ngIf="role.privileges">
                     <mat-chip-list cdkDropListOrientation="horizontal">
                         <mat-chip *ngFor="let privilege of role.privileges">
-                            {{privilege.privilegename}}
+                            {{privilege}}
                         </mat-chip>
                     </mat-chip-list>
                 </div>

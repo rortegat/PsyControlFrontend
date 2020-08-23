@@ -60,7 +60,7 @@
                 <mat-label>Roles</mat-label>
                 <mat-select multiple formControlName="roles">
                     <mat-option *ngFor="let role of rolesList" [value]="role">
-                        {{role.rolename}}
+                        {{role}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

@@ -15,7 +15,7 @@ import { NgxChartsModule, PieChartModule, NumberCardModule } from '@swimlane/ngx
 import { NgxFileDropModule } from 'ngx-file-drop';
 
 import { FileUploadComponent } from './components/file/file-upload/file-upload.component';
-import { AuthInterceptor } from './security/auth.interceptor';
+import { AuthInterceptor } from './services/auth/auth.interceptor';
 import { FileListComponent } from './components/file/file-list/file-list.component';
 import { PatientFormComponent } from './components/patient/patient-form/patient-form.component';
 import { ConsultListComponent } from './components/consult/consult-list/consult-list.component';
@@ -36,7 +36,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RoleListComponent } from './components/role/role-list/role-list.component';
 import { RoleFormComponent } from './components/role/role-form/role-form.component';
 import { UserAddComponent } from './components/user/user-add/user-add.component';
-import { AuthImagePipe } from './security/auth-image.pipe';
+import { AuthImagePipe } from './services/auth/auth-image.pipe';
 @NgModule({
   declarations: [
     AppComponent,

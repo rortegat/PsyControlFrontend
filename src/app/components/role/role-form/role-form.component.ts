@@ -15,8 +15,8 @@ export class RoleFormComponent implements OnInit {
   public roleForm: FormGroup;
   public title: string="Nuevo rol";
 
-  public privilegesList: Privilege[] = [];
-  public rolePrivileges: Privilege[] = [];
+  public privilegesList: string[] = [];
+  public rolePrivileges: string[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,13 +35,13 @@ export class RoleFormComponent implements OnInit {
     });
 
     this.privilegeService.getPrivileges().subscribe((rsp) => {
-      this.privilegesList = rsp;
+      this.privilegesList = rsp.map(privilege=>privilege.privilegename);
 
       if (this.role != null) {
         this.title="Modificar rol"
         this.privilegesList.forEach((privilege, index) => {
           this.role.privileges.forEach((rolePrivilege) => {
-            if (privilege.privilegename === rolePrivilege.privilegename)
+            if (privilege === rolePrivilege)
               this.rolePrivileges.push(this.privilegesList[index])
           });
         });

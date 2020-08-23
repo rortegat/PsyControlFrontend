@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { SessionService } from '../services/session.service';
+import { SessionService } from '../session.service';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ServerErrorComponent } from '../components/modal/server-error/server-error.component';
+import { ServerErrorComponent } from '../../components/modal/server-error/server-error.component';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
@@ -40,8 +40,8 @@ export class AuthInterceptor implements HttpInterceptor {
                 data: error
               });
               dialogRef.afterClosed().subscribe(() => {
+                this.session.removeTokenData();
                 this.session.removeUserData();
-                this.router.navigate(['login']);
               });
               break;
 
