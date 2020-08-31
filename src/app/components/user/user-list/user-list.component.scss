@@ -39,18 +39,3 @@ mat-table {
     flex-direction: column-reverse;
     align-items: center;
   }
-  
-  ::ng-deep .mat-paginator {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-  }
-  
-  ::ng-deep .mat-paginator-container{
-    justify-content: flex-start !important;
-  }
-  
-  ::ng-deep .mat-option-text {
-    text-align: left;
-  }

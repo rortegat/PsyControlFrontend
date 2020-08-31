@@ -71,11 +71,27 @@ a span {
 
 .container {
   height: 100vh;
-  padding: 5% 20px 0px 20px;
+  padding: 10% 20px 0px 20px;
 }
 
-mat-progress-spinner{
-  position: fixed !important;
-  top:15%;
-  right: 40%;
+/*
+CENTER MAT-SPINNER AND PUT IN FRONT OF ALL DOM ELEMENTS
+*/
+.center {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.overlay {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 10;
+  top: 0;
+  left: 0;
+  position: fixed;
 }

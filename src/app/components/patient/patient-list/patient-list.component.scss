@@ -20,9 +20,6 @@ mat-table {
 
 .mat-column-email {
   word-wrap: break-word !important;
-  /* white-space: unset !important;
-  flex: 0 0 28% !important;
-  width: 28% !important; */
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
@@ -58,22 +55,11 @@ mat-table {
 }
 
 
-:host ::ng-deep.mat-paginator .mat-paginator-container{
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  justify-content: center;
-
-}
-
-/* :host
-::ng-deep .mat-paginator {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-::ng-deep .mat-paginator-container{
-  align-content: center !important;
-} */
+// :host ::ng-deep.mat-paginator .mat-paginator-container{
+//   position: fixed;
+//   bottom: 0;
+//   width: 100%;
+//   justify-content: left;
+// }
 
 

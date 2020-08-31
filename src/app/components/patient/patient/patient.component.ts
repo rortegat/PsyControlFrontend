@@ -16,7 +16,7 @@ import { ApplicationErrorComponent } from '../../modal/application-error/applica
 })
 export class PatientComponent implements OnInit {
 
-  public patient: Patient = new Patient();
+  public patient: Patient;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,13 +26,13 @@ export class PatientComponent implements OnInit {
     private patientService: PatientService,
     private sessionService: SessionService
   ) {
-    this.sessionService.loading.next(true);
   }
 
   ngOnInit(): void {
+    setTimeout(() => { this.sessionService.loading.next(true) }, 0);
     this.patientService.getPatient(parseInt(this.route.snapshot.paramMap.get('id'))).subscribe((rsp) => {
-      this.sessionService.loading.next(false);
       this.patient = rsp;
+      this.sessionService.loading.next(false);
     });
   }
 
@@ -56,9 +56,9 @@ export class PatientComponent implements OnInit {
 
   deletePatient(): void {
     this.patientService.deletePatient(this.patient.id).subscribe(() => {
-        this.snack.open("Paciente Eliminado")._dismissAfter(2000);
-        this.router.navigate(['/home/patient-list']);
-      },
+      this.snack.open("Paciente Eliminado")._dismissAfter(2000);
+      this.router.navigate(['/home/patient-list']);
+    },
       (error) => {
         console.log(error)
         this.dialog.open(ApplicationErrorComponent, {
@@ -67,5 +67,10 @@ export class PatientComponent implements OnInit {
       });
   }
 
+  public consultas: boolean = false;
+
+  clicked() {
+    this.consultas = !this.consultas;
+  }
 
 }

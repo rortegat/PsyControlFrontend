@@ -1,7 +1,8 @@
-<br />
 <a [routerLink]="'/home/patient-list'">Regresar</a>
 
-<h2 align="center">{{patient.firstname}} {{patient.lastname}}</h2>
+<div *ngIf="patient">
+    <h2 align="center">{{patient.firstname}} {{patient.lastname}}</h2>
+</div>
 
 <button mat-raised-button color="warn" (click)="deletePatientButton()">
     <mat-icon>delete</mat-icon>
@@ -11,11 +12,16 @@
     <mat-icon>add</mat-icon>
     Nueva consulta
 </button>
+<button mat-button (click)="clicked()">
+    Preview consulta
+</button>
 <div class="group-container">
-    <div class="consult-container" *ngIf="patient.id">
+    <div class="consult-container" *ngIf="patient">
         <app-consult-list [id]="patient.id"></app-consult-list>
     </div>
-    <div class="editor-container">
-            <app-consult-edit></app-consult-edit>
+    <div class="editor-container" *ngIf="consultas">
+        <mat-card class="mat-elevation-z10">
+            <app-consult-edit [id]="16"></app-consult-edit>
+        </mat-card>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ConsultService } from 'src/app/services/api/consult.service'
@@ -12,6 +12,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor'
   styleUrls: ['./consult-edit.component.scss']
 })
 export class ConsultEditComponent implements OnInit {
+
+  @Input() id: number;
 
   public editorConfig: AngularEditorConfig = {
     editable: false,
@@ -59,19 +61,16 @@ export class ConsultEditComponent implements OnInit {
   };
 
   public editForm: FormGroup;
-  public consultId: number;
-
-
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private snack: MatSnackBar,
     private formBuilder: FormBuilder,
     private consultService: ConsultService,
-    private sessionService: SessionService
-  ) {
-    this.consultId = 16;
-  }
+    private sessionService: SessionService) {
+      
+    }
 
   ngOnInit(): void {
     setTimeout(() => { this.sessionService.loading.next(true) }, 0);
@@ -81,7 +80,7 @@ export class ConsultEditComponent implements OnInit {
       description: ['', Validators.required]
     });
 
-    this.consultService.getConsult(this.consultId).subscribe((rsp) => {
+    this.consultService.getConsult(this.id).subscribe((rsp) => {
       this.editForm.patchValue(rsp);
       this.sessionService.loading.next(false);
     });

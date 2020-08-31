@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Patient } from 'src/app/models/patient';
 import { PatientService } from 'src/app/services/api/patient.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-consult-add',
@@ -65,7 +66,8 @@ export class ConsultAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private consult: ConsultService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sessionService: SessionService
   ) {
     this.patientId = parseInt(this.route.snapshot.paramMap.get('id'));
   }
@@ -80,7 +82,7 @@ export class ConsultAddComponent implements OnInit {
   }
 
   onSubmit(): void {
-    //this.addForm.controls.patient.setValue(this.patient)
+    this.sessionService.loading.next(true);
     if (this.addForm.invalid) {
       return;
     }

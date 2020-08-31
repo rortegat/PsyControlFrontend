@@ -1,10 +1,15 @@
+.group-container{
+    width: 100%;
+    overflow: hidden;
+}
 .consult-container{
-    max-width: 300px;
+    width: 30%;
+    float: left;
 }
 
-.consult-container{
-    max-width: 300px;
-    float: left;
+.editor-container{
+    width: 70%;
+    overflow: hidden;
 }
 
 button{

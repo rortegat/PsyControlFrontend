@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ConsultService } from 'src/app/services/api/consult.service';
 import { Consult } from 'src/app/models/consult';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -19,7 +18,6 @@ export class ConsultListComponent implements OnInit {
   public consults: Consult[] = [];
 
   constructor(
-    private router: Router,
     private consultService: ConsultService,
     private sessionService: SessionService,
     private dialog: MatDialog,
@@ -37,7 +35,6 @@ export class ConsultListComponent implements OnInit {
   }
 
   loadData(): void {
-    this.sessionService.loading.next(true);
     setTimeout(() => { this.sessionService.loading.next(true) }, 0);
     this.consultService.getConsults(this.id).subscribe((rsp) => {
       this.consults = rsp;

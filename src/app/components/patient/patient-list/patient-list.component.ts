@@ -37,7 +37,6 @@ export class PatientListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    setTimeout(() => { this.session.loading.next(true) }, 0);
     this.loadData();
   }
 
@@ -48,7 +47,7 @@ export class PatientListComponent implements OnInit {
   }
 
   loadData(): void {
-    setTimeout(()=>this.session.loading.next(true),0);
+    setTimeout(() => this.session.loading.next(true), 0);
     this.patient.getPatients(this.page.pageable).subscribe((page) => {
       this.page = page;
       this.length = this.page.totalElements;
@@ -60,7 +59,7 @@ export class PatientListComponent implements OnInit {
   }
 
   clear(): void {
-    console.log("Por implementar")
+    console.log("Por implementar");
     this.filterValue = "";
   }
 
@@ -89,11 +88,10 @@ export class PatientListComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(rsp => {
         if (rsp != undefined) {
-          this.patient.updatePatient(rsp).subscribe(
-            () => {
-              this.loadData();
-              this.snack.open("Paciente modificado")._dismissAfter(2000);
-            });
+          this.patient.updatePatient(rsp).subscribe(() => {
+            this.loadData();
+            this.snack.open("Paciente modificado")._dismissAfter(2000);
+          });
         }
       });
     });
@@ -114,11 +112,10 @@ export class PatientListComponent implements OnInit {
   }
 
   deletePatient(patient: Patient): void {
-    this.patient.deletePatient(patient.id).subscribe(
-      () => {
-        this.snack.open("Paciente Eliminado")._dismissAfter(2000);
-        this.router.navigate(['/home/patient-list']);
-      },
+    this.patient.deletePatient(patient.id).subscribe(() => {
+      this.snack.open("Paciente Eliminado")._dismissAfter(2000);
+      this.router.navigate(['/home/patient-list']);
+    },
       (error) => {
         console.log(error);
         this.dialog.open(ApplicationErrorComponent, {
@@ -128,7 +125,6 @@ export class PatientListComponent implements OnInit {
   }
 
   onSelect(row: Patient): void {
-    console.log(row);
     this.router.navigate(["home/patient", row.id]);
   }
 
